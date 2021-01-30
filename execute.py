@@ -33,10 +33,10 @@ class Parameters:
                             "compound_2m_plus_h",
                             "compound_2m_plus_na"]
         self.remove_duplicates = True
-        self.duplicate_mass_error = 0.05     # NOTE: DO WE NEED SEPARATE ERRORS FOR PPM AND DUPLICATES?
         self.min_gnps_cluster_size = 4
         self.max_gnps_cluster_size = 5000
         self.min_atlas_annotation_cluster_size = 3
+        self.min_compound_group_count = 3
 
     def extract_file_name(self, file_path):
         """Extracts file name from file path"""
@@ -94,8 +94,8 @@ def create_gnps_network_annotations(atlas_df, parameters):
 
 if __name__ == "__main__":
 
-    source_ms_data = os.path.join("snapms", "data", "ms_input", "mass_list.csv")
-    # source_ms_data = os.path.join("snapms", "data", "ms_input", "METABOLOMICS-SNETS-V2-d909a4dc-download_cytoscape_data-main.graphml")
+    # source_ms_data = os.path.join("snapms", "data", "ms_input", "mass_list.csv")
+    source_ms_data = os.path.join("snapms", "data", "ms_input", "METABOLOMICS-SNETS-V2-d909a4dc-download_cytoscape_data-main.graphml")
     atlas_data = os.path.join("snapms", "data", "atlas_input", "npatlas_all_20201210.tsv")
     output_directory = os.path.join("snapms", "data", "output")
     parameters = Parameters(source_ms_data, atlas_data, output_directory)

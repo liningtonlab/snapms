@@ -35,7 +35,7 @@ def return_compounds(mass_list, parameters, atlas_df):
 
         for adduct in parameters.adduct_list:
             selected_compounds = atlas_df[atlas_df[adduct].between(mass - mass_error, mass + mass_error)][['npaid'
-                , 'compound_accurate_mass', 'compound_smiles']]
+                , 'compound_accurate_mass', 'compound_smiles', 'compound_names', 'npatlas_url']]
             if not selected_compounds.empty:
                 selected_compounds['mass'] = mass
                 selected_compounds['compound_number'] = index + 1
@@ -70,8 +70,8 @@ def annotate_gnps_network(atlas_df, parameters):
                     # Only add unique masses to the mass list
                     insert_mass = True
                     for mass in target_mass_list:
-                        if mass - parameters.duplicate_mass_error <= node_mass <= mass + \
-                                parameters.duplicate_mass_error:
+                        mass_error = calculate_error(mass, parameters.ppm_error)
+                        if mass - mass_error <= node_mass <= mass + mass_error:
                             insert_mass = False
                     if insert_mass:
                         target_mass_list.append(node_mass)

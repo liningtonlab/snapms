@@ -60,10 +60,12 @@ def match_compound_network(compound_match_list):
         node_list.append((index, {'npaid': compound[0],
                                   'accurate_mass': compound[1],
                                   'smiles': compound[2],
-                                  'original_gnps_mass': compound[3],
-                                  'compound_group': compound[4],
-                                  'adduct': compound[5]}))
-        index_group_dict[index] = compound[4]
+                                  'compound_name': compound[3],
+                                  'npatlas_url': compound[4],
+                                  'original_gnps_mass': compound[5],
+                                  'compound_group': compound[6],
+                                  'adduct': compound[7]}))
+        index_group_dict[index] = compound[6]
     compound_graph.add_nodes_from(node_list)
 
     # Add edges if above Dice threshold and not between compounds in the same compound group
@@ -83,9 +85,9 @@ def match_compound_network(compound_match_list):
 def export_graphml(graph, parameters):
     """Exports networkx graph from match_compound_network as graphML for use in external visualization tools"""
 
-    output_filename = parameters.file_name + "_snapms_output.graphml"
-
-    nx.write_graphml(graph, os.path.join(parameters.output_path, output_filename))
+    if graph_size_check(graph, parameters):
+        output_filename = parameters.file_name + "_snapms_output.graphml"
+        nx.write_graphml(graph, os.path.join(parameters.output_path, output_filename))
 
 
 def export_gnps_graphml(graph, cluster_id, parameters):
@@ -212,7 +214,11 @@ def graph_size_check(graph, parameters):
     max_node_count = 2000
     max_edge_count = 10000
 
-    if parameters.min_atlas_annotation_cluster_size <= len(nx.nodes(graph)) < max_node_count and len(nx.edges(graph)) < max_edge_count:
+    # Assess the results graph to make sure that at least one subgraph contains the minimum number of compound groups
+    # and that the nodes and edges do not violate max limits
+    if max_compound_group_count(graph) >= parameters.min_compound_group_count \
+            and parameters.min_atlas_annotation_cluster_size <= len(nx.nodes(graph)) < max_node_count \
+            and len(nx.edges(graph)) < max_edge_count:
         return True
     else:
         return False
@@ -225,15 +231,11 @@ def annotate_top_candidates(graph):
 
     """
 
-    max_compound_group_count = 0
-    for subgraph in nx.connected_components(graph):
-        compound_group_count = compound_group_counter(subgraph, graph)
-        if compound_group_count > max_compound_group_count:
-            max_compound_group_count = compound_group_count
+    max_compound_groups = max_compound_group_count(graph)
 
     for subgraph in nx.connected_components(graph):
         compound_group_count = compound_group_counter(subgraph, graph)
-        if compound_group_count == max_compound_group_count:
+        if compound_group_count == max_compound_groups:
             for node in subgraph:
                 graph.add_node(node, top_candidate=True)
         else:
@@ -251,3 +253,16 @@ def compound_group_counter(subgraph, graph):
             compound_group_list.append(compound_group)
 
     return len(compound_group_list)
+
+
+def max_compound_group_count(graph):
+    """Determine the maximum compound group count in any subgraph in the main graph
+    (i.e. what is the maximum number of compound groups in any subgraph)"""
+
+    max_compound_group_count = 0
+    for subgraph in nx.connected_components(graph):
+        compound_group_count = compound_group_counter(subgraph, graph)
+        if compound_group_count > max_compound_group_count:
+            max_compound_group_count = compound_group_count
+
+    return max_compound_group_count
