@@ -95,7 +95,7 @@ def create_gnps_network_annotations(atlas_df, parameters):
 if __name__ == "__main__":
 
     # source_ms_data = os.path.join("snapms", "data", "ms_input", "mass_list.csv")
-    source_ms_data = os.path.join("snapms", "data", "ms_input", "METABOLOMICS-SNETS-V2-d909a4dc-download_cytoscape_data-main.graphml")
+    source_ms_data = os.path.join("snapms", "data", "ms_input", "NIH_Natural_Products_1_And_2.graphml")
     atlas_data = os.path.join("snapms", "data", "atlas_input", "npatlas_all_20201210.tsv")
     output_directory = os.path.join("snapms", "data", "output")
     parameters = Parameters(source_ms_data, atlas_data, output_directory)

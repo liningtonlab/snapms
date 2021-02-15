@@ -11,7 +11,7 @@ def import_atlas(parameters):
 
     """
 
-    input_df = pd.read_csv(parameters.reference_db, sep='\t', header=0)
+    input_df = pd.read_csv(parameters.reference_db, sep='\t', header=0, encoding='utf-8')
     clean_headers(input_df)
     input_df = extend_adducts(input_df)
     print("Finished NP Atlas data import")

@@ -4,6 +4,7 @@
 
 import os
 import glob
+import re
 
 import networkx as nx
 import numpy as np
@@ -12,6 +13,7 @@ from rdkit.Chem import AllChem
 from rdkit import DataStructs
 from py2cytoscape.data.cyrest_client import CyRestClient
 from py2cytoscape.data.style import StyleUtil
+from xml.sax import saxutils as saxutils
 
 
 def tanimoto_matrix(smiles_list):
@@ -57,10 +59,18 @@ def match_compound_network(compound_match_list):
     node_list = []
     index_group_dict = {}
     for index, compound in enumerate(compound_match_list):
+        # Elementree has some problems reading special characters from the Atlas input because the input is
+        # occasionally not clean UTF-8. This if/ else statement cleans up names to eliminate crashes due to string
+        # parsing failure from the graphML file.
+        if re.match('^[A-Za-z0-9 α-ωΑ-Ω\-‐~,\"\'$&*()±\[\]′’+./–″<>−{}|_:;]+$', compound[3]):
+            compound_name = compound[3]
+        else:
+            compound_name = ""
+
         node_list.append((index, {'npaid': compound[0],
                                   'accurate_mass': compound[1],
                                   'smiles': compound[2],
-                                  'compound_name': compound[3],
+                                  'compound_name': compound_name,
                                   'npatlas_url': compound[4],
                                   'original_gnps_mass': compound[5],
                                   'compound_group': compound[6],
