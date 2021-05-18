@@ -1,0 +1,13 @@
+name : snapms
+channels :
+  - conda-forge
+dependencies :
+  - python>=3.7
+  - pip
+  - rdkit
+  - numpy
+  - pandas
+  - networkx
+  - scipy
+  - pip:
+    - py2cytoscape
