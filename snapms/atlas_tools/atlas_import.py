@@ -25,7 +25,6 @@ def import_atlas(parameters):
         lambda x: f"https://www.npatlas.org/explore/compounds/{x}"
     )
     print("Finished NP Atlas data import")
-    print(input_df.head(2))
     return input_df
 
 

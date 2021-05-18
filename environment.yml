@@ -11,3 +11,5 @@ dependencies :
   - scipy
   - pip:
     - py2cytoscape
+    - django
+    - django-rq
