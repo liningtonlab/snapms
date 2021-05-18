@@ -2,57 +2,68 @@
 
 """ An application to identify groups of natural products by comparing grouped mass spectrometry features and compound
 groups from chemical similarity methods
-
 """
 
 import csv
-import os
-from sys import exit
+import sys
+from pathlib import Path
+from typing import List
 
 from snapms.atlas_tools.atlas_import import import_atlas
-from snapms.matching_tools import match_compounds
-from snapms.matching_tools import mass_list
+from snapms.matching_tools import mass_list, match_compounds
 from snapms.network_tools import create_networks
+
+# current working directory for data file paths
+CWD = Path(__file__).parent
+
+
+# Defaults
+DEFAULT_ADDUCT_LIST = [
+    "m_plus_h",
+    "m_plus_na",
+    "m_plus_nh4",
+    "m_plus_h_minus_h2o",
+    "m_plus_k",
+    "2m_plus_h",
+    "2m_plus_na",
+]
 
 
 class Parameters:
     """Class containing all of the setup parameters from SNAP-MS"""
-    def __init__(self, file_path, atlas_db_path, output_path):
+
+    def __init__(
+        self,
+        file_path: Path,
+        atlas_db_path: Path,
+        output_path: Path,
+        ppm_error: int = 10,
+        adduct_list: List[str] = DEFAULT_ADDUCT_LIST,
+        remove_duplicates: bool = True,
+        min_gnps_size: int = 3,
+        max_gnps_size: int = 5000,
+        min_atlas_size: int = 3,
+        min_group_size: int = 3,
+    ):
         self.file_path = file_path
-        self.file_name = self.extract_file_name(file_path)
-        self.file_type = self.extract_file_type(file_path)
+        # pathlib.Path gives convenient methods for getting name and extension
+        self.file_name = file_path.stem
+        self.file_type = file_path.suffix.lstrip(".").lower()
         self.reference_db = atlas_db_path
         self.output_path = output_path
         self.sample_output_path = self.sample_output_directory_path()
-        self.ppm_error = 10
-        self.adduct_list = ["compound_m_plus_h",
-                            "compound_m_plus_na",
-                            "compound_m_plus_nh4",
-                            "compound_m_plus_h_minus_h2o",
-                            "compound_m_plus_k",
-                            "compound_2m_plus_h",
-                            "compound_2m_plus_na"]
-        self.remove_duplicates = True
-        self.min_gnps_cluster_size = 4
-        self.max_gnps_cluster_size = 5000
-        self.min_atlas_annotation_cluster_size = 3
-        self.min_compound_group_count = 3
+        self.ppm_error = ppm_error
+        self.adduct_list = adduct_list
+        self.remove_duplicates = remove_duplicates
+        self.min_gnps_cluster_size = min_gnps_size
+        self.max_gnps_cluster_size = max_gnps_size
+        self.min_atlas_annotation_cluster_size = min_atlas_size
+        self.min_compound_group_count = min_group_size
 
-    def extract_file_name(self, file_path):
-        """Extracts file name from file path"""
-
-        return str(os.path.basename(file_path)).rsplit(".")[0]
-
-    def extract_file_type(self, file_path):
-        """ Extracts file suffix from file path"""
-
-        extension = os.path.splitext(file_path)
-
-        return extension[1][1:]
-
-    def sample_output_directory_path(self):
-
-        return os.path.join(self.output_path, self.file_name + "_output")
+    def sample_output_directory_path(self) -> Path:
+        file_path = self.output_path / f"{self.file_name}_output"
+        file_path.mkdir(exist_ok=True, parents=True)
+        return file_path
 
 
 def network_from_mass_list(atlas_df, parameters):
@@ -68,8 +79,12 @@ def network_from_mass_list(atlas_df, parameters):
             target_mass_list.append(float(row[0]))
 
     if parameters.remove_duplicates:
-        target_mass_list = mass_list.remove_mass_duplicates(target_mass_list, parameters)
-    compound_list = match_compounds.return_compounds(target_mass_list, parameters, atlas_df)
+        target_mass_list = mass_list.remove_mass_duplicates(
+            target_mass_list, parameters
+        )
+    compound_list = match_compounds.return_compounds(
+        target_mass_list, parameters, atlas_df
+    )
     compound_network = create_networks.match_compound_network(compound_list)
     create_networks.annotate_top_candidates(compound_network)
     create_networks.export_graphml(compound_network, parameters)
@@ -89,15 +104,19 @@ def create_gnps_network_annotations(atlas_df, parameters):
         create_networks.insert_atlas_clusters_to_cytoscape(parameters)
     else:
         print("OK, bye!")
-        exit()
+        sys.exit()
 
 
 if __name__ == "__main__":
+    DATADIR = CWD / "data"
+    assert DATADIR.exists()
 
-    # source_ms_data = os.path.join("snapms", "data", "ms_input", "mass_list.csv")
-    source_ms_data = os.path.join("snapms", "data", "ms_input", "NIH_Natural_Products_1_And_2.graphml")
-    atlas_data = os.path.join("snapms", "data", "atlas_input", "npatlas_all_20201210.tsv")
-    output_directory = os.path.join("snapms", "data", "output")
+    #### CONFIG
+    source_ms_data = DATADIR / "ms_input" / "mass_list.csv"
+    # source_ms_data = DATADIR / "ms_input" / "NIH_Natural_Products_1_And_2.graphml"
+    # atlas_data = DATADIR / "atlas_input" / "npatlas_all_20201210.tsv"
+    atlas_data = DATADIR / "atlas_input" / "npatlas_v202006.json"
+    output_directory = DATADIR / "output"
     parameters = Parameters(source_ms_data, atlas_data, output_directory)
 
     # Load Atlas data as Pandas dataframe
@@ -105,9 +124,11 @@ if __name__ == "__main__":
 
     if parameters.file_type == "csv":
         network_from_mass_list(atlas_df, parameters)
-    elif parameters.file_type == "graphML" or parameters.file_type == "graphml":
+    elif parameters.file_type == "graphml":
         create_gnps_network_annotations(atlas_df, parameters)
     else:
-        print("ERROR: This file type is not supported. Supported types include csv (for simple peak lists) and graphML "
-              "(for standard GNPS output)")
-        exit()
+        print(
+            "ERROR: This file type is not supported. Supported types include csv (for simple peak lists) and graphML "
+            "(for standard GNPS output)"
+        )
+        sys.exit()

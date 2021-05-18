@@ -1,5 +1,9 @@
+# IDE configs
 .vscode/
 .idea/
+
+# Data folders for development
+data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -131,6 +135,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Data folders for development
 
-/data/*

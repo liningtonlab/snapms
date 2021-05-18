@@ -2,33 +2,37 @@
 
 """Tools to create networks of various types for SNAP-MS platform"""
 
-import os
-import glob
-import re
+# import os
+# import glob
+
+# import re
+from pathlib import Path
 
 import networkx as nx
 import numpy as np
-from rdkit import Chem
-from rdkit.Chem import AllChem
-from rdkit import DataStructs
 from py2cytoscape.data.cyrest_client import CyRestClient
 from py2cytoscape.data.style import StyleUtil
-from xml.sax import saxutils as saxutils
+from rdkit import Chem, DataStructs
+from rdkit.Chem import AllChem
 
 
 def tanimoto_matrix(smiles_list):
     """Creates square matrix of Tanimoto scores for all SMILES strings in the input list"""
 
-    fingerprints = []   # [[smiles, rdkit_fingerprint]]
+    fingerprints = []  # [[smiles, rdkit_fingerprint]]
     matrix = []
 
     for compound in smiles_list:
-        fingerprints.append(AllChem.GetMorganFingerprint(Chem.MolFromSmiles(compound), 2))
+        fingerprints.append(
+            AllChem.GetMorganFingerprint(Chem.MolFromSmiles(compound), 2)
+        )
 
     for fingerprint in fingerprints:
         insert_data = []
         for fingerprint2 in fingerprints:
-            insert_data.append(round(DataStructs.DiceSimilarity(fingerprint, fingerprint2), 2))
+            insert_data.append(
+                round(DataStructs.DiceSimilarity(fingerprint, fingerprint2), 2)
+            )
         matrix.append(insert_data)
 
     return matrix
@@ -59,22 +63,32 @@ def match_compound_network(compound_match_list):
     node_list = []
     index_group_dict = {}
     for index, compound in enumerate(compound_match_list):
+        # JvS - This should no longer be required with unicode normalization on atlas import
         # Elementree has some problems reading special characters from the Atlas input because the input is
         # occasionally not clean UTF-8. This if/ else statement cleans up names to eliminate crashes due to string
         # parsing failure from the graphML file.
-        if re.match('^[A-Za-z0-9 α-ωΑ-Ω\-‐~,\"\'$&*()±\[\]′’+./–″<>−{}|_:;]+$', compound[3]):
-            compound_name = compound[3]
-        else:
-            compound_name = ""
+        # if re.match(
+        #     "^[A-Za-z0-9 α-ωΑ-Ω\-‐~,\"'$&*()±\[\]′’+./–″<>−{}|_:;]+$", compound[3]
+        # ):
+        #     compound_name = compound[3]
+        # else:
+        #     compound_name = ""
 
-        node_list.append((index, {'npaid': compound[0],
-                                  'accurate_mass': compound[1],
-                                  'smiles': compound[2],
-                                  'compound_name': compound_name,
-                                  'npatlas_url': compound[4],
-                                  'original_gnps_mass': compound[5],
-                                  'compound_group': compound[6],
-                                  'adduct': compound[7]}))
+        node_list.append(
+            (
+                index,
+                {
+                    "npaid": compound[0],
+                    "exact_mass": compound[1],
+                    "smiles": compound[2],
+                    "compound_name": compound[3],
+                    "npatlas_url": compound[4],
+                    "original_gnps_mass": compound[5],
+                    "compound_group": compound[6],
+                    "adduct": compound[7],
+                },
+            )
+        )
         index_group_dict[index] = compound[6]
     compound_graph.add_nodes_from(node_list)
 
@@ -84,7 +98,10 @@ def match_compound_network(compound_match_list):
     row_counter = 0
     for row in tanimoto_grid:
         for index, value in enumerate(row):
-            if value >= tanimoto_cutoff and index_group_dict[row_counter] != index_group_dict[index]:
+            if (
+                value >= tanimoto_cutoff
+                and index_group_dict[row_counter] != index_group_dict[index]
+            ):
                 edge_list.append((row_counter, index))
         row_counter += 1
     compound_graph.add_edges_from(edge_list)
@@ -96,20 +113,20 @@ def export_graphml(graph, parameters):
     """Exports networkx graph from match_compound_network as graphML for use in external visualization tools"""
 
     if graph_size_check(graph, parameters):
-        output_filename = parameters.file_name + "_snapms_output.graphml"
-        nx.write_graphml(graph, os.path.join(parameters.output_path, output_filename))
+        output_filename = f"{parameters.file_name}_snapms_output.graphml"
+        nx.write_graphml(graph, parameters.output_path / output_filename)
 
 
 def export_gnps_graphml(graph, cluster_id, parameters):
-    """Exports networkx graph from match_compound_network for each gnps cluster, with cluster id in filename as graphML
+    """Exports networkx graph from match_compound_network for each gnps cluster, with cluster id in filename as graphML"""
 
-    """
+    # Pathlib
+    parameters.sample_output_path.mkdir(exist_ok=True)
 
-    if not os.path.isdir(parameters.sample_output_path):
-        os.mkdir(parameters.sample_output_path)
-
-    nx.write_graphml(graph, os.path.join(parameters.sample_output_path,
-                                         "GNPS_componentindex_" + str(cluster_id) + ".graphml"))
+    nx.write_graphml(
+        graph,
+        parameters.sample_output_path / f"GNPS_componentindex_{cluster_id}.graphml",
+    )
 
 
 def insert_atlas_clusters_to_cytoscape(parameters):
@@ -131,12 +148,14 @@ def insert_atlas_clusters_to_cytoscape(parameters):
 
     # Open each Atlas annotation network in turn. Glob function includes [0-9] in order to exclude the modified original
     # gnps network (if present)
-    for network in sorted(glob.glob(os.path.join(parameters.sample_output_path, "*[0-9].graphml")),
-                          key=extract_cluster_id):
+    for network in sorted(
+        parameters.sample_output_path.glob("*[0-9].graphml"),
+        key=extract_cluster_id,
+    ):
         with open(network) as f:
             atlas_graph = nx.read_graphml(f)
 
-        network_title = str(os.path.basename(network)).rsplit(".")[0]
+        network_title = Path(network).stem
         print("Starting insertion of " + network_title + " to GNPS network file")
 
         if graph_size_check(atlas_graph, parameters):
@@ -156,53 +175,65 @@ def insert_atlas_clusters_to_cytoscape(parameters):
                 # family
                 annotate_top_candidates(atlas_graph)
                 # Insert Atlas annotation graph to Cytoscape file
-                insert_network = cy.network.create_from_networkx(atlas_graph,
-                                                                 name=network_title,
-                                                                 collection='NP Atlas GNPS annotation collection')
-                cy.layout.apply(name='hierarchical', network=insert_network)
-                undirected = cy.style.create('Undirected')
+                insert_network = cy.network.create_from_networkx(
+                    atlas_graph,
+                    name=network_title,
+                    collection="NP Atlas GNPS annotation collection",
+                )
+                cy.layout.apply(name="hierarchical", network=insert_network)
+                undirected = cy.style.create("Undirected")
                 new_defaults = {
                     # Node defaults
-                    'NODE_SHAPE"': 'round rectangle',
-                    'NODE_FILL_COLOR': '#eeeeff',
-                    'NODE_SIZE': 75,
-                    'NODE_BORDER_WIDTH': 2,
-                    'NODE_BORDER_PAINT': 'green',
-                    'NODE_TRANSPARENCY': 225,
-                    'NODE_LABEL_COLOR': 'black',
-
+                    'NODE_SHAPE"': "round rectangle",
+                    "NODE_FILL_COLOR": "#eeeeff",
+                    "NODE_SIZE": 75,
+                    "NODE_BORDER_WIDTH": 2,
+                    "NODE_BORDER_PAINT": "green",
+                    "NODE_TRANSPARENCY": 225,
+                    "NODE_LABEL_COLOR": "black",
                     # Edge defaults
-                    'EDGE_WIDTH': 3,
-                    'EDGE_LINE_TYPE': 'LINE',
-                    'EDGE_LINE_COLOR': 'black',
-                    'EDGE_TRANSPARENCY': 120,
-
+                    "EDGE_WIDTH": 3,
+                    "EDGE_LINE_TYPE": "LINE",
+                    "EDGE_LINE_COLOR": "black",
+                    "EDGE_TRANSPARENCY": 120,
                     # Network defaults
-                    'NETWORK_BACKGROUND_PAINT': 'white'
+                    "NETWORK_BACKGROUND_PAINT": "white",
                 }
 
-                max_compound_group = int(max(dict(atlas_graph.nodes(data='compound_group')).values()))
-                mid_compound_group = max_compound_group//2
+                max_compound_group = int(
+                    max(dict(atlas_graph.nodes(data="compound_group")).values())
+                )
+                mid_compound_group = max_compound_group // 2
 
                 # Update graph
                 undirected.update_defaults(new_defaults)
                 # Apply mapping
                 # undirected.create_passthrough_mapping(column='name', col_type='String', vp='NODE_LABEL')
-                color_gradient = StyleUtil.create_3_color_gradient(min=1,
-                                                                   mid=mid_compound_group,
-                                                                   max=max_compound_group,
-                                                                   colors=('#fbe723', '#21918C', '#440256'))
-                undirected.create_continuous_mapping(column='compound_group',
-                                                     vp='NODE_FILL_COLOR',
-                                                     col_type='String',
-                                                     points=color_gradient)
+                color_gradient = StyleUtil.create_3_color_gradient(
+                    min=1,
+                    mid=mid_compound_group,
+                    max=max_compound_group,
+                    colors=("#fbe723", "#21918C", "#440256"),
+                )
+                undirected.create_continuous_mapping(
+                    column="compound_group",
+                    vp="NODE_FILL_COLOR",
+                    col_type="String",
+                    points=color_gradient,
+                )
                 cy.style.apply(undirected, network=insert_network)
             else:
-                print("After sub-graph size filter, no clusters remain that possess the minimum number of nodes. "
-                      "Skipping network insertion")
+                print(
+                    "After sub-graph size filter, no clusters remain that possess the minimum number of nodes. "
+                    "Skipping network insertion"
+                )
         else:
-            print("ERROR: Atlas annotation graph " + str(network_title) + " either too small or too large. "
-                                                                          "Skipping insert")
+            print(
+                "ERROR: Atlas annotation graph "
+                + str(network_title)
+                + " either too small or too large. "
+                "Skipping insert"
+            )
 
 
 def extract_cluster_id(filepath):
@@ -210,7 +241,7 @@ def extract_cluster_id(filepath):
     Used to sort the Atlas networks so that they are processed and inserted into the Cytoscape file in numerical order
 
     """
-    filename = str(os.path.basename(filepath).rsplit(".")[0])
+    filename = Path(filepath).stem
     cluster_id = int(filename.rsplit("_")[-1])
     return cluster_id
 
@@ -219,16 +250,20 @@ def graph_size_check(graph, parameters):
     """Assess overall size of networkx graphs. Used to skip graphs that are too small or too large, or that have become
     too small after filtering steps
 
-     """
+    """
 
     max_node_count = 2000
     max_edge_count = 10000
 
     # Assess the results graph to make sure that at least one subgraph contains the minimum number of compound groups
     # and that the nodes and edges do not violate max limits
-    if max_compound_group_count(graph) >= parameters.min_compound_group_count \
-            and parameters.min_atlas_annotation_cluster_size <= len(nx.nodes(graph)) < max_node_count \
-            and len(nx.edges(graph)) < max_edge_count:
+    if (
+        max_compound_group_count(graph) >= parameters.min_compound_group_count
+        and parameters.min_atlas_annotation_cluster_size
+        <= len(nx.nodes(graph))
+        < max_node_count
+        and len(nx.edges(graph)) < max_edge_count
+    ):
         return True
     else:
         return False

@@ -13,7 +13,7 @@ from snapms.network_tools import create_networks
 def calculate_error(mass, mass_error):
     """Calculate ppm error for a given mass and error"""
 
-    return round((mass * mass_error)/1000000, 4)
+    return round((mass * mass_error) / 1e6, 4)
 
 
 def return_compounds(mass_list, parameters, atlas_df):
@@ -26,20 +26,27 @@ def return_compounds(mass_list, parameters, atlas_df):
     adduct list should be a list of adducts that are present in the Atlas dataframe. By default only 'H' and 'Na' are
     present
     atlas_df is the dataframe from data_import.advanced_export after clean_headers has been applied
-
-
     """
     output_list = []
     for index, mass in enumerate(mass_list):
         mass_error = calculate_error(mass, parameters.ppm_error)
 
         for adduct in parameters.adduct_list:
-            selected_compounds = atlas_df[atlas_df[adduct].between(mass - mass_error, mass + mass_error)][['npaid'
-                , 'compound_accurate_mass', 'compound_smiles', 'compound_names', 'npatlas_url']]
+            selected_compounds = atlas_df[
+                atlas_df[adduct].between(mass - mass_error, mass + mass_error)
+            ][
+                [
+                    "npaid",
+                    "exact_mass",
+                    "smiles",
+                    "name",
+                    "npatlas_url",
+                ]
+            ]
             if not selected_compounds.empty:
-                selected_compounds['mass'] = mass
-                selected_compounds['compound_number'] = index + 1
-                selected_compounds['adduct'] = adduct
+                selected_compounds["mass"] = mass
+                selected_compounds["compound_number"] = index + 1
+                selected_compounds["adduct"] = adduct
                 output_list += selected_compounds.values.tolist()
 
     return output_list
@@ -54,7 +61,6 @@ def annotate_gnps_network(atlas_df, parameters):
     of compound groups, and prevents 'annotation bloat' where many nodes become interconnected because they are
     repeated compounds, but in different compound groups (and so get edges added in annotation network).
     Leads to cleaned results files. Recommended default is True
-
     """
 
     gnps_network = data_import.import_gnps_network(parameters)
@@ -79,11 +85,19 @@ def annotate_gnps_network(atlas_df, parameters):
                     # else add all masses
                     target_mass_list.append(node_mass)
             # if gnps mass list contains appropriate number of members, perform Atlas annotation
-            if parameters.min_gnps_cluster_size <= len(target_mass_list) <= parameters.max_gnps_cluster_size:
-                atlas_compound_list = return_compounds(target_mass_list, parameters, atlas_df)
-                compound_network = create_networks.match_compound_network(atlas_compound_list)
+            if (
+                parameters.min_gnps_cluster_size
+                <= len(target_mass_list)
+                <= parameters.max_gnps_cluster_size
+            ):
+                atlas_compound_list = return_compounds(
+                    target_mass_list, parameters, atlas_df
+                )
+                compound_network = create_networks.match_compound_network(
+                    atlas_compound_list
+                )
                 if len(list(compound_network.nodes)) > 0:
-                    create_networks.export_gnps_graphml(compound_network, cluster_id, parameters)
+                    create_networks.export_gnps_graphml(
+                        compound_network, cluster_id, parameters
+                    )
             print("Finished Atlas annotation for GNPS cluster " + str(cluster_id))
-
-
