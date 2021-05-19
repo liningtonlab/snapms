@@ -99,7 +99,8 @@ def create_gnps_network_annotations(atlas_df, parameters):
 
     # Append all Atlas annotation networks to GNPS original network file
     # NOTE: GNPS network file must be open in Cytoscape for this to work
-    cytoscape_status = input("Is the Cytoscape file open? [y/n]")
+    # cytoscape_status = input("Is the Cytoscape file open? [y/n]")
+    cytoscape_status = "n"
     if cytoscape_status == "y":
         create_networks.insert_atlas_clusters_to_cytoscape(parameters)
     else:
@@ -112,8 +113,8 @@ if __name__ == "__main__":
     assert DATADIR.exists()
 
     #### CONFIG
-    source_ms_data = DATADIR / "ms_input" / "mass_list.csv"
-    # source_ms_data = DATADIR / "ms_input" / "NIH_Natural_Products_1_And_2.graphml"
+    # source_ms_data = DATADIR / "ms_input" / "mass_list.csv"
+    source_ms_data = DATADIR / "ms_input" / "NIH_Natural_Products_1_And_2.graphml"
     # atlas_data = DATADIR / "atlas_input" / "npatlas_all_20201210.tsv"
     atlas_data = DATADIR / "atlas_input" / "npatlas_v202006.json"
     output_directory = DATADIR / "output"

@@ -1,0 +1,36 @@
+FROM ubuntu:20.04
+
+# PARAMETERS
+ENV CYTOSCAPE_VERSION 3.8.2
+ENV DISPLAY=0:0.0
+# CHANGE USER
+USER root
+
+# INSTALL JAVA
+# RUN apt-get update && apt-get -y install default-jdk libxcursor1 xvfb supervisor wget x11vnc && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y install default-jdk libxcursor1 wget && rm -rf /var/lib/apt/lists/*
+RUN wget -v https://github.com/cytoscape/cytoscape/releases/download/3.8.2/Cytoscape_3_8_2_unix.sh -O /cytoscape.sh
+
+# Set JAVA_HOME From sudo update-alternatives --config java
+RUN echo 'JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> /etc/environment
+RUN bash /cytoscape.sh -q
+
+# SETUP SUPERVISOR
+# RUN echo -e "\
+#     [supervisord]\
+#     nodaemon=true\
+#     \
+#     [program:cytoscape]\
+#     command=/bin/bash -c 'rm -rf /root/CytoscapeConfiguration && xvfb-run --auth-file /root/.Xauth -s \"-screen 0 1920x1080x24\" /cytoscape.sh'\
+#     priority=10\
+#     stdout_logfile=/dev/fd/1\
+#     stdout_logfile_maxbytes=0\
+#     \
+#     [program:x11vnc]\
+#     command=/bin/bash -c 'x11vnc -display :99 -auth /root/.Xauth'\
+#     priority=11\
+#     " > /etc/supervisor/conf.d/supervisord.conf
+
+EXPOSE 1234
+# CMD ["/usr/bin/supervisord"]
+CMD ["/usr/local/Cytoscape_v3.8.2/cytoscape.sh"]
