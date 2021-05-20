@@ -65,6 +65,9 @@ def adduct_compute(exact_mass: pd.Series, name: str) -> pd.Series:
     """Compute the adduct mass given and pandas series.
     To add new adducts, simply add a new `if name == 'new_adduct_name'` statement.
     Returns a new series.
+
+    This method should also work for pure floats/ints or numpy arrays, but is not tested for them.
+
     Raises AdductNotFound if adduct name not recognized.
     """
     if name == "m_plus_nh4":
