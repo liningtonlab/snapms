@@ -7,7 +7,7 @@ import networkx as nx
 
 def fix_long_dtype(fpath: Path) -> tempfile.TemporaryFile:
     temp_f = tempfile.TemporaryFile()
-    with open(fpath) as f:
+    with open(fpath, encoding="utf-8") as f:
         for l in f.readlines():
             temp_f.write(l.replace('attr.type="long"', 'attr.type="int"').encode())
     temp_f.seek(0)
@@ -20,7 +20,7 @@ def import_gnps_network(parameters):
     # Read in the file and replace any `long` with `int` dtypes
     # Create temp file
     try:
-        with open(parameters.file_path) as f:
+        with open(parameters.file_path, encoding="utf-8") as f:
             import_network = nx.read_graphml(f)
     except KeyError:
         temp_f = fix_long_dtype(parameters.file_path)

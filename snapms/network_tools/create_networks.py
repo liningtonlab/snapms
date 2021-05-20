@@ -5,7 +5,7 @@
 # import os
 # import glob
 
-# import re
+import re
 from pathlib import Path
 
 import networkx as nx
@@ -67,12 +67,12 @@ def match_compound_network(compound_match_list):
         # Elementree has some problems reading special characters from the Atlas input because the input is
         # occasionally not clean UTF-8. This if/ else statement cleans up names to eliminate crashes due to string
         # parsing failure from the graphML file.
-        # if re.match(
-        #     "^[A-Za-z0-9 α-ωΑ-Ω\-‐~,\"'$&*()±\[\]′’+./–″<>−{}|_:;]+$", compound[3]
-        # ):
-        #     compound_name = compound[3]
-        # else:
-        #     compound_name = ""
+        if re.match(
+            "^[A-Za-z0-9 α-ωΑ-Ω\-‐~,\"'$&*()±\[\]′’+./–″<>−{}|_:;]+$", compound[3]
+        ):
+            compound_name = compound[3]
+        else:
+            compound_name = ""
 
         node_list.append(
             (
@@ -81,7 +81,7 @@ def match_compound_network(compound_match_list):
                     "npaid": compound[0],
                     "exact_mass": compound[1],
                     "smiles": compound[2],
-                    "compound_name": compound[3],
+                    "compound_name": compound_name,
                     "npatlas_url": compound[4],
                     "original_gnps_mass": compound[5],
                     "compound_group": compound[6],
@@ -152,7 +152,7 @@ def insert_atlas_clusters_to_cytoscape(parameters):
         parameters.sample_output_path.glob("*[0-9].graphml"),
         key=extract_cluster_id,
     ):
-        with open(network) as f:
+        with open(network, encoding="utf-8") as f:
             atlas_graph = nx.read_graphml(f)
 
         network_title = Path(network).stem
@@ -174,6 +174,9 @@ def insert_atlas_clusters_to_cytoscape(parameters):
                 # Annotate subgraphs to find those subgraphs which are top candidates for the correct compound
                 # family
                 annotate_top_candidates(atlas_graph)
+                # patch in old networkx name for nodelist
+                # to make compatible with py2cytoscape
+                atlas_graph.node = atlas_graph.nodes
                 # Insert Atlas annotation graph to Cytoscape file
                 insert_network = cy.network.create_from_networkx(
                     atlas_graph,
