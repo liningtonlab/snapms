@@ -83,5 +83,8 @@ def adduct_compute(exact_mass: pd.Series, name: str) -> pd.Series:
 def extend_adducts(atlas_df: pd.DataFrame, adduct_list: List[str]) -> pd.DataFrame:
     """Tool to include additional adducts in Atlas dataframe, beyond m_plus_h and m_plus_na provided in Atlas download"""
     for adduct_name in adduct_list:
+        # skip pre-computed values
+        if adduct_name in ["m_plus_h", "m_plus_na"]:
+            continue
         atlas_df[adduct_name] = adduct_compute(atlas_df["exact_mass"], adduct_name)
     return atlas_df
