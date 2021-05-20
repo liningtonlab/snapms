@@ -2,10 +2,13 @@
 
 """Tools to import and reformat NP Atlas data"""
 
+from snapms import atlas_tools
 import unicodedata
 from typing import List
 
 import pandas as pd
+
+from snapms.exceptions import AdductNotFound
 
 
 def import_atlas(parameters):
@@ -17,8 +20,8 @@ def import_atlas(parameters):
     # )
     input_df = normalize_dataframe(pd.read_json(parameters.reference_db))
     # clean_headers(input_df) # shouldn't be needed
-    clean_names(input_df)
-    extend_adducts(input_df)
+    input_df = clean_names(input_df)
+    input_df = extend_adducts(input_df, parameters.adduct_list)
     # add back url
     input_df["npaid"] = input_df.npaid.apply(lambda x: f"NPA{x:06d}")
     input_df["npatlas_url"] = input_df.npaid.apply(
@@ -30,8 +33,10 @@ def import_atlas(parameters):
 
 def normalize_dataframe(
     df: pd.DataFrame, cols: List[str] = ["origin_reference", "origin_organism"]
-):
-    """Normalize columns for nested JSON/dict data inside a dataframe"""
+) -> pd.DataFrame:
+    """Normalize columns for nested JSON/dict data inside a dataframe
+    NOTE: These data are currently not used by snapms.
+    """
     df = df.copy()
     for c in cols:
         a = pd.json_normalize(df[c], sep="_")
@@ -41,25 +46,42 @@ def normalize_dataframe(
     return df
 
 
-def clean_names(df: pd.DataFrame, name_col: str = "name") -> None:
+def clean_names(df: pd.DataFrame, name_col: str = "name") -> pd.DataFrame:
     """Perform unicode normalization on compound names"""
     df[name_col] = [unicodedata.normalize("NFKC", n) for n in df[name_col]]
+    return df
 
 
-def clean_headers(df: pd.DataFrame) -> None:
+def clean_headers(df: pd.DataFrame) -> pd.DataFrame:
     """Tidy up headers in dataframe containing whitespace"""
-
     df.columns = (
         c.strip().lower().replace(" ", "_").replace("(", "").replace(")", "")
         for c in df.columns
     )
+    return df
 
 
-def extend_adducts(atlas_df: pd.DataFrame) -> None:
+def adduct_compute(exact_mass: pd.Series, name: str) -> pd.Series:
+    """Compute the adduct mass given and pandas series.
+    To add new adducts, simply add a new `if name == 'new_adduct_name'` statement.
+    Returns a new series.
+    Raises AdductNotFound if adduct name not recognized.
+    """
+    if name == "m_plus_nh4":
+        return exact_mass + 18.033823
+    if name == "m_plus_h_minus_h2o":
+        return exact_mass - 17.00328
+    if name == "m_plus_k":
+        return exact_mass + 38.963158
+    if name == "2m_plus_h":
+        return (2 * exact_mass) + 1.007276
+    if name == "2m_plus_na":
+        return (2 * exact_mass) + 22.989218
+    raise AdductNotFound("Adduct not recognized")
+
+
+def extend_adducts(atlas_df: pd.DataFrame, adduct_list: List[str]) -> pd.DataFrame:
     """Tool to include additional adducts in Atlas dataframe, beyond m_plus_h and m_plus_na provided in Atlas download"""
-
-    atlas_df["m_plus_nh4"] = atlas_df["exact_mass"] + 18.033823
-    atlas_df["m_plus_h_minus_h2o"] = atlas_df["exact_mass"] - 17.00328
-    atlas_df["m_plus_k"] = atlas_df["exact_mass"] + 38.963158
-    atlas_df["2m_plus_h"] = (2 * atlas_df["exact_mass"]) + 1.007276
-    atlas_df["2m_plus_na"] = (2 * atlas_df["exact_mass"]) + 22.989218
+    for adduct_name in adduct_list:
+        atlas_df[adduct_name] = adduct_compute(atlas_df["exact_mass"], adduct_name)
+    return atlas_df
