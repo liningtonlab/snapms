@@ -5,8 +5,8 @@
 # import os
 # import glob
 
-import re
 from pathlib import Path
+from typing import List
 
 import networkx as nx
 import numpy as np
@@ -14,6 +14,7 @@ from py2cytoscape.data.cyrest_client import CyRestClient
 from py2cytoscape.data.style import StyleUtil
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
+from snapms.matching_tools.CompoundMatch import CompoundMatch
 
 
 def tanimoto_matrix(smiles_list):
@@ -38,7 +39,7 @@ def tanimoto_matrix(smiles_list):
     return matrix
 
 
-def match_compound_network(compound_match_list):
+def match_compound_network(compound_match_list: List[CompoundMatch]) -> nx.Graph:
     """Tool to create a network illustrating relatedness of candidate structures for masses in a GNPS cluster
     Requires the output list from matching_tools.match_compounds.return_compounds
 
@@ -48,9 +49,7 @@ def match_compound_network(compound_match_list):
     tanimoto_cutoff = 0.66
 
     # Create a list of just the SMILES strings, for the Tanimoto grid generation
-    smiles_list = []
-    for compound in compound_match_list:
-        smiles_list.append(compound[2])
+    smiles_list = [c.smiles for c in compound_match_list]
 
     tanimoto_grid = tanimoto_matrix(smiles_list)
 
@@ -63,33 +62,22 @@ def match_compound_network(compound_match_list):
     node_list = []
     index_group_dict = {}
     for index, compound in enumerate(compound_match_list):
-        # JvS - This should no longer be required with unicode normalization on atlas import
-        # Elementree has some problems reading special characters from the Atlas input because the input is
-        # occasionally not clean UTF-8. This if/ else statement cleans up names to eliminate crashes due to string
-        # parsing failure from the graphML file.
-        if re.match(
-            "^[A-Za-z0-9 α-ωΑ-Ω\-‐~,\"'$&*()±\[\]′’+./–″<>−{}|_:;]+$", compound[3]
-        ):
-            compound_name = compound[3]
-        else:
-            compound_name = ""
-
         node_list.append(
             (
                 index,
                 {
-                    "npaid": compound[0],
-                    "exact_mass": compound[1],
-                    "smiles": compound[2],
-                    "compound_name": compound_name,
-                    "npatlas_url": compound[4],
-                    "original_gnps_mass": compound[5],
-                    "compound_group": compound[6],
-                    "adduct": compound[7],
+                    "npaid": compound.npaid,
+                    "exact_mass": compound.exact_mass,
+                    "smiles": compound.smiles,
+                    "compound_name": compound.friendly_name(),
+                    "npatlas_url": compound.npatlas_url,
+                    "original_gnps_mass": compound.mass,
+                    "compound_group": compound.compound_number,
+                    "adduct": compound.adduct,
                 },
             )
         )
-        index_group_dict[index] = compound[6]
+        index_group_dict[index] = compound.compound_number
     compound_graph.add_nodes_from(node_list)
 
     # Add edges if above Dice threshold and not between compounds in the same compound group

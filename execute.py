@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import List
 
 from snapms.atlas_tools.atlas_import import import_atlas
-from snapms.matching_tools import mass_list, match_compounds
+from snapms.matching_tools import match_compounds
 from snapms.network_tools import create_networks
 
 # current working directory for data file paths
@@ -71,7 +71,7 @@ def network_from_mass_list(atlas_df, parameters):
 
     target_mass_list = []
 
-    with open(parameters.file_path) as f:
+    with open(parameters.file_path, encoding="utf-8") as f:
         csv_f = csv.reader(f)
         next(f)
 
@@ -79,12 +79,13 @@ def network_from_mass_list(atlas_df, parameters):
             target_mass_list.append(float(row[0]))
 
     if parameters.remove_duplicates:
-        target_mass_list = mass_list.remove_mass_duplicates(
-            target_mass_list, parameters
+        target_mass_list = match_compounds.remove_mass_duplicates(
+            target_mass_list, parameters.ppm_error
         )
-    compound_list = match_compounds.return_compounds(
+    compound_list = match_compounds.compute_adduct_matches(
         target_mass_list, parameters, atlas_df
     )
+    print(f"Found {len(compound_list)} candidate adduct masses")
     compound_network = create_networks.match_compound_network(compound_list)
     create_networks.annotate_top_candidates(compound_network)
     create_networks.export_graphml(compound_network, parameters)
@@ -100,7 +101,7 @@ def create_gnps_network_annotations(atlas_df, parameters):
     # Append all Atlas annotation networks to GNPS original network file
     # NOTE: GNPS network file must be open in Cytoscape for this to work
     # cytoscape_status = input("Is the Cytoscape file open? [y/n]")
-    cytoscape_status = "n"
+    cytoscape_status = "y"
     if cytoscape_status == "y":
         create_networks.insert_atlas_clusters_to_cytoscape(parameters)
     else:
@@ -113,8 +114,8 @@ if __name__ == "__main__":
     assert DATADIR.exists()
 
     #### CONFIG
-    # source_ms_data = DATADIR / "ms_input" / "mass_list.csv"
-    source_ms_data = DATADIR / "ms_input" / "NIH_Natural_Products_1_And_2.graphml"
+    source_ms_data = DATADIR / "ms_input" / "mass_list.csv"
+    # source_ms_data = DATADIR / "ms_input" / "NIH_Natural_Products_1_And_2.graphml"
     # atlas_data = DATADIR / "atlas_input" / "npatlas_all_20201210.tsv"
     atlas_data = DATADIR / "atlas_input" / "npatlas_v202006.json"
     output_directory = DATADIR / "output"

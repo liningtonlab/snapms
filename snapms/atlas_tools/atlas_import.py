@@ -19,14 +19,9 @@ def import_atlas(parameters):
     #     parameters.reference_db, sep="\t", header=0, encoding="utf-8"
     # )
     input_df = normalize_dataframe(pd.read_json(parameters.reference_db))
-    # clean_headers(input_df) # shouldn't be needed
+    # clean_headers(input_df) # shouldn't be needed with JSON input
     input_df = clean_names(input_df)
     input_df = extend_adducts(input_df, parameters.adduct_list)
-    # add back url
-    input_df["npaid"] = input_df.npaid.apply(lambda x: f"NPA{x:06d}")
-    input_df["npatlas_url"] = input_df.npaid.apply(
-        lambda x: f"https://www.npatlas.org/explore/compounds/{x}"
-    )
     print("Finished NP Atlas data import")
     return input_df
 
