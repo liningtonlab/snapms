@@ -10,11 +10,11 @@ from typing import List
 
 import networkx as nx
 import numpy as np
-from py2cytoscape.data.cyrest_client import CyRestClient
-from py2cytoscape.data.style import StyleUtil
+
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
 from snapms.matching_tools.CompoundMatch import CompoundMatch
+from snapms.network_tools import cytoscape as cy
 
 
 def tanimoto_matrix(smiles_list):
@@ -126,9 +126,8 @@ def insert_atlas_clusters_to_cytoscape(parameters):
     Tested with Cytoscape 3.8
 
     """
-
     # Open connection to cytoscape client
-    cy = CyRestClient()
+    # cy = CyRestClient()
 
     # Start new session (currently not implemented)
 
@@ -162,57 +161,36 @@ def insert_atlas_clusters_to_cytoscape(parameters):
                 # Annotate subgraphs to find those subgraphs which are top candidates for the correct compound
                 # family
                 annotate_top_candidates(atlas_graph)
-                # patch in old networkx name for nodelist
-                # to make compatible with py2cytoscape
-                atlas_graph.node = atlas_graph.nodes
-                # Insert Atlas annotation graph to Cytoscape file
-                insert_network = cy.network.create_from_networkx(
-                    atlas_graph,
-                    name=network_title,
-                    collection="NP Atlas GNPS annotation collection",
-                )
-                cy.layout.apply(name="hierarchical", network=insert_network)
-                undirected = cy.style.create("Undirected")
-                new_defaults = {
-                    # Node defaults
-                    'NODE_SHAPE"': "round rectangle",
-                    "NODE_FILL_COLOR": "#eeeeff",
-                    "NODE_SIZE": 75,
-                    "NODE_BORDER_WIDTH": 2,
-                    "NODE_BORDER_PAINT": "green",
-                    "NODE_TRANSPARENCY": 225,
-                    "NODE_LABEL_COLOR": "black",
-                    # Edge defaults
-                    "EDGE_WIDTH": 3,
-                    "EDGE_LINE_TYPE": "LINE",
-                    "EDGE_LINE_COLOR": "black",
-                    "EDGE_TRANSPARENCY": 120,
-                    # Network defaults
-                    "NETWORK_BACKGROUND_PAINT": "white",
-                }
 
+                # Insert Atlas annotation graph to Cytoscape file
+                # insert_network = cy.network.create_from_networkx(
+                #     atlas_graph,
+                #     name=network_title,
+                #     collection="NP Atlas GNPS annotation collection",
+                # )
+                # cy.layout.apply(name="hierarchical", network=insert_network)
+
+                # undirected = cy.style.create("Undirected")
                 max_compound_group = int(
                     max(dict(atlas_graph.nodes(data="compound_group")).values())
                 )
-                mid_compound_group = max_compound_group // 2
-
                 # Update graph
-                undirected.update_defaults(new_defaults)
+                # undirected.update_defaults(new_defaults)
                 # Apply mapping
                 # undirected.create_passthrough_mapping(column='name', col_type='String', vp='NODE_LABEL')
-                color_gradient = StyleUtil.create_3_color_gradient(
-                    min=1,
-                    mid=mid_compound_group,
-                    max=max_compound_group,
-                    colors=("#fbe723", "#21918C", "#440256"),
-                )
-                undirected.create_continuous_mapping(
-                    column="compound_group",
-                    vp="NODE_FILL_COLOR",
-                    col_type="String",
-                    points=color_gradient,
-                )
-                cy.style.apply(undirected, network=insert_network)
+                # color_gradient = StyleUtil.create_3_color_gradient(
+                #     min=1,
+                #     mid=mid_compound_group,
+                #     max=max_compound_group,
+                #     colors=("#fbe723", "#21918C", "#440256"),
+                # )
+                # undirected.create_continuous_mapping(
+                #     column="compound_group",
+                #     vp="NODE_FILL_COLOR",
+                #     col_type="String",
+                #     points=color_gradient,
+                # )
+                # cy.style.apply(undirected, network=insert_network)
             else:
                 print(
                     "After sub-graph size filter, no clusters remain that possess the minimum number of nodes. "
@@ -220,10 +198,8 @@ def insert_atlas_clusters_to_cytoscape(parameters):
                 )
         else:
             print(
-                "ERROR: Atlas annotation graph "
-                + str(network_title)
-                + " either too small or too large. "
-                "Skipping insert"
+                f"ERROR: Atlas annotation graph {network_title} either too small or too large. "
+                "Skipping insert."
             )
 
 

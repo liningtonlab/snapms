@@ -29,6 +29,7 @@ def remove_mass_duplicates(mass_list: List[float], ppm_error: float) -> List[flo
         for deduplicated_mass in deduplicated_mass_list:
             if mass - mass_error <= deduplicated_mass <= mass + mass_error:
                 insert_mass = False
+                break
         if insert_mass:
             deduplicated_mass_list.append(mass)
 
@@ -77,7 +78,7 @@ def compute_adduct_matches(
     return output_list
 
 
-def annotate_gnps_network(atlas_df, parameters):
+def annotate_gnps_network(atlas_df: pd.DataFrame, parameters):
     """Tool to create structure class predictions from GNPS clusters by identifying the compound classes with the
     highest prevalence in the GNPS network.
 
@@ -95,7 +96,7 @@ def annotate_gnps_network(atlas_df, parameters):
             cluster_id = gnps_network.nodes[list(cluster)[0]]["componentindex"]
             # Create gnps mass list
             target_mass_list = [
-                nd["parrent mass"] for _, nd in cluster.nodes(data=True)
+                gnps_network.nodes[node]["parent mass"] for node in cluster
             ]
             if parameters.remove_duplicates:
                 target_mass_list = remove_mass_duplicates(
@@ -112,6 +113,9 @@ def annotate_gnps_network(atlas_df, parameters):
                 )
                 compound_network = create_networks.match_compound_network(
                     atlas_compound_list
+                )
+                nx.set_node_attributes(
+                    compound_network, cluster_id, name="componentindex"
                 )
                 if len(list(compound_network.nodes)) > 0:
                     create_networks.export_gnps_graphml(
