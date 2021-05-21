@@ -2,7 +2,7 @@
 
 from typing import Dict, Optional, Tuple
 from urllib.parse import quote
-
+from pathlib import Path
 import networkx as nx
 import requests
 
@@ -241,6 +241,43 @@ def cyrest_install_app(app_name: str) -> Response:
     r = requests.post(
         f"{BASE_URL}/commands/apps/install", json={"app": app_name}, headers=HEADERS
     )
+    return r.status_code, r.json()
+
+
+def cyrest_load_session(file_path: Path) -> Response:
+    """Load the a Cytoscape session from a file.
+    Raises a `FileNotFoundError` if file does not exist.
+
+    Returns JSON response
+    """
+    if not file_path.exists():
+        raise FileNotFoundError("Session file does not exist")
+    r = requests.get(
+        f"{BASE_URL}/session?file={quote(str(file_path.absolute()))}", headers=HEADERS
+    )
+    return r.status_code, r.json()
+
+
+def cyrest_save_session(file_path: Path) -> Response:
+    """Save the current Cytoscape session to a given path.
+    Makes sure the parent directory of the specified path exists.
+    Raises a `FileNotFoundError` if parent directory does not exist.
+
+    Returns JSON response
+    """
+    if not file_path.parent.exists():
+        raise FileNotFoundError("Directory to save file does not exist")
+    r = requests.post(
+        f"{BASE_URL}/session?file={quote(str(file_path.absolute()))}", headers=HEADERS
+    )
+    return r.status_code, r.json()
+
+
+def cyrest_delete_session() -> Response:
+    """Close the current Cytoscape session, starting a new one.
+    Returns JSON response
+    """
+    r = requests.delete(f"{BASE_URL}/session", headers=HEADERS)
     return r.status_code, r.json()
 
 

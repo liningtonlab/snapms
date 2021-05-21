@@ -1,6 +1,11 @@
-import responses  # mocking out requests
+from pathlib import Path
+from _pytest.nodes import File
+import pytest
 import networkx as nx
+import responses  # mocking out requests
 from snapms.network_tools import cytoscape as cy
+
+CWD = Path(__file__).parent
 
 
 @responses.activate
@@ -328,4 +333,72 @@ def test_cyrest_install_app_fails():
         status=200,
     )
     status, _ = cy.cyrest_install_app(name)
+    assert status == 200
+
+
+@responses.activate
+def test_cyrest_load_session():
+    file_path = CWD / "test_session.cys"
+    responses.add(
+        responses.GET,
+        f"{cy.BASE_URL}/session",
+        json={"file": str(file_path.absolute)},
+        status=200,
+        match_querystring=False,  # ignore collection name
+    )
+    status, _ = cy.cyrest_load_session(file_path)
+    assert status == 200
+
+
+@responses.activate
+def test_cyrest_load_session_non_existant_session():
+    file_path = CWD / "test_session_NOT_EXIST.cys"
+    responses.add(
+        responses.GET,
+        f"{cy.BASE_URL}/session",
+        json={"file": str(file_path.absolute)},
+        status=200,
+        match_querystring=False,  # ignore collection name
+    )
+    with pytest.raises(FileNotFoundError):
+        cy.cyrest_load_session(file_path)
+
+
+@responses.activate
+def test_cyrest_save_session():
+    file_path = CWD / "test_session_save.cys"
+    responses.add(
+        responses.POST,
+        f"{cy.BASE_URL}/session",
+        json={"file": str(file_path.absolute)},
+        status=200,
+        match_querystring=False,  # ignore collection name
+    )
+    status, _ = cy.cyrest_save_session(file_path)
+    assert status == 200
+
+
+@responses.activate
+def test_cyrest_save_session_bad_parent_dir():
+    file_path = CWD / "NOTEXIST" / "test_session_save.cys"
+    responses.add(
+        responses.POST,
+        f"{cy.BASE_URL}/session",
+        json={"file": str(file_path.absolute)},
+        status=200,
+        match_querystring=False,  # ignore collection name
+    )
+    with pytest.raises(FileNotFoundError):
+        cy.cyrest_save_session(file_path)
+
+
+@responses.activate
+def test_cyrest_delete_session():
+    responses.add(
+        responses.DELETE,
+        f"{cy.BASE_URL}/session",
+        json={"message": "New session created."},
+        status=200,
+    )
+    status, _ = cy.cyrest_delete_session()
     assert status == 200
