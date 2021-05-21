@@ -2,11 +2,8 @@
 
 """Tools to create networks of various types for SNAP-MS platform"""
 
-# import os
-# import glob
-
 from pathlib import Path
-from typing import List
+from typing import List, Dict
 
 import networkx as nx
 import numpy as np
@@ -17,24 +14,13 @@ from snapms.matching_tools.CompoundMatch import CompoundMatch
 from snapms.network_tools import cytoscape as cy
 
 
-def tanimoto_matrix(smiles_list):
+def tanimoto_matrix(smiles_list: List[str]) -> List[List[float]]:
     """Creates square matrix of Tanimoto scores for all SMILES strings in the input list"""
-
-    fingerprints = []  # [[smiles, rdkit_fingerprint]]
-    matrix = []
-
-    for compound in smiles_list:
-        fingerprints.append(
-            AllChem.GetMorganFingerprint(Chem.MolFromSmiles(compound), 2)
-        )
-
-    for fingerprint in fingerprints:
-        insert_data = []
-        for fingerprint2 in fingerprints:
-            insert_data.append(
-                round(DataStructs.DiceSimilarity(fingerprint, fingerprint2), 2)
-            )
-        matrix.append(insert_data)
+    fingerprints = [
+        AllChem.GetMorganFingerprint(Chem.MolFromSmiles(compound), 2)
+        for compound in smiles_list
+    ]
+    matrix = [DataStructs.BulkDiceSimilarity(fp, fingerprints) for fp in fingerprints]
 
     return matrix
 
@@ -83,15 +69,15 @@ def match_compound_network(compound_match_list: List[CompoundMatch]) -> nx.Graph
     # Add edges if above Dice threshold and not between compounds in the same compound group
     # (i.e. compounds that are included because they are candidates for the same original mass from GNPS)
     edge_list = []
-    row_counter = 0
-    for row in tanimoto_grid:
-        for index, value in enumerate(row):
+    for row_idx, row in enumerate(tanimoto_grid):
+        for col_idx, value in enumerate(row):
+            if row_idx == col_idx:
+                continue
             if (
                 value >= tanimoto_cutoff
-                and index_group_dict[row_counter] != index_group_dict[index]
+                and index_group_dict[row_idx] != index_group_dict[col_idx]
             ):
-                edge_list.append((row_counter, index))
-        row_counter += 1
+                edge_list.append((row_idx, col_idx))
     compound_graph.add_edges_from(edge_list)
 
     return compound_graph
@@ -213,7 +199,7 @@ def extract_cluster_id(filepath):
     return cluster_id
 
 
-def graph_size_check(graph, parameters):
+def graph_size_check(G: nx.Graph, parameters) -> bool:
     """Assess overall size of networkx graphs. Used to skip graphs that are too small or too large, or that have become
     too small after filtering steps
 
@@ -224,57 +210,59 @@ def graph_size_check(graph, parameters):
 
     # Assess the results graph to make sure that at least one subgraph contains the minimum number of compound groups
     # and that the nodes and edges do not violate max limits
+    group_counts = get_compound_group_count(G)
+    max_compound_group_count = max(group_counts.values())
     if (
-        max_compound_group_count(graph) >= parameters.min_compound_group_count
+        max_compound_group_count >= parameters.min_compound_group_count
         and parameters.min_atlas_annotation_cluster_size
-        <= len(nx.nodes(graph))
+        <= len(nx.nodes(G))
         < max_node_count
-        and len(nx.edges(graph)) < max_edge_count
+        and len(nx.edges(G)) < max_edge_count
     ):
         return True
     else:
         return False
 
 
-def annotate_top_candidates(graph):
+def compound_group_counter(G: nx.Graph) -> int:
+    """Count the number of unique compound groups in any graph or subgraph
+    Makes sure the graph nodes have compound_group values
+    """
+    compound_groups = set(
+        nd
+        for _, node_data in G.nodes(data=True)
+        if (nd := node_data.get("compound_group")) is not None
+    )
+
+    return len(compound_groups)
+
+
+def get_compound_group_count(G: nx.Graph) -> Dict[int, int]:
+    """Compute the compound group count in any subgraph in the main graph.
+
+    Returns a dictionary with subgraph index key and count value
+    """
+    counts = {}
+    for idx, subgraph in enumerate(nx.connected_components(G)):
+        S = G.subgraph(subgraph)
+        counts[idx] = compound_group_counter(S)
+    return counts
+
+
+def annotate_top_candidates(G: nx.Graph, group_counts: Dict[int, int]) -> None:
     """Annotate subgraphs as top candidate answers, based on maximum compound group counts within each subgraph
     in the network. In other words, if three answers all have four compound groups and this is the highest compound
     group count, then these three answers are all equally likely to be correct.
 
+    Requires graph and pre-computed group count dictionary.
     """
+    # globally set top_candidate attribute to False
+    nx.set_node_attributes(G, values=False, name="top_candidate")
 
-    max_compound_groups = max_compound_group_count(graph)
-
-    for subgraph in nx.connected_components(graph):
-        compound_group_count = compound_group_counter(subgraph, graph)
-        if compound_group_count == max_compound_groups:
-            for node in subgraph:
-                graph.add_node(node, top_candidate=True)
-        else:
-            for node in subgraph:
-                graph.add_node(node, top_candidate=False)
-
-
-def compound_group_counter(subgraph, graph):
-    """Count the number of unique compound groups in any graph or subgraph"""
-
-    compound_group_list = []
-    for node in subgraph:
-        compound_group = graph.nodes[node]["compound_group"]
-        if compound_group not in compound_group_list:
-            compound_group_list.append(compound_group)
-
-    return len(compound_group_list)
-
-
-def max_compound_group_count(graph):
-    """Determine the maximum compound group count in any subgraph in the main graph
-    (i.e. what is the maximum number of compound groups in any subgraph)"""
-
-    max_compound_group_count = 0
-    for subgraph in nx.connected_components(graph):
-        compound_group_count = compound_group_counter(subgraph, graph)
-        if compound_group_count > max_compound_group_count:
-            max_compound_group_count = compound_group_count
-
-    return max_compound_group_count
+    max_group_count = max(group_counts.values())
+    for idx, subgraph in enumerate(nx.connected_components(G)):
+        if group_counts[idx] == max_group_count:
+            print(f"Subgraph {idx} is a top candidate")
+            nx.set_node_attributes(
+                G, values={nid: True for nid in subgraph}, name="top_candidate"
+            )
