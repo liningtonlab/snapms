@@ -167,8 +167,11 @@ def cyrest_to_networkx(network: int) -> Optional[nx.Graph]:
 
 def cyrest_is_available() -> bool:
     """Check if Cytoscape is available"""
-    r = requests.get(f"{BASE_URL}", headers=HEADERS)
-    return r.status_code == 200
+    try:
+        r = requests.get(f"{BASE_URL}", headers=HEADERS)
+        return r.status_code == 200
+    except requests.exceptions.ConnectionError:
+        return False
 
 
 def cyrest_apply_layout(network: int, name="force-directed") -> Response:
@@ -216,11 +219,28 @@ def cyrest_create_style(style: Dict, force: bool = False) -> Response:
     return r.status_code, r.json()
 
 
-def cyrest_apply_style(network, style="default") -> Response:
+def cyrest_apply_style(network: int, style: str = "default") -> Response:
     """Apply a named style to a network in Cytoscape
     Returns JSON response.
     """
     r = requests.get(f"{BASE_URL}/apply/styles/{style}/{network}", headers=HEADERS)
+    return r.status_code, r.json()
+
+
+def cyrest_install_app(app_name: str) -> Response:
+    """Install a cytoscape app by name
+    Returns JSON response
+
+    WARNING: CyREST DOES NOT REPORT ERRORS FOR APP INSTALLATION.
+
+    Example:
+    ```
+    cyrest_install_app(app_name="chemViz2")
+    ```
+    """
+    r = requests.post(
+        f"{BASE_URL}/commands/apps/install", json={"app": app_name}, headers=HEADERS
+    )
     return r.status_code, r.json()
 
 
@@ -231,10 +251,10 @@ SNAP_MS_STYLE = {
     "title": "Undirected",
     "defaults": [
         {"visualProperty": "NODE_SHAPE", "value": "ELLIPSE"},
-        {"visualProperty": "NODE_FILL_COLOR", "value": "#eeeeff"},
+        {"visualProperty": "NODE_FILL_COLOR", "value": "white"},
         {"visualProperty": "NODE_SIZE", "value": 75},
         {"visualProperty": "NODE_BORDER_WIDTH", "value": 2},
-        {"visualProperty": "NODE_BORDER_PAINT", "value": "white"},
+        {"visualProperty": "NODE_BORDER_PAINT", "value": "blue"},
         {"visualProperty": "NODE_TRANSPARENCY", "value": 255},
         {"visualProperty": "NODE_LABEL_COLOR", "value": "black"},
         {"visualProperty": "EDGE_WIDTH", "value": 3},
@@ -243,7 +263,27 @@ SNAP_MS_STYLE = {
         {"visualProperty": "EDGE_TRANSPARENCY", "value": 120},
         {"visualProperty": "NETWORK_BACKGROUND_PAINT", "value": "white"},
     ],
-    "mappings": [],
+    "mappings": [
+        {
+            "mappingType": "passthrough",
+            "mappingColumn": "compound_name",
+            "mappingColumnType": "String",
+            "visualProperty": "NODE_LABEL",
+        },
+        {
+            "mappingType": "passthrough",
+            "mappingColumn": "chemViz Passthrough",
+            "mappingColumnType": "String",
+            "visualProperty": "NODE_CUSTOMGRAPHICS_2",
+        },
+        {
+            "mappingType": "discrete",
+            "mappingColumn": "top_candidate",
+            "mappingColumnType": "Boolean",
+            "visualProperty": "NODE_BORDER_WIDTH",
+            "map": [{"key": "false", "value": "2.0"}, {"key": "true", "value": "10.0"}],
+        },
+    ],
 }
 
 GNPS_STYLE = {

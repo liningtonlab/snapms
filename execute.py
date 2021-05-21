@@ -11,7 +11,7 @@ from typing import List
 
 from snapms.atlas_tools.atlas_import import import_atlas
 from snapms.matching_tools import match_compounds
-from snapms.network_tools import create_networks
+from snapms.network_tools import create_networks, cytoscape as cy
 
 # current working directory for data file paths
 CWD = Path(__file__).parent
@@ -89,6 +89,11 @@ def network_from_mass_list(atlas_df, parameters):
     compound_network = create_networks.match_compound_network(compound_list)
     create_networks.annotate_top_candidates(compound_network)
     create_networks.export_graphml(compound_network, parameters)
+    if cy.cyrest_is_available():
+        print("Inserting mass list data into Cytoscape")
+        create_networks.add_cluster_to_cytoscape(compound_network, "snapms_mass_list")
+    else:
+        print("WARNING - Cytoscape Unavailable!")
 
 
 def create_gnps_network_annotations(atlas_df, parameters):
@@ -101,12 +106,11 @@ def create_gnps_network_annotations(atlas_df, parameters):
     # Append all Atlas annotation networks to GNPS original network file
     # NOTE: GNPS network file must be open in Cytoscape for this to work
     # cytoscape_status = input("Is the Cytoscape file open? [y/n]")
-    cytoscape_status = "y"
-    if cytoscape_status == "y":
+    if cy.cyrest_is_available():
+        print("Cytoscape detected - performing network annotation")
         create_networks.insert_atlas_clusters_to_cytoscape(parameters)
     else:
-        print("OK, bye!")
-        sys.exit()
+        print("WARNING - Cytoscape Unavailable!")
 
 
 if __name__ == "__main__":
@@ -133,4 +137,4 @@ if __name__ == "__main__":
             "ERROR: This file type is not supported. Supported types include csv (for simple peak lists) and graphML "
             "(for standard GNPS output)"
         )
-        sys.exit()
+        sys.exit(-1)

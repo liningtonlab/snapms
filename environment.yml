@@ -3,14 +3,14 @@ channels :
   - conda-forge
 dependencies :
   - python>=3.8
-  - pip=
+  - pip
   - rdkit
   - numpy
   - pandas
   - networkx
   - scipy
+  - requests
   - pip:
-    - py2cytoscape
     - python-dotenv
     - django
     - django-rq

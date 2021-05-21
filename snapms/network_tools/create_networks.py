@@ -6,7 +6,6 @@ from pathlib import Path
 from typing import List, Dict
 
 import networkx as nx
-import numpy as np
 
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
@@ -86,9 +85,13 @@ def match_compound_network(compound_match_list: List[CompoundMatch]) -> nx.Graph
 def export_graphml(graph, parameters):
     """Exports networkx graph from match_compound_network as graphML for use in external visualization tools"""
 
-    if graph_size_check(graph, parameters):
+    if graph_size_check(
+        graph,
+        parameters.min_compound_group_count,
+        parameters.min_atlas_annotation_cluster_size,
+    ):
         output_filename = f"{parameters.file_name}_snapms_output.graphml"
-        nx.write_graphml(graph, parameters.output_path / output_filename)
+        nx.write_graphml(graph, parameters.sample_output_path / output_filename)
 
 
 def export_gnps_graphml(graph, cluster_id, parameters):
@@ -112,9 +115,6 @@ def insert_atlas_clusters_to_cytoscape(parameters):
     Tested with Cytoscape 3.8
 
     """
-    # Open connection to cytoscape client
-    # cy = CyRestClient()
-
     # Start new session (currently not implemented)
 
     # Import original gnps network (currently not implemented)
@@ -131,57 +131,18 @@ def insert_atlas_clusters_to_cytoscape(parameters):
         network_title = Path(network).stem
         print("Starting insertion of " + network_title + " to GNPS network file")
 
-        if graph_size_check(atlas_graph, parameters):
-            # Remove subgraphs that do not have the minimum required number of nodes. Useful for removing large
-            # numbers of small clusters containing just one or two Atlas compounds
-            nodes_to_include = []
-            for subgraph in nx.connected_components(atlas_graph):
-                if len(subgraph) >= parameters.min_atlas_annotation_cluster_size:
-                    nodes_to_include.extend(subgraph)
-            nodes_to_remove = np.setdiff1d(atlas_graph.nodes(), nodes_to_include)
-            for removed_node in nodes_to_remove:
-                atlas_graph.remove_node(removed_node)
-
-            # Insert atlas annotation graphs in to cytoscape file, provided they are still an appropriate size
-            if graph_size_check(atlas_graph, parameters):
-                # Annotate subgraphs to find those subgraphs which are top candidates for the correct compound
-                # family
-                annotate_top_candidates(atlas_graph)
-
-                # Insert Atlas annotation graph to Cytoscape file
-                # insert_network = cy.network.create_from_networkx(
-                #     atlas_graph,
-                #     name=network_title,
-                #     collection="NP Atlas GNPS annotation collection",
-                # )
-                # cy.layout.apply(name="hierarchical", network=insert_network)
-
-                # undirected = cy.style.create("Undirected")
-                max_compound_group = int(
-                    max(dict(atlas_graph.nodes(data="compound_group")).values())
-                )
-                # Update graph
-                # undirected.update_defaults(new_defaults)
-                # Apply mapping
-                # undirected.create_passthrough_mapping(column='name', col_type='String', vp='NODE_LABEL')
-                # color_gradient = StyleUtil.create_3_color_gradient(
-                #     min=1,
-                #     mid=mid_compound_group,
-                #     max=max_compound_group,
-                #     colors=("#fbe723", "#21918C", "#440256"),
-                # )
-                # undirected.create_continuous_mapping(
-                #     column="compound_group",
-                #     vp="NODE_FILL_COLOR",
-                #     col_type="String",
-                #     points=color_gradient,
-                # )
-                # cy.style.apply(undirected, network=insert_network)
-            else:
-                print(
-                    "After sub-graph size filter, no clusters remain that possess the minimum number of nodes. "
-                    "Skipping network insertion"
-                )
+        remove_small_subgraphs(atlas_graph, parameters)
+        # Insert atlas annotation graphs in to cytoscape file, provided they are still an appropriate size
+        # TODO: differentiate between too small and too large
+        if graph_size_check(
+            atlas_graph,
+            parameters.min_compound_group_count,
+            parameters.min_atlas_annotation_cluster_size,
+        ):
+            # Annotate subgraphs to find those subgraphs which are top candidates for the correct compound
+            # family
+            annotate_top_candidates(atlas_graph)
+            add_cluster_to_cytoscape(atlas_graph, network_title)
         else:
             print(
                 f"ERROR: Atlas annotation graph {network_title} either too small or too large. "
@@ -189,7 +150,32 @@ def insert_atlas_clusters_to_cytoscape(parameters):
             )
 
 
-def extract_cluster_id(filepath):
+def remove_small_subgraphs(G: nx.Graph, parameters):
+    """Remove subgraphs that do not have the minimum required number of nodes. Useful for removing large
+    numbers of small clusters containing just one or two Atlas compounds
+    """
+    nodes_to_include = set()
+    for subgraph in nx.connected_components(G):
+        if len(subgraph) >= parameters.min_atlas_annotation_cluster_size:
+            nodes_to_include.update(subgraph)
+    nodes_to_remove = set(G.nodes()) - nodes_to_include
+    G.remove_nodes_from(nodes_to_remove)
+
+
+def add_cluster_to_cytoscape(G: nx.Graph, title: str) -> None:
+    """Add graph to cytoscape session and applying styling.
+
+    IMPORTANT: Assumes CyREST is available.
+    """
+    add_chemviz_passthrough_column(G)
+    # Insert Atlas annotation graph to Cytoscape file
+    network_id = cy.networkx_to_cyrest(G, name=title)
+    cy.cyrest_apply_layout(network_id, name="force-directed")
+    cy.cyrest_create_style(cy.SNAP_MS_STYLE, force=False)
+    cy.cyrest_apply_style(network_id, cy.SNAP_MS_STYLE["title"])
+
+
+def extract_cluster_id(filepath: Path) -> int:
     """Tool to extract the GNPS componentindex (i.e. cluster id) from the Atlas annotation cluster filename.
     Used to sort the Atlas networks so that they are processed and inserted into the Cytoscape file in numerical order
 
@@ -199,24 +185,29 @@ def extract_cluster_id(filepath):
     return cluster_id
 
 
-def graph_size_check(G: nx.Graph, parameters) -> bool:
+def graph_size_check(
+    G: nx.Graph,
+    min_group_count: int,
+    min_cluster_size: int,
+    max_node_count: int = 2000,
+    max_edge_count: int = 10000,
+) -> bool:
     """Assess overall size of networkx graphs. Used to skip graphs that are too small or too large, or that have become
     too small after filtering steps
 
     """
-
-    max_node_count = 2000
-    max_edge_count = 10000
-
     # Assess the results graph to make sure that at least one subgraph contains the minimum number of compound groups
     # and that the nodes and edges do not violate max limits
     group_counts = get_compound_group_count(G)
-    max_compound_group_count = max(group_counts.values())
+
+    try:
+        max_compound_group_count = max(group_counts.values())
+    # save when max empty sequence
+    except ValueError:
+        return False
     if (
-        max_compound_group_count >= parameters.min_compound_group_count
-        and parameters.min_atlas_annotation_cluster_size
-        <= len(nx.nodes(G))
-        < max_node_count
+        max_compound_group_count >= min_group_count
+        and min_cluster_size <= len(nx.nodes(G)) < max_node_count
         and len(nx.edges(G)) < max_edge_count
     ):
         return True
@@ -249,13 +240,13 @@ def get_compound_group_count(G: nx.Graph) -> Dict[int, int]:
     return counts
 
 
-def annotate_top_candidates(G: nx.Graph, group_counts: Dict[int, int]) -> None:
+def annotate_top_candidates(G: nx.Graph) -> None:
     """Annotate subgraphs as top candidate answers, based on maximum compound group counts within each subgraph
     in the network. In other words, if three answers all have four compound groups and this is the highest compound
     group count, then these three answers are all equally likely to be correct.
-
-    Requires graph and pre-computed group count dictionary.
     """
+    group_counts = get_compound_group_count(G)
+
     # globally set top_candidate attribute to False
     nx.set_node_attributes(G, values=False, name="top_candidate")
 
@@ -266,3 +257,9 @@ def annotate_top_candidates(G: nx.Graph, group_counts: Dict[int, int]) -> None:
             nx.set_node_attributes(
                 G, values={nid: True for nid in subgraph}, name="top_candidate"
             )
+
+
+def add_chemviz_passthrough_column(G: nx.Graph, smiles_col: str = "smiles"):
+    """Adds a chemViz Passthrough column to the output"""
+    for _, nd in G.nodes(data=True):
+        nd["chemViz Passthrough"] = f"chemviz:{nd[smiles_col]}"

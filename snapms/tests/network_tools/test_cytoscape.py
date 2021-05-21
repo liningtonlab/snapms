@@ -303,3 +303,29 @@ def test_cyrest_apply_style_does_not_exists():
     )
     status, _ = cy.cyrest_apply_style(1, style=name)
     assert status == 404
+
+
+@responses.activate
+def test_cyrest_install_app():
+    name = "chemViz2"
+    responses.add(
+        responses.POST,
+        f"{cy.BASE_URL}/commands/apps/install",
+        json={"data": {}, "errors": []},
+        status=200,
+    )
+    status, _ = cy.cyrest_install_app(name)
+    assert status == 200
+
+
+@responses.activate
+def test_cyrest_install_app_fails():
+    name = "chemVizNonExistent"
+    responses.add(
+        responses.POST,
+        f"{cy.BASE_URL}/commands/apps/install",
+        json={"data": {}, "errors": []},
+        status=200,
+    )
+    status, _ = cy.cyrest_install_app(name)
+    assert status == 200
