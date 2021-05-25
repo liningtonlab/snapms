@@ -2,7 +2,10 @@
 
 import tempfile
 from pathlib import Path
+
 import networkx as nx
+
+from snapms.config import Parameters
 
 
 def fix_long_dtype(fpath: Path) -> tempfile.TemporaryFile:
@@ -14,7 +17,7 @@ def fix_long_dtype(fpath: Path) -> tempfile.TemporaryFile:
     return temp_f
 
 
-def import_gnps_network(parameters):
+def import_gnps_network(parameters: Parameters):
     """Import the original GNPS network file (graphML) downloaded from the GNPS output site"""
     # Networkx 2.5 has a bug which fails to read `long` data from graphML
     # Read in the file and replace any `long` with `int` dtypes

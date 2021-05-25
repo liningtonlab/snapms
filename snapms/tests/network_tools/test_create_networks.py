@@ -1,9 +1,10 @@
 from pathlib import Path
 
 import networkx as nx
+import pytest
 from numpy import exp
 from numpy.lib.npyio import load
-import pytest
+
 from snapms.network_tools import create_networks
 
 CWD = Path(__file__).parent

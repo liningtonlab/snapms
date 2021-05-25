@@ -2,16 +2,16 @@
 
 """Tools to import and reformat NP Atlas data"""
 
-from snapms import atlas_tools
 import unicodedata
 from typing import List
 
 import pandas as pd
 
+from snapms.config import Parameters
 from snapms.exceptions import AdductNotFound
 
 
-def import_atlas(parameters):
+def import_atlas(parameters: Parameters):
     """Import Atlas data from Advanced search output, and reformat as a pandas df with cleaned headers and additional
     adducts (if selected)
     """

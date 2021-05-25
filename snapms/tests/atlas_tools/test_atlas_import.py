@@ -1,8 +1,9 @@
 from pathlib import Path
 
 import pandas as pd
-from pandas.testing import assert_series_equal
 import pytest
+from pandas.testing import assert_series_equal
+
 from snapms.atlas_tools import atlas_import
 from snapms.exceptions import AdductNotFound
 

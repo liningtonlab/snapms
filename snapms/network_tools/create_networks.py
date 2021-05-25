@@ -3,12 +3,13 @@
 """Tools to create networks of various types for SNAP-MS platform"""
 
 from pathlib import Path
-from typing import List, Dict
+from typing import Dict, List
 
 import networkx as nx
-
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
+
+from snapms.config import Parameters
 from snapms.matching_tools.CompoundMatch import CompoundMatch
 from snapms.network_tools import cytoscape as cy
 
@@ -82,7 +83,7 @@ def match_compound_network(compound_match_list: List[CompoundMatch]) -> nx.Graph
     return compound_graph
 
 
-def export_graphml(graph, parameters):
+def export_graphml(graph: nx.Graph, parameters: Parameters):
     """Exports networkx graph from match_compound_network as graphML for use in external visualization tools"""
 
     if graph_size_check(
@@ -94,7 +95,7 @@ def export_graphml(graph, parameters):
         nx.write_graphml(graph, parameters.sample_output_path / output_filename)
 
 
-def export_gnps_graphml(graph, cluster_id, parameters):
+def export_gnps_graphml(graph: nx.Graph, cluster_id: int, parameters: Parameters):
     """Exports networkx graph from match_compound_network for each gnps cluster, with cluster id in filename as graphML"""
 
     # Pathlib
@@ -106,7 +107,7 @@ def export_gnps_graphml(graph, cluster_id, parameters):
     )
 
 
-def insert_atlas_clusters_to_cytoscape(parameters):
+def insert_atlas_clusters_to_cytoscape(parameters: Parameters):
     """Tool to create a new collection in an existing Cytoscape file, and to append all Atlas GNPS annotation networks
     as separate network views.
 
@@ -150,7 +151,7 @@ def insert_atlas_clusters_to_cytoscape(parameters):
             )
 
 
-def remove_small_subgraphs(G: nx.Graph, parameters):
+def remove_small_subgraphs(G: nx.Graph, parameters: Parameters):
     """Remove subgraphs that do not have the minimum required number of nodes. Useful for removing large
     numbers of small clusters containing just one or two Atlas compounds
     """

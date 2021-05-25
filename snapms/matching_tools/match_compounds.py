@@ -5,8 +5,10 @@ from typing import List
 
 import networkx as nx
 import pandas as pd
-from snapms.matching_tools.CompoundMatch import CompoundMatch
+
+from snapms.config import Parameters
 from snapms.matching_tools import data_import
+from snapms.matching_tools.CompoundMatch import CompoundMatch
 from snapms.network_tools import create_networks
 
 
@@ -37,7 +39,7 @@ def remove_mass_duplicates(mass_list: List[float], ppm_error: float) -> List[flo
 
 
 def compute_adduct_matches(
-    mass_list: List[float], parameters, atlas_df: pd.DataFrame
+    mass_list: List[float], parameters: Parameters, atlas_df: pd.DataFrame
 ) -> List[CompoundMatch]:
     """Tool to search the Atlas for a given mass, and return all compounds with that mass as a specific adduct,
     within a given mass error
@@ -78,7 +80,7 @@ def compute_adduct_matches(
     return output_list
 
 
-def annotate_gnps_network(atlas_df: pd.DataFrame, parameters):
+def annotate_gnps_network(atlas_df: pd.DataFrame, parameters: Parameters):
     """Tool to create structure class predictions from GNPS clusters by identifying the compound classes with the
     highest prevalence in the GNPS network.
 

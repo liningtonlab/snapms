@@ -1,8 +1,10 @@
 from pathlib import Path
-from _pytest.nodes import File
-import pytest
+
 import networkx as nx
+import pytest
 import responses  # mocking out requests
+from _pytest.nodes import File
+
 from snapms.network_tools import cytoscape as cy
 
 CWD = Path(__file__).parent

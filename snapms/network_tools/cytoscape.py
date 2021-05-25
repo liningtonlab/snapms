@@ -1,8 +1,9 @@
 """Conversion and API access tools for the Cytoscape CyREST API"""
 
+from pathlib import Path
 from typing import Dict, Optional, Tuple
 from urllib.parse import quote
-from pathlib import Path
+
 import networkx as nx
 import requests
 
