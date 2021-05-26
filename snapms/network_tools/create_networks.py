@@ -3,13 +3,12 @@
 """Tools to create networks of various types for SNAP-MS platform"""
 
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import networkx as nx
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
-
-from snapms.config import Parameters
+from snapms.config import Parameters, CYTOSCAPE_DATADIR
 from snapms.matching_tools.CompoundMatch import CompoundMatch
 from snapms.network_tools import cytoscape as cy
 
@@ -114,7 +113,6 @@ def insert_atlas_clusters_to_cytoscape(parameters: Parameters):
     Currently the GNPS file to which networks will be added must be open in the Cytoscape desktop program in a single
     session.
     Tested with Cytoscape 3.8
-
     """
     # Start new session (currently not implemented)
 
@@ -143,7 +141,12 @@ def insert_atlas_clusters_to_cytoscape(parameters: Parameters):
             # Annotate subgraphs to find those subgraphs which are top candidates for the correct compound
             # family
             annotate_top_candidates(atlas_graph)
-            add_cluster_to_cytoscape(atlas_graph, network_title)
+            # TODO: replace output_file with param
+            add_cluster_to_cytoscape(
+                atlas_graph,
+                network_title,
+                output_file=CYTOSCAPE_DATADIR.joinpath("snapms.cys"),
+            )
         else:
             print(
                 f"ERROR: Atlas annotation graph {network_title} either too small or too large. "
@@ -163,8 +166,12 @@ def remove_small_subgraphs(G: nx.Graph, parameters: Parameters):
     G.remove_nodes_from(nodes_to_remove)
 
 
-def add_cluster_to_cytoscape(G: nx.Graph, title: str) -> None:
+def add_cluster_to_cytoscape(
+    G: nx.Graph, title: str, output_file: Optional[Path]
+) -> None:
     """Add graph to cytoscape session and applying styling.
+
+    output_file should be a Path accessible by the host running CyREST.
 
     IMPORTANT: Assumes CyREST is available.
     """
@@ -174,6 +181,9 @@ def add_cluster_to_cytoscape(G: nx.Graph, title: str) -> None:
     cy.cyrest_apply_layout(network_id, name="force-directed")
     cy.cyrest_create_style(cy.SNAP_MS_STYLE, force=False)
     cy.cyrest_apply_style(network_id, cy.SNAP_MS_STYLE["title"])
+    if output_file is not None:
+        cy.cyrest_save_session(output_file)
+        cy.cyrest_delete_session()
 
 
 def extract_cluster_id(filepath: Path) -> int:

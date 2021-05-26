@@ -55,18 +55,8 @@ docker run -itd -p 6379:6379 --name snapms-redis redis
 2. Cytoscape
 
 Cytoscape automation requires a running instance. You can run it on the desktop, but on a server
-it will be easier to run it in a docker container. The CyREST runs on port 1234. Cytoscape needs an X server to run 
-(I tried to make a headless docker container and failed). The `no_proxy` env variables below are essential (read as required).
+it will be easier to run it in a docker container. The CyREST runs on port 1234. 
 
 ```
-docker rm -f cy; docker run -itd --name cy \
-  -v $HOME/cytoscape:/home/seluser/cytoscape/output \
-  -p 5900:5900 -p 1234:1234 -p 8080:8080 -p 6080:6080 \
-  -e no_proxy=localhost \
-  -e HUB_ENV_no_proxy=localhost \
-  -e SCREEN_WIDTH=1270 -e SCREEN_HEIGHT=700 \
-  -e VNC_NO_PASSWORD=1 \
-  cytoscape/cytoscape-desktop:3.7.0 \
-  sh -c '/opt/bin/entry_point.sh & /home/seluser/noVNC/utils/launch.sh --vnc localhost:5900' &\
-  (sleep 3; docker exec -it cy sh -c '/home/seluser/cytoscape/start.sh') &
+docker run --name cy -itd -v $HOME/cytoscape:/root/data -p 1234:1234 jvansan/cytoscape-desktop-headless:latest
 ```

@@ -2,7 +2,7 @@ import csv
 
 import pandas as pd
 
-from snapms.config import Parameters
+from snapms.config import Parameters, CYTOSCAPE_DATADIR
 from snapms.matching_tools import match_compounds
 from snapms.network_tools import create_networks
 from snapms.network_tools import cytoscape as cy
@@ -33,7 +33,12 @@ def network_from_mass_list(atlas_df: pd.DataFrame, parameters: Parameters):
     create_networks.export_graphml(compound_network, parameters)
     if cy.cyrest_is_available():
         print("Inserting mass list data into Cytoscape")
-        create_networks.add_cluster_to_cytoscape(compound_network, "snapms_mass_list")
+        # TODO: replace output_file with param
+        create_networks.add_cluster_to_cytoscape(
+            compound_network,
+            "snapms_mass_list",
+            output_file=CYTOSCAPE_DATADIR.joinpath("snapms.cys"),
+        )
     else:
         print("WARNING - Cytoscape Unavailable!")
 

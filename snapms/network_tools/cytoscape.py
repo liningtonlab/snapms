@@ -13,7 +13,7 @@ Response = Tuple[int, Dict]
 BASE_URL = "http://localhost:1234/v1"
 HEADERS = {"Content-Type": "application/json"}
 
-# Converters taken from (under MIT License)
+# Converters derived from (under MIT License)
 # https://github.com/cytoscape/py2cytoscape/blob/develop/py2cytoscape/util/util_networkx.py
 
 # Special Keys
@@ -251,8 +251,9 @@ def cyrest_load_session(file_path: Path) -> Response:
 
     Returns JSON response
     """
-    if not file_path.exists():
-        raise FileNotFoundError("Session file does not exist")
+    # This doesn't make sense with CyREST in a container
+    # if not file_path.exists():
+    #     raise FileNotFoundError("Session file does not exist")
     r = requests.get(
         f"{BASE_URL}/session?file={quote(str(file_path.absolute()))}", headers=HEADERS
     )
@@ -266,8 +267,9 @@ def cyrest_save_session(file_path: Path) -> Response:
 
     Returns JSON response
     """
-    if not file_path.parent.exists():
-        raise FileNotFoundError("Directory to save file does not exist")
+    # This doesn't make sense with CyREST in a container
+    # if not file_path.parent.exists():
+    #     raise FileNotFoundError("Directory to save file does not exist")
     r = requests.post(
         f"{BASE_URL}/session?file={quote(str(file_path.absolute()))}", headers=HEADERS
     )
