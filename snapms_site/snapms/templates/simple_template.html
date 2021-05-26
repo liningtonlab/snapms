@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Natural Products Atlas | {{ page_name }}{% endblock %}
+
+{% block content %}
+<style>
+    h4 {
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+</style>
+
+<div class="container bg-light p-4">
+    <div class="container-fluid mt-3 bg-white rounded py-3">
+        <h4>{{ page_name }}</h4>
+        {%block page_content%}
+        {% endblock %}
+    </div>
+</div>
+
+{% endblock %}

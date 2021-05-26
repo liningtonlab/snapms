@@ -1,6 +1,7 @@
 # IDE configs
 .vscode/
 .idea/
+db/
 
 # Data folders for development
 data/
