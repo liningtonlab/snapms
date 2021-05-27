@@ -28,167 +28,230 @@
         border-width: 0.5px;
     }
 </style>
-<div class="container-fluid">
-    <div class="row pt-2 pb-4">
-        A tool to predict the identities of compound clusters based on mass spectrometry features
-    </div>
-    <div class="row py-2">
-        <h5>1) Upload Mass List of GNPS Network</h5>
-    </div>
-    <div class="row align-items-center py-2">
-        <div class="col-lg-5 pt-1">
-            <div class="upload-drop-zone d-flex flex-fill flex-column align-items-center justify-content-center text-center"
-                id="drop-zone">
-                <h5 class="pb-1">Drag and Drop File (or Click) Here</h5>
-                <input type="file" class="custom-file-input" id="fileUpload" hidden>
-                <div>Mass list (<code>.csv</code> format, example <a href="#">here</a>) or
-                    GNPS Network (<code>.graphML</code> or Cytoscape session <code>.cys</code>)
+<div class="container-fluid" id="vue-app">
+    <form @submit.prevent="submitData">
+        {% csrf_token %}
+        <div class="row pt-2 pb-4">
+            A tool to predict the identities of compound clusters based on mass spectrometry features
+        </div>
+        <div class="row py-2">
+            <h5>1) Upload Mass List of GNPS Network</h5>
+        </div>
+        <div class="row align-items-center py-2">
+            <div class="col-lg-5 pt-1">
+                <div class="upload-drop-zone d-flex flex-fill flex-column align-items-center justify-content-center text-center"
+                    id="drop-zone">
+                    <h5 class="pb-1">Drag and Drop File (or Click) Here</h5>
+                    <input type="file" class="custom-file-input" id="fileUpload" hidden>
+                    <div>Mass list (<code>.csv</code> format, example <a href="#">here</a>) or
+                        GNPS Network (<code>.graphML</code> or Cytoscape session <code>.cys</code>)
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 text-center">
+                <h5>OR</h5>
+            </div>
+            <div class="col-lg-5 mb-4">
+                <div class="form-group">
+                    <label for="massList">Mass List</label>
+                    <textarea class="form-control" placeholder="Enter one mass per row" id="massList"
+                        style='height: 195px' v-model="mass_list"></textarea>
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 text-center">
-            <h5>OR</h5>
+        <div class="row py-2">
+            <h5>2) Select Reference Database</h5>
         </div>
-        <div class="col-lg-5 mb-4">
-            <div class="form-group">
-                <label for="massList">Mass List</label>
-                <textarea class="form-control" placeholder="Enter one mass per row" id="massList"
-                    style='height: 195px'></textarea>
+        <div class="row align-items-center justify-content-center py-2">
+            <div class="col-lg-2 text-center">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineCheckboxFull" value="full"
+                        name="refereceDbSelection" checked v-model="reference_db">
+                    <label class="form-check-label" for="inlineCheckboxFull">Full NP Atlas</label>
+                </div>
+            </div>
+            <div class="col-lg-2 text-center">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineCheckboxBact" value="bacteria"
+                        name="refereceDbSelection" v-model="reference_db">
+                    <label class="form-check-label" for="inlineCheckboxBact">Bacterial only</label>
+                </div>
+            </div>
+            <div class="col-lg-2 text-center">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineCheckboxBact" value="fungi"
+                        name="refereceDbSelection" v-model="reference_db">
+                    <label class="form-check-label" for="inlineCheckboxBact">Fungi only</label>
+                </div>
+            </div>
+            <div class="col-lg-5 text-center">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="radio" id="inlineCheckboxCustom" value="custom" name="refereceDbSelection"
+                                v-model="reference_db">
+                            <label class="form-check-label" for="inlineCheckboxCustom">Custom</label>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Enter a phylum, family, genus, etc."
+                        v-model="custom_value">
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row py-2">
-        <h5>2) Select Reference Database</h5>
-    </div>
-    <div class="row align-items-center justify-content-center py-2">
-        <div class="col-lg-5 text-center">
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="inlineCheckboxFull" value="full"
-                    name="refereceDbSelection" checked>
-                <label class="form-check-label" for="inlineCheckboxFull">Full NP Atlas</label>
+        <div class="row py-2">
+            <h5>3) Set Optional Parameters</h5>
+        </div>
+        <div class="row justify-content-around py-2">
+            <div class="col-5 params">
+                <fieldset>
+                    <legend class="offset-sm-1 col-form-label col-sm-2 pt-0">Adducts</legend>
+                    <div class="row mb-3 align-items-around justify-content-around">
+                        <div class="col-md-5 mx-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="m_plus_h" value="m_plus_h"
+                                    v-model="checked_adducts">
+                                <label class="form-check-label" for="m_plus_h">
+                                    [M+H]<sup>+</sup>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="m_plus_na" value="m_plus_na"
+                                    v-model="checked_adducts">
+                                <label class="form-check-label" for="m_plus_na">
+                                    [M+Na]<sup>+</sup>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="m_plus_nh4" value="m_plus_nh4"
+                                    v-model="checked_adducts">
+                                <label class="form-check-label" for="m_plus_nh4">
+                                    [M+NH<sub>4</sub>]<sup>+</sup>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="m_minus_h2o_plus_h"
+                                    value="m_minus_h2o_plus_h" v-model="checked_adducts">
+                                <label class="form-check-label" for="m_minus_h2o_plus_h">
+                                    [M-H<sub>2</sub>O+H]<sup>+</sup>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-5 mx-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="m_plus_k" value="m_plus_k"
+                                    v-model="checked_adducts">
+                                <label class="form-check-label" for="m_plus_k">
+                                    [M+K]<sup>+</sup>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="2m_plus_h" value="2m_plus_h"
+                                    v-model="checked_adducts">
+                                <label class="form-check-label" for="2m_plus_h">
+                                    [2M+H]<sup>+</sup>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="2m_plus_na" value="2m_plus_na"
+                                    v-model="checked_adducts">
+                                <label class="form-check-label" for="2m_plus_na">
+                                    [2M+Na]<sup>+</sup>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="inlineCheckboxBact" value="bacteria"
-                    name="refereceDbSelection">
-                <label class="form-check-label" for="inlineCheckboxBact">Bacterial only</label>
+            <div class="col-6 params pb-2">
+                <fieldset>
+                    <legend class="offset-sm-1 col-form-label col-sm-2 pt-0">Parameters</legend>
+                    <div class="form-group row align-items-center">
+                        <div class="col-sm-4">
+                            <input class="form-control text-center" type="number" step="1" min="1" id="ppm_error"
+                                v-model="ppm_error">
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="form-label" for="ppm_error">ppm error</label>
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <div class="col-sm-4">
+                            <input class="form-control text-center" type="number" step="1" min="0" id="min_gnps_size"
+                                v-model="min_gnps">
+                        </div>
+                        <div class="col-sm-8">
+                            <label class="form-label" for="min_gnps_size">minimum GNPS cluster size</label>
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <div class="col-sm-4">
+                            <input class="form-control text-center" type="number" step="1" min="0" id="max_gnps_size"
+                                v-model="max_gnps">
+                        </div>
+                        <div class="col-sm-8">
+                            <label class="form-label" for="max_gnps_size">maximum GNPS cluster size</label>
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <div class="col-sm-4">
+                            <input class="form-control text-center" type="number" step="1" min="0" id="min_atlas_size"
+                                v-model="min_atlas">
+                        </div>
+                        <div class="col-sm-8">
+                            <label class="form-label" for="min_atlas_size">minimum NP Atlas annotation cluster
+                                size</label>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="inlineCheckboxBact" value="fungi"
-                    name="refereceDbSelection">
-                <label class="form-check-label" for="inlineCheckboxBact">Fungi only</label>
+        </div>
+        <div class="row py-2">
+            <div class="col">
+                <button class="btn btn-prim-solid btn-lg" type="submit">
+                    Submit
+                </button>
             </div>
         </div>
-        <div class="col-lg-5 text-center">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="radio" id="inlineCheckboxCustom" value="custom" name="refereceDbSelection">
-                        <label class="form-check-label" for="inlineCheckboxCustom">Custom</label>
-                    </div>
-                </div>
-                <input type="text" class="form-control" placeholder="Enter a phylum, family, genus, etc.">
-            </div>
-        </div>
-    </div>
-    <div class="row py-2">
-        <h5>3) Set Optional Parameters</h5>
-    </div>
-    <div class="row justify-content-around py-2">
-        <div class="col-5 params">
-            <fieldset>
-                <legend class="offset-sm-1 col-form-label col-sm-2 pt-0">Adducts</legend>
-                <div class="row mb-3 align-items-around justify-content-around">
-                    <div class="col-md-5 mx-2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="m_plus_h">
-                            <label class="form-check-label" for="m_plus_h">
-                                [M+H]<sup>+</sup>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="m_plus_na">
-                            <label class="form-check-label" for="m_plus_na">
-                                [M+Na]<sup>+</sup>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="m_plus_nh4">
-                            <label class="form-check-label" for="m_plus_nh4">
-                                [M+NH<sub>4</sub>]<sup>+</sup>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="m_minus_h2o_plus_h">
-                            <label class="form-check-label" for="m_minus_h2o_plus_h">
-                                [M-H<sub>2</sub>O+H]<sup>+</sup>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-5 mx-2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="m_plus_k">
-                            <label class="form-check-label" for="m_plus_k">
-                                [M+K]<sup>+</sup>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="2m_plus_h">
-                            <label class="form-check-label" for="2m_plus_h">
-                                [2M+H]<sup>+</sup>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="2m_plus_na">
-                            <label class="form-check-label" for="2m_plus_na">
-                                [2M+Na]<sup>+</sup>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div class="col-6 params pb-2">
-            <fieldset>
-                <legend class="offset-sm-1 col-form-label col-sm-2 pt-0">Parameters</legend>
-                <div class="form-group row align-items-center">
-                    <div class="col-sm-4">
-                        <input class="form-control text-center" type="number" step="1" min="1" id="ppm_error">
-                    </div>
-                    <div class="col-sm-4">
-                        <label class="form-label" for="ppm_error">ppm error</label>
-                    </div>
-                </div>
-                <div class="form-group row align-items-center">
-                    <div class="col-sm-4">
-                        <input class="form-control text-center" type="number" step="1" min="0" id="min_gnps_size">
-                    </div>
-                    <div class="col-sm-8">
-                        <label class="form-label" for="min_gnps_size">minimum GNPS cluster size</label>
-                    </div>
-                </div>
-                <div class="form-group row align-items-center">
-                    <div class="col-sm-4">
-                        <input class="form-control text-center" type="number" step="1" min="0" id="max_gnps_size">
-                    </div>
-                    <div class="col-sm-8">
-                        <label class="form-label" for="max_gnps_size">maximum GNPS cluster size</label>
-                    </div>
-                </div>
-                <div class="form-group row align-items-center">
-                    <div class="col-sm-4">
-                        <input class="form-control text-center" type="number" step="1" min="0" id="max_atlas_size">
-                    </div>
-                    <div class="col-sm-8">
-                        <label class="form-label" for="max_atlas_size">minimum NP Atlas annotation cluster size</label>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-    </div>
-    <div class="row py-2">
-        <div class="col">
-            <input type="button" class="btn btn-prim-solid" value="Submit" onclick="handleSubmit()">
-        </div>
-    </div>
+    </form>
 </div>
+
+<script>
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    var app = new Vue({
+        delimiters: ["[[", "]]"],
+        el: '#vue-app',
+        data: {
+            input_file: null,
+            mass_list: "",
+            reference_db: "full",
+            custom_value: "",
+            checked_adducts: ["m_plus_h", "m_plus_na", "m_plus_nh4", "m_minus_h2o_plus_h", "m_plus_k", "2m_plus_h", "2m_plus_na"],
+            ppm_error: 10,
+            min_gnps: 3,
+            max_gnps: 100,
+            min_atlas: 3,
+        },
+        methods: {
+            submitData: async function () {
+                console.log("Submit...")
+                $("#loader-div").removeClass("d-none")
+                await sleep(3000)
+                // const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+                // axios.post("#", post_data, { headers: { 'X-CSRFToken': csrftoken } }).then(res => {
+                //     console.log(res)
+                //     $("#loader-div").addClass("d-none")
+                //     alert("Thanks for submitting your data!")
+                //     window.location.reload();
+                // }, err => {
+                //     $("#loader-div").addClass("d-none")
+                //     console.error(err)
+                //     alert("Failed to submit data... Please contact us at support@npatlas.org")
+                // });
+                $("#loader-div").addClass("d-none")
+            }
+        }
+    })
+</script>
 {% endblock %}
