@@ -41,7 +41,7 @@
             <p>More instructions are available at <a href="{% url 'snapms:docs' %}">the docs</a>.</p>
         </div>
         <div class="row py-2">
-            <h5>1) Upload Mass List of GNPS Network</h5>
+            <h5>1) Upload Mass List or GNPS Network</h5>
         </div>
         <div class="row align-items-center py-2">
             <div class="col-lg-5 pt-1">
@@ -178,41 +178,82 @@
             <div class="col-6 params pb-2">
                 <fieldset>
                     <legend class="offset-sm-1 col-form-label col-sm-2 pt-0 fw-bold">Parameters</legend>
-                    <div class="form-group row align-items-center">
-                        <div class="col-sm-4">
-                            <input class="form-control text-center" type="number" step="1" min="1" id="ppm_error"
-                                v-model="ppm_error">
+                    <div class="container-fluid">
+                        <div class="form-group row align-items-center">
+                            <div class="col-sm-4">
+                                <input class="form-control text-center" type="number" step="1" min="1" id="ppm_error"
+                                    v-model="ppm_error">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="form-label" for="ppm_error">
+                                    ppm error <i class="fa fa-question-circle" data-toggle="tooltip"
+                                        data-placement="right" title="Mass tolerance for matching adducts"></i>
+                                </label>
+                            </div>
                         </div>
-                        <div class="col-sm-4">
-                            <label class="form-label" for="ppm_error">ppm error</label>
+                        <div class="form-group row align-items-center">
+                            <div class="col-sm-4">
+                                <input class="form-control text-center" type="number" step="1" min="0"
+                                    id="min_gnps_size" v-model="min_gnps">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="form-label" for="min_gnps_size">
+                                    minimum GNPS cluster size <i class="fa fa-question-circle" data-toggle="tooltip"
+                                        data-placement="right"
+                                        title="Minimum number of members in GNPS subnetwork to be considered"></i>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row align-items-center">
-                        <div class="col-sm-4">
-                            <input class="form-control text-center" type="number" step="1" min="0" id="min_gnps_size"
-                                v-model="min_gnps">
+                        <div class="form-group row align-items-center">
+                            <div class="col-sm-4">
+                                <input class="form-control text-center" type="number" step="1" min="0"
+                                    id="max_gnps_size" v-model="max_gnps">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="form-label" for="max_gnps_size">
+                                    maximum GNPS cluster size <i class="fa fa-question-circle" data-toggle="tooltip"
+                                        data-placement="right"
+                                        title="Maximum number of members in GNPS subnetwork to be considered"></i>
+                                </label>
+                            </div>
                         </div>
-                        <div class="col-sm-8">
-                            <label class="form-label" for="min_gnps_size">minimum GNPS cluster size</label>
+                        <div class="form-group row align-items-center">
+                            <div class="col-sm-4">
+                                <input class="form-control text-center" type="number" step="1" min="0"
+                                    id="min_atlas_size" v-model="min_atlas">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="form-label" for="min_atlas_size">
+                                    minimum NP Atlas annotation cluster size <i class="fa fa-question-circle"
+                                        data-toggle="tooltip" data-placement="right"
+                                        title="Minimum number of members in NP Atlas cluster to be considered"></i>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row align-items-center">
-                        <div class="col-sm-4">
-                            <input class="form-control text-center" type="number" step="1" min="0" id="max_gnps_size"
-                                v-model="max_gnps">
+                        <div class="form-group row align-items-center">
+                            <div class="col-sm-4">
+                                <input class="form-control text-center" type="number" step="1" min="0" id="min_group"
+                                    v-model="min_group">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="form-label" for="min_group">
+                                    minimum compound group size <i class="fa fa-question-circle" data-toggle="tooltip"
+                                        data-placement="right"
+                                        title="Minimum number of compounds groups to be added as true annotations"></i>
+                                </label>
+                            </div>
                         </div>
-                        <div class="col-sm-8">
-                            <label class="form-label" for="max_gnps_size">maximum GNPS cluster size</label>
-                        </div>
-                    </div>
-                    <div class="form-group row align-items-center">
-                        <div class="col-sm-4">
-                            <input class="form-control text-center" type="number" step="1" min="0" id="min_atlas_size"
-                                v-model="min_atlas">
-                        </div>
-                        <div class="col-sm-8">
-                            <label class="form-label" for="min_atlas_size">minimum NP Atlas annotation cluster
-                                size</label>
+                        <div class="row align-items-center">
+                            <div class="col-sm-4 text-center">
+                                <input class="form-check-input" type="checkbox" id="deduplicate" v-model="deduplicate">
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-check-label" for="deduplicate">
+                                    remove duplicates? <i class="fa fa-question-circle" data-toggle="tooltip"
+                                        data-placement="right"
+                                        title="Remove masses in mass list within ppm error of existing masses"></i>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
@@ -229,6 +270,12 @@
 </div>
 
 <script>
+    $(document).ready(() => {
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    })
+
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -243,8 +290,10 @@
             checked_adducts: ["m_plus_h", "m_plus_na", "m_plus_nh4", "m_plus_h_minus_h2o", "m_plus_k", "2m_plus_h", "2m_plus_na"],
             ppm_error: 10,
             min_gnps: 3,
-            max_gnps: 100,
+            max_gnps: 5000,
             min_atlas: 3,
+            min_group: 3,
+            deduplicate: true,
         },
         methods: {
             handleDrop: function (e) {
