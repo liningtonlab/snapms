@@ -14,11 +14,16 @@
         border-radius: 30px;
         border-style: dashed;
         border-color: #898989;
+        cursor: pointer;
     }
 
-    .upload-drop-zone.drop {
-        color: #222;
-        border-color: #222;
+    #inputFile {
+        cursor: pointer;
+        /* hidden */
+        opacity: 0;
+        width: 400px;
+        height: 195px;
+        position: absolute;
     }
 
     .params {
@@ -32,19 +37,27 @@
     <form @submit.prevent="submitData">
         {% csrf_token %}
         <div class="row pt-2 pb-4">
-            A tool to predict the identities of compound clusters based on mass spectrometry features
+            <p>A tool to predict the identities of compound clusters based on mass spectrometry features.</p>
+            <p>More instructions are available at <a href="{% url 'snapms:docs' %}">the docs</a>.</p>
         </div>
         <div class="row py-2">
             <h5>1) Upload Mass List of GNPS Network</h5>
         </div>
         <div class="row align-items-center py-2">
             <div class="col-lg-5 pt-1">
-                <div class="upload-drop-zone d-flex flex-fill flex-column align-items-center justify-content-center text-center"
-                    id="drop-zone">
-                    <h5 class="pb-1">Drag and Drop File (or Click) Here</h5>
-                    <input type="file" class="custom-file-input" id="fileUpload" hidden>
-                    <div>Mass list (<code>.csv</code> format, example <a href="#">here</a>) or
-                        GNPS Network (<code>.graphML</code> or Cytoscape session <code>.cys</code>)
+                <div class="upload-drop-zone d-flex flex-fill flex-column text-center align-items-center justify-content-center"
+                    id="drop-zone" @drop.prevent="handleDrop" @dragover.prevent>
+                    <input type="file" id="inputFile" name="inputFile" accept=".csv,.graphml,.cys"
+                        @change="handleFile" />
+                    <div v-if="this.input_file === null">
+                        <h5 class="pb-1">Drag and Drop File Here</h5>
+                        <h5>(Click to browse files)</h5>
+                        <p>Mass list (<code>.csv</code> format) or
+                            GNPS Network (<code>.graphML</code> or Cytoscape session <code>.cys</code>)
+                        </p>
+                    </div>
+                    <div v-else>
+                        <b>Selected file:</b> [[ input_file.name ]]
                     </div>
                 </div>
             </div>
@@ -104,7 +117,7 @@
         <div class="row justify-content-around py-2">
             <div class="col-5 params">
                 <fieldset>
-                    <legend class="offset-sm-1 col-form-label col-sm-2 pt-0">Adducts</legend>
+                    <legend class="offset-sm-1 col-form-label col-sm-2 pt-0 fw-bold">Adducts</legend>
                     <div class="row mb-3 align-items-around justify-content-around">
                         <div class="col-md-5 mx-2">
                             <div class="form-check">
@@ -164,7 +177,7 @@
             </div>
             <div class="col-6 params pb-2">
                 <fieldset>
-                    <legend class="offset-sm-1 col-form-label col-sm-2 pt-0">Parameters</legend>
+                    <legend class="offset-sm-1 col-form-label col-sm-2 pt-0 fw-bold">Parameters</legend>
                     <div class="form-group row align-items-center">
                         <div class="col-sm-4">
                             <input class="form-control text-center" type="number" step="1" min="1" id="ppm_error"
@@ -234,6 +247,26 @@
             min_atlas: 3,
         },
         methods: {
+            handleDrop: function (e) {
+                let droppedFiles = e.dataTransfer.files;
+                if (!droppedFiles) return;
+                if (droppedFiles.length > 1) {
+                    alert("Only one file can be selected")
+                    return
+                };
+                const allowed = ["graphml", "csv", "cys"]
+                let extension = droppedFiles[0].name.split(".").pop().toLowerCase();
+                if (!allowed.includes(extension)) {
+                    alert(`Extension ${extension} not allowed. Expected one of ${allowed.join(" or ")}.`)
+                    return
+                }
+                this.input_file = droppedFiles[0];
+            },
+            handleFile: function (e) {
+                let selectedFiles = e.target.files;
+                if (!selectedFiles) return;
+                this.input_file = selectedFiles[0];
+            },
             submitData: async function () {
                 console.log("Submit...")
                 $("#loader-div").removeClass("d-none")
