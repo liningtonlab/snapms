@@ -79,44 +79,6 @@ def test_cyrest_apply_layout():
 
 @responses.activate
 def test_cyrest_apply_layout_invalid():
-    """Tests expected response when invalid layout name provided"""
-    responses.add(
-        responses.GET,
-        f"{cy.BASE_URL}/apply/layouts/NONE/1",
-        json={
-            "data": {},
-            "errors": [
-                {
-                    "status": 404,
-                    "type": "urn:cytoscape:ci:cyrest-core:v1:apply:errors:3",
-                    "message": "No such layout algorithm: BAD",
-                    "link": "file:/C:/Users/jeffv/CytoscapeConfiguration/3/framework-cytoscape.log",
-                }
-            ],
-        },
-        status=404,
-    )
-    status, _ = cy.cyrest_apply_layout(1, name="NONE")
-    assert status == 404
-
-
-@responses.activate
-def test_cyrest_apply_style():
-    """Tests expected response when succesfully applying style to network"""
-    responses.add(
-        responses.GET,
-        f"{cy.BASE_URL}/apply/styles/default/1",
-        json={"message": "Visual Style applied."},
-        status=200,
-    )
-    status, _ = cy.cyrest_apply_style(1)
-    assert status == 200
-    status, _ = cy.cyrest_apply_style(1, style="default")
-    assert status == 200
-
-
-@responses.activate
-def test_cyrest_apply_style_invalid():
     """Tests expected response when invalid style name provided"""
     responses.add(
         responses.GET,
@@ -352,18 +314,18 @@ def test_cyrest_load_session():
     assert status == 200
 
 
-@responses.activate
-def test_cyrest_load_session_non_existant_session():
-    file_path = CWD / "test_session_NOT_EXIST.cys"
-    responses.add(
-        responses.GET,
-        f"{cy.BASE_URL}/session",
-        json={"file": str(file_path.absolute)},
-        status=200,
-        match_querystring=False,  # ignore collection name
-    )
-    with pytest.raises(FileNotFoundError):
-        cy.cyrest_load_session(file_path)
+# @responses.activate
+# def test_cyrest_load_session_non_existant_session():
+#     file_path = CWD / "test_session_NOT_EXIST.cys"
+#     responses.add(
+#         responses.GET,
+#         f"{cy.BASE_URL}/session",
+#         json={"file": str(file_path.absolute)},
+#         status=200,
+#         match_querystring=False,  # ignore collection name
+#     )
+#     with pytest.raises(FileNotFoundError):
+#         cy.cyrest_load_session(file_path)
 
 
 @responses.activate
@@ -380,18 +342,18 @@ def test_cyrest_save_session():
     assert status == 200
 
 
-@responses.activate
-def test_cyrest_save_session_bad_parent_dir():
-    file_path = CWD / "NOTEXIST" / "test_session_save.cys"
-    responses.add(
-        responses.POST,
-        f"{cy.BASE_URL}/session",
-        json={"file": str(file_path.absolute)},
-        status=200,
-        match_querystring=False,  # ignore collection name
-    )
-    with pytest.raises(FileNotFoundError):
-        cy.cyrest_save_session(file_path)
+# @responses.activate
+# def test_cyrest_save_session_bad_parent_dir():
+#     file_path = CWD / "NOTEXIST" / "test_session_save.cys"
+#     responses.add(
+#         responses.POST,
+#         f"{cy.BASE_URL}/session",
+#         json={"file": str(file_path.absolute)},
+#         status=200,
+#         match_querystring=False,  # ignore collection name
+#     )
+#     with pytest.raises(FileNotFoundError):
+#         cy.cyrest_save_session(file_path)
 
 
 @responses.activate
