@@ -26,7 +26,12 @@ This repo includes an example Django App for Snap MS. Some configuration is requ
 Environment file (`.env`)
 ```
 REDIS_URI=redis://localhost:6379/0
+CYTOSCAPE_DATADIR=/root/data
+SNAPMS_DATADIR=/home/jvansan/git/snapms/data
+NPATLAS_FILE=/home/jvansan/git/snapms/data/atlas_input/npatlas_v202006.json
 ```
+
+The `SNAPMS_DATADIR` MUST exist already and the `NPATLAS_FILE` MUST also be available.
 
 Running the development server requires two instances.
 

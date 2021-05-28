@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import warnings
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -133,14 +134,28 @@ REDIS_URI = os.getenv("REDIS_URI", "redis://localhost:6379/0")
 RQ_QUEUES = {
     "default": {
         "URL": REDIS_URI,
-        "DEFAULT_TIMEOUT": 360,
+        "DEFAULT_TIMEOUT": 3600,
     },
     "high": {
         "URL": REDIS_URI,
-        "DEFAULT_TIMEOUT": 500,
+        "DEFAULT_TIMEOUT": 5000,
     },
     "low": {
         "URL": REDIS_URI,
-        "DEFAULT_TIMEOUT": 500,
+        "DEFAULT_TIMEOUT": 5000,
     },
 }
+
+# Data config for SnapMS and some pre-app checks
+try:
+    SNAPMS_DATADIR = Path(os.getenv("SNAPMS_DATADIR"))
+    assert SNAPMS_DATADIR.exists() and SNAPMS_DATADIR.is_dir()
+except (TypeError, AssertionError):
+    warnings.warn("SNAPMS_DATADIR not available")
+    SNAPMS_DATADIR = None
+try:
+    NPATLAS_FILE = Path(os.getenv("NPATLAS_FILE"))
+    assert NPATLAS_FILE.exists()
+except (TypeError, AssertionError):
+    warnings.warn("NPATLAS_FILE not available")
+    NPATLAS_FILE = None

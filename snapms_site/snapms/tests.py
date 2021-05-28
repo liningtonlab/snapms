@@ -1,6 +1,7 @@
+import json
 from http import HTTPStatus
 from uuid import UUID
-import json
+from unittest.mock import patch
 
 from django.shortcuts import resolve_url
 from django.test import TestCase
@@ -55,8 +56,20 @@ class SimpleViewTests(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.METHOD_NOT_ALLOWED)
 
     def test_handle_snapms_is_post(self):
-        response = self.client.post(resolve_url("snapms:handle_snapms"))
-        self.assertEqual(response.status_code, HTTPStatus.OK)
+        from django.http import HttpResponse
+
+        with patch("snapms_site.snapms.views.handle_snapms_request") as mock_fn:
+            mock_fn.return_value = HttpResponse(dict(success=True))
+            response = self.client.post(resolve_url("snapms:handle_snapms"))
+            self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_handle_snapms_bad_fileformat(self):
+        from django.http import HttpResponseBadRequest
+
+        with patch("snapms_site.snapms.views.handle_snapms_request") as mock_fn:
+            mock_fn.return_value = HttpResponseBadRequest()
+            response = self.client.post(resolve_url("snapms:handle_snapms"))
+            self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
 
 
 class JobModelTests(TestCase):

@@ -19,7 +19,10 @@ class Job(models.Model):
     """
 
     id = models.CharField(
-        primary_key=True, default=str(uuid.uuid4()), editable=False, max_length=32
+        primary_key=True,
+        default=lambda: str(uuid.uuid4()),
+        editable=False,
+        max_length=32,
     )
     created = models.DateTimeField(auto_now_add=True)
     archived = models.BooleanField(default=False)

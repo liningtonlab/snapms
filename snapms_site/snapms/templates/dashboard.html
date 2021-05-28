@@ -319,18 +319,35 @@
             submitData: async function () {
                 console.log("Submit...")
                 $("#loader-div").removeClass("d-none")
-                await sleep(3000)
-                // const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
-                // axios.post("#", post_data, { headers: { 'X-CSRFToken': csrftoken } }).then(res => {
-                //     console.log(res)
-                //     $("#loader-div").addClass("d-none")
-                //     alert("Thanks for submitting your data!")
-                //     window.location.reload();
-                // }, err => {
-                //     $("#loader-div").addClass("d-none")
-                //     console.error(err)
-                //     alert("Failed to submit data... Please contact us at support@npatlas.org")
-                // });
+                // await sleep(3000)
+                // POST it using Content-Type: multipart/form-data
+
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+                let post_data = new FormData();
+                post_data.append("file", this.input_file);
+                const jsonData = {
+                    masslist: this.mass_list,
+                    reference_db: this.reference_db,
+                    custom_value: this.custom_value,
+                    adduct_list: this.checked_adducts,
+                    ppm_error: this.ppm_error,
+                    min_gnps_size: this.min_gnps,
+                    max_gnps_size: this.max_gnps,
+                    min_atlas_size: this.min_atlas,
+                    min_group_size: this.min_group,
+                    remove_duplicates: this.deduplicate,
+                }
+                post_data.append("metadata", JSON.stringify(jsonData));
+                axios.post("{% url 'snapms:handle_snapms' %}", post_data, { headers: { 'X-CSRFToken': csrftoken } }).then(res => {
+                    console.log(res)
+                    $("#loader-div").addClass("d-none")
+                    alert("Thanks for using SnapMS!\nYou will be redirected to your output page.")
+                    // window.location.reload();
+                }, err => {
+                    $("#loader-div").addClass("d-none")
+                    console.error(err)
+                    alert("Failed to submit data... Please contact us at support@npatlas.org")
+                });
                 $("#loader-div").addClass("d-none")
             }
         }
