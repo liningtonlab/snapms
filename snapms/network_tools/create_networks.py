@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
 """Tools to create networks of various types for SNAP-MS platform"""
-
+import zipfile
 from pathlib import Path
 from typing import Dict, List, Optional
 
 import networkx as nx
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
-from snapms.config import Parameters, CYTOSCAPE_DATADIR
+from snapms.config import CYTOSCAPE_DATADIR, Parameters
 from snapms.matching_tools.CompoundMatch import CompoundMatch
 from snapms.network_tools import cytoscape as cy
 
@@ -82,7 +82,7 @@ def match_compound_network(compound_match_list: List[CompoundMatch]) -> nx.Graph
     return compound_graph
 
 
-def export_graphml(graph: nx.Graph, parameters: Parameters):
+def export_masslist_graphml(graph: nx.Graph, parameters: Parameters):
     """Exports networkx graph from match_compound_network as graphML for use in external visualization tools"""
 
     if graph_size_check(
@@ -91,19 +91,28 @@ def export_graphml(graph: nx.Graph, parameters: Parameters):
         parameters.min_atlas_annotation_cluster_size,
     ):
         output_filename = f"{parameters.file_name}_snapms_output.graphml"
-        nx.write_graphml(graph, parameters.sample_output_path / output_filename)
+        nx.write_graphml(graph, parameters.output_path / output_filename)
 
 
 def export_gnps_graphml(graph: nx.Graph, cluster_id: int, parameters: Parameters):
     """Exports networkx graph from match_compound_network for each gnps cluster, with cluster id in filename as graphML"""
 
     # Pathlib
-    parameters.sample_output_path.mkdir(exist_ok=True)
+    parameters.output_path.mkdir(exist_ok=True)
 
     nx.write_graphml(
         graph,
-        parameters.sample_output_path / f"GNPS_componentindex_{cluster_id}.graphml",
+        parameters.output_path / f"GNPS_componentindex_{cluster_id}.graphml",
     )
+
+
+def compress_gnps_graphml_outputs(parameters: Parameters):
+    """Compress the graphml output files for cytoscape job"""
+    output_zip = parameters.output_path / "GNPS_components_snapms.zip"
+    with zipfile.ZipFile(output_zip, "w") as zipf:
+        for f in parameters.output_path.glob("GNPS*[0-9].graphml"):
+            zipf.write(f.name)
+            f.unlink()
 
 
 def insert_atlas_clusters_to_cytoscape(parameters: Parameters):
@@ -121,7 +130,7 @@ def insert_atlas_clusters_to_cytoscape(parameters: Parameters):
     # Open each Atlas annotation network in turn. Glob function includes [0-9] in order to exclude the modified original
     # gnps network (if present)
     for network in sorted(
-        parameters.sample_output_path.glob("*[0-9].graphml"),
+        parameters.output_path.glob("GNPS*[0-9].graphml"),
         key=extract_cluster_id,
     ):
         with open(network, encoding="utf-8") as f:

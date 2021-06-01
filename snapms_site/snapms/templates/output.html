@@ -1,0 +1,13 @@
+{% extends 'simple_template.html' %}
+
+{% block page_content %}
+<div class="container-fluid">
+    {% if job is None %}
+    <h5 class="error">ERROR: Job {{ job_id }} could not be found</h5>
+    {% else %}
+    <h5>Job - {{ job.id }}</h5>
+    <p><b>Status - </b>{{ job.status }}</p>
+    <p><b>Input - </b>{{ job.inputfile }}</p>
+    {% endif %}
+</div>
+{% endblock %}

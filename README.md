@@ -44,7 +44,7 @@ dotenv run ./manage.py runserver
 2. RQ worker
 
 ```
-dotenv run ./manage rqworker high default low
+dotenv run ./manage.py rqworker high default low
 ```
 
 ## Requirements
@@ -60,8 +60,13 @@ docker run -itd -p 6379:6379 --name snapms-redis redis
 2. Cytoscape
 
 Cytoscape automation requires a running instance. You can run it on the desktop, but on a server
-it will be easier to run it in a docker container. The CyREST runs on port 1234. 
+it will be easier to run it in a docker container. The CyREST runs on port 1234.
+
+For cytoscape session file serving to work, the mounted volume should point to the same place as the 
+`SNAPMS_DATADIR`.
+
+In development, I often use the `./data` as my `SNAPMS_DATADIR`.
 
 ```
-docker run --name cy -itd -v $HOME/cytoscape:/root/data -p 1234:1234 jvansan/cytoscape-desktop-headless:latest
+docker run --name cy -itd -v $(PWD)/data:/root/data -p 1234:1234 jvansan/cytoscape-desktop-headless:latest
 ```

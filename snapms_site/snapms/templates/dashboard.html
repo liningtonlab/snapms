@@ -342,7 +342,7 @@
                     console.log(res)
                     $("#loader-div").addClass("d-none")
                     alert("Thanks for using SnapMS!\nYou will be redirected to your output page.")
-                    // window.location.reload();
+                    window.location = `/snapms/output/${res.data.job_id}`
                 }, err => {
                     $("#loader-div").addClass("d-none")
                     console.error(err)

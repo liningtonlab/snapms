@@ -30,14 +30,20 @@ def network_from_mass_list(atlas_df: pd.DataFrame, parameters: Parameters):
     print(f"Found {len(compound_list)} candidate adduct masses")
     compound_network = create_networks.match_compound_network(compound_list)
     create_networks.annotate_top_candidates(compound_network)
-    create_networks.export_graphml(compound_network, parameters)
+    create_networks.export_masslist_graphml(compound_network, parameters)
     if cy.cyrest_is_available():
         print("Inserting mass list data into Cytoscape")
-        # TODO: replace output_file with param
+        # If there is a job_id in the params, use this to save the output file
+        # For this to work, the snapms datadir should be mounted to the CYTOSCAPE_DATADIR
+        # Else use a default
+        if parameters.job_id is not None:
+            output_path = CYTOSCAPE_DATADIR / parameters.job_id / "snapms.cys"
+        else:
+            output_path = CYTOSCAPE_DATADIR / "snapms.cys"
         create_networks.add_cluster_to_cytoscape(
             compound_network,
             "snapms_mass_list",
-            output_file=CYTOSCAPE_DATADIR.joinpath("snapms.cys"),
+            output_file=output_path,
         )
     else:
         print("WARNING - Cytoscape Unavailable!")
@@ -58,3 +64,5 @@ def create_gnps_network_annotations(atlas_df: pd.DataFrame, parameters: Paramete
         create_networks.insert_atlas_clusters_to_cytoscape(parameters)
     else:
         print("WARNING - Cytoscape Unavailable!")
+    if parameters.compress_output:
+        create_networks.compress_gnps_graphml_outputs(parameters)

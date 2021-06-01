@@ -1,6 +1,7 @@
 import csv
 import json
 from pathlib import Path
+from uuid import UUID
 
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
@@ -8,9 +9,10 @@ from django.http.response import HttpResponseBadRequest, HttpResponseNotAllowed
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 
+
 from snapms.config import Parameters
 
-from .models import Job, Status
+from .models import Job
 from .tasks import run_snapms_gnps, run_snapms_masslist
 
 
@@ -31,6 +33,16 @@ def handle_snapms(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         return handle_snapms_request(request)
     return HttpResponseNotAllowed(["POST"])
+
+
+def job_output(request: HttpRequest, job_id: UUID) -> HttpResponse:
+    """Handle access of Job output and status"""
+    try:
+        job = Job.objects.get(id=str(job_id))
+    except Job.DoesNotExist:
+        job = None
+    context = dict(job=job, job_id=job_id)
+    return render(request, "output.html", context)
 
 
 ### Helper functions
@@ -67,7 +79,7 @@ def handle_snapms_request(request: HttpRequest) -> HttpResponse:
     parameters = Parameters(
         file_path=input_file,
         atlas_db_path=settings.NPATLAS_FILE,
-        output_path=job_dir / "output",
+        output_path=job_dir,
         ppm_error=data["ppm_error"],
         adduct_list=data["adduct_list"],
         remove_duplicates=data["remove_duplicates"],
@@ -75,16 +87,17 @@ def handle_snapms_request(request: HttpRequest) -> HttpResponse:
         max_gnps_size=data["max_gnps_size"],
         min_atlas_size=data["min_atlas_size"],
         min_group_size=data["min_group_size"],
+        job_id=job_id,
     )
     if parameters.file_type == "csv":
         run_snapms_masslist.delay(parameters, job_id)
     elif parameters.file_type == "graphml":
+        parameters.compress_output = True
         run_snapms_gnps.delay(parameters, job_id)
     elif parameters.file_type == "cys":
         return HttpResponseBadRequest("Cytoscape import is not yet supported")
     else:
         return HttpResponseBadRequest("Input file format not supported")
-    job_id = "FAKE"
     return HttpResponse(json.dumps(dict(success=True, job_id=job_id)))
 
 
