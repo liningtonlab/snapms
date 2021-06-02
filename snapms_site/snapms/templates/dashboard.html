@@ -68,7 +68,7 @@
                 <div class="form-group">
                     <label for="massList">Mass List</label>
                     <textarea class="form-control" placeholder="Enter one mass per row" id="massList"
-                        style='height: 195px' v-model="mass_list"></textarea>
+                        style='height: 195px' v-model="mass_list" :disabled="input_file != null"></textarea>
                 </div>
             </div>
         </div>
@@ -261,7 +261,7 @@
         </div>
         <div class="row py-2">
             <div class="col">
-                <button class="btn btn-prim-solid btn-lg" type="submit">
+                <button class="btn btn-prim-solid btn-lg" type="submit" :disabled="!formReady()">
                     Submit
                 </button>
             </div>
@@ -314,7 +314,13 @@
             handleFile: function (e) {
                 let selectedFiles = e.target.files;
                 if (!selectedFiles) return;
+                if (selectedFiles.length === 0) return;
                 this.input_file = selectedFiles[0];
+            },
+            formReady: function () {
+                if (this.input_file != null) return true
+                if (this.mass_list.length !== 0) return true
+                return false
             },
             submitData: async function () {
                 console.log("Submit...")

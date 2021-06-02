@@ -43,8 +43,9 @@ def network_from_mass_list(atlas_df: pd.DataFrame, parameters: Parameters):
         create_networks.add_cluster_to_cytoscape(
             compound_network,
             "snapms_mass_list",
-            output_file=output_path,
         )
+        cy.cyrest_save_session(output_path)
+        cy.cyrest_delete_session()
     else:
         print("WARNING - Cytoscape Unavailable!")
 

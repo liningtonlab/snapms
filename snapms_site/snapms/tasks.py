@@ -11,6 +11,7 @@ from .models import Job, Status
 
 
 def cleanup_job(params: Parameters, status: Status = Status.completed):
+    """Cleanup input files and remove failed job data"""
     # remove input file
     params.file_path.unlink()
     if status == Status.failed:
@@ -18,15 +19,20 @@ def cleanup_job(params: Parameters, status: Status = Status.completed):
 
 
 def mark_status(job_id: str, status: Status):
+    """Change the status of a job given the job_id"""
     job = Job.objects.get(id=job_id)
     job.status = status.value
     job.save()
 
 
 def run_snapms(snapms_fn, params, job_id):
+    """Wrapper function to run the core SnapMS functionality
+    Requires the specified function to run, params, and job_id
+    """
     print("Running SnapMS for ", job_id)
-    atlas = import_atlas(params)
     try:
+        mark_status(job_id, Status.running)
+        atlas = import_atlas(params)
         snapms_fn(atlas, params)
         cleanup_job(params)
         sleep(5)
@@ -46,4 +52,4 @@ def run_snapms_masslist(params: Parameters, job_id: str) -> None:
 
 @job("default")
 def run_snapms_gnps(params: Parameters, job_id: str) -> None:
-    run_snapms(create_gnps_network_annotations, params, job)
+    run_snapms(create_gnps_network_annotations, params, job_id)

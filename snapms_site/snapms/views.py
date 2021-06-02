@@ -63,6 +63,7 @@ def handle_snapms_request(request: HttpRequest) -> HttpResponse:
         parameters=json.dumps(data),
     )
     job_id = str(job.id)
+    print(job_id)
     # Setup job directory
     job_dir = Path(settings.SNAPMS_DATADIR) / job_id
     job_dir.mkdir()

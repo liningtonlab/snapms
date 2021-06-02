@@ -111,7 +111,12 @@ def compress_gnps_graphml_outputs(parameters: Parameters):
     output_zip = parameters.output_path / "GNPS_components_snapms.zip"
     with zipfile.ZipFile(output_zip, "w") as zipf:
         for f in parameters.output_path.glob("GNPS*[0-9].graphml"):
-            zipf.write(f.name)
+            if parameters.job_id is not None:
+                arcname = Path(f"snapms_{parameters.job_id}") / f.name
+            else:
+                arcname = Path("snapms") / f.name
+            # get path relative to CWD
+            zipf.write(f.relative_to(Path().absolute()), arcname=arcname)
             f.unlink()
 
 
@@ -123,8 +128,6 @@ def insert_atlas_clusters_to_cytoscape(parameters: Parameters):
     session.
     Tested with Cytoscape 3.8
     """
-    # Start new session (currently not implemented)
-
     # Import original gnps network (currently not implemented)
 
     # Open each Atlas annotation network in turn. Glob function includes [0-9] in order to exclude the modified original
@@ -150,17 +153,24 @@ def insert_atlas_clusters_to_cytoscape(parameters: Parameters):
             # Annotate subgraphs to find those subgraphs which are top candidates for the correct compound
             # family
             annotate_top_candidates(atlas_graph)
-            # TODO: replace output_file with param
             add_cluster_to_cytoscape(
                 atlas_graph,
                 network_title,
-                output_file=CYTOSCAPE_DATADIR.joinpath("snapms.cys"),
             )
         else:
             print(
                 f"ERROR: Atlas annotation graph {network_title} either too small or too large. "
                 "Skipping insert."
             )
+    # If there is a job_id in the params, use this to save the output file
+    # For this to work, the snapms datadir should be mounted to the CYTOSCAPE_DATADIR
+    # Else use a default
+    if parameters.job_id is not None:
+        output_path = CYTOSCAPE_DATADIR / parameters.job_id / "snapms.cys"
+    else:
+        output_path = CYTOSCAPE_DATADIR / "snapms.cys"
+    cy.cyrest_save_session(output_path)
+    cy.cyrest_delete_session()
 
 
 def remove_small_subgraphs(G: nx.Graph, parameters: Parameters):
@@ -175,12 +185,8 @@ def remove_small_subgraphs(G: nx.Graph, parameters: Parameters):
     G.remove_nodes_from(nodes_to_remove)
 
 
-def add_cluster_to_cytoscape(
-    G: nx.Graph, title: str, output_file: Optional[Path]
-) -> None:
+def add_cluster_to_cytoscape(G: nx.Graph, title: str) -> None:
     """Add graph to cytoscape session and applying styling.
-
-    output_file should be a Path accessible by the host running CyREST.
 
     IMPORTANT: Assumes CyREST is available.
     """
@@ -190,9 +196,6 @@ def add_cluster_to_cytoscape(
     cy.cyrest_apply_layout(network_id, name="force-directed")
     cy.cyrest_create_style(cy.SNAP_MS_STYLE, force=False)
     cy.cyrest_apply_style(network_id, cy.SNAP_MS_STYLE["title"])
-    if output_file is not None:
-        cy.cyrest_save_session(output_file)
-        cy.cyrest_delete_session()
 
 
 def extract_cluster_id(filepath: Path) -> int:
