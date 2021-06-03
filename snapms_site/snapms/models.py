@@ -3,6 +3,11 @@ from enum import Enum
 from django.db import models
 
 
+class FileFormat(str, Enum):
+    graphml = "graphml"
+    cytoscape = "cytoscape"
+
+
 class Status(str, Enum):
     queued = "queued"
     running = "running"

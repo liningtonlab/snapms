@@ -1,18 +1,23 @@
 import csv
 import json
 from pathlib import Path
+from typing import Dict, Optional
 from uuid import UUID
 
 from django.conf import settings
-from django.http import HttpRequest, HttpResponse
-from django.http.response import HttpResponseBadRequest, HttpResponseNotAllowed
+from django.core.serializers import serialize
+from django.http import HttpRequest, HttpResponse, JsonResponse, FileResponse
+from django.http.response import (
+    HttpResponseBadRequest,
+    HttpResponseNotAllowed,
+    HttpResponseNotFound,
+)
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 
-
 from snapms.config import Parameters
 
-from .models import Job
+from .models import Job, FileFormat
 from .tasks import run_snapms_gnps, run_snapms_masslist
 
 
@@ -36,16 +41,55 @@ def handle_snapms(request: HttpRequest) -> HttpResponse:
 
 
 def job_output(request: HttpRequest, job_id: UUID) -> HttpResponse:
-    """Handle access of Job output and status"""
+    """Handle access of Job output and status in HTML form"""
+    job_data = get_job_data(job_id)
+    context = dict(job=job_data, job_id=job_id)
+    if "text/html" in request.META["HTTP_ACCEPT"]:
+        return render(request, "output.html", context)
+    elif "application/json" in request.META["HTTP_ACCEPT"]:
+        return JsonResponse(context)
+    return HttpResponseBadRequest("Invalid accept encoding")
+
+
+def download_output(request: HttpRequest, job_id: UUID, fmt: str) -> HttpResponse:
+    """Handle sending output file"""
+    if request.method != "GET":
+        return HttpResponseNotAllowed(["GET"])
     try:
-        job = Job.objects.get(id=str(job_id))
-    except Job.DoesNotExist:
-        job = None
-    context = dict(job=job, job_id=job_id)
-    return render(request, "output.html", context)
+        fmt = FileFormat(fmt)
+        if get_job_data(job_id) is None:
+            return HttpResponseNotFound("Job does not exist")
+        return send_job_output(job_id, fmt)
+    except ValueError:
+        return HttpResponseBadRequest("File format is not available")
 
 
 ### Helper functions
+def send_job_output(job_id: UUID, fmt: FileFormat) -> HttpResponse:
+    job_dir = Path(settings.SNAPMS_DATADIR) / str(job_id)
+    if fmt == FileFormat.cytoscape:
+        output_file = job_dir / "snapms.cys"
+    elif fmt == FileFormat.graphml:
+        output_file = find_graphml_output(job_dir)
+    fname = f"snapms_{job_id}{output_file.suffix}"
+    return FileResponse(output_file.open("rb"), filename=fname)
+
+
+def find_graphml_output(job_dir: Path) -> Path:
+    for ftype in (".zip", ".graphml"):
+        flist = list(job_dir.glob(f"*{ftype}"))
+        if flist:
+            return flist[0]
+
+
+def get_job_data(job_id: UUID) -> Optional[Dict]:
+    try:
+        job = Job.objects.get(id=str(job_id))
+        return serialize("python", [job])[0]
+    except Job.DoesNotExist:
+        return None
+
+
 def handle_snapms_request(request: HttpRequest) -> HttpResponse:
     """Method for handling work of creating a new job and passing to worker queue"""
     # from collections import defaultdict
@@ -59,7 +103,7 @@ def handle_snapms_request(request: HttpRequest) -> HttpResponse:
         upload_file = None
     # Create Job
     job = Job.objects.create(
-        inputfile=upload_file or "masslist",
+        inputfile=upload_file or "masslist.csv",
         parameters=json.dumps(data),
     )
     job_id = str(job.id)
