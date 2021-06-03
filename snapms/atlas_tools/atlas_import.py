@@ -3,11 +3,11 @@
 """Tools to import and reformat NP Atlas data"""
 
 import unicodedata
-from typing import List
+from typing import List, Optional
 
 import pandas as pd
 
-from snapms.config import Parameters
+from snapms.config import AtlasFilter, Parameters
 from snapms.exceptions import AdductNotFound
 
 
@@ -19,11 +19,29 @@ def import_atlas(parameters: Parameters):
     #     parameters.reference_db, sep="\t", header=0, encoding="utf-8"
     # )
     input_df = normalize_dataframe(pd.read_json(parameters.reference_db))
+    input_df = apply_db_filter(
+        input_df, parameters.atlas_filter, parameters.custom_filter
+    )
     # clean_headers(input_df) # shouldn't be needed with JSON input
     input_df = clean_names(input_df)
     input_df = extend_adducts(input_df, parameters.adduct_list)
     print("Finished NP Atlas data import")
     return input_df
+
+
+def apply_db_filter(
+    df: pd.DataFrame, filter_type: AtlasFilter, custom_value: Optional[str] = None
+) -> pd.DataFrame:
+    """Apply filtering to NP Atlas standard dataframe POST normalization"""
+    if filter_type == AtlasFilter.bacteria:
+        print("Filtering for bacteria")
+        return df[df.origin_organism_type == "Bacterium"].copy()
+    elif filter_type == AtlasFilter.fungi:
+        print("Filtering for fungi")
+        return df[df.origin_organism_type == "Fungus"].copy()
+    elif filter_type == AtlasFilter.custom:
+        print("Filtering for custom")
+    return df
 
 
 def normalize_dataframe(

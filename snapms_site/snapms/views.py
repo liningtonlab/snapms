@@ -15,7 +15,7 @@ from django.http.response import (
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 
-from snapms.config import Parameters
+from snapms.config import AtlasFilter, Parameters
 
 from .models import Job, FileFormat
 from .tasks import run_snapms_gnps, run_snapms_masslist
@@ -44,11 +44,9 @@ def job_output(request: HttpRequest, job_id: UUID) -> HttpResponse:
     """Handle access of Job output and status in HTML form"""
     job_data = get_job_data(job_id)
     context = dict(job=job_data, job_id=job_id)
-    if "text/html" in request.META["HTTP_ACCEPT"]:
-        return render(request, "output.html", context)
-    elif "application/json" in request.META["HTTP_ACCEPT"]:
+    if "application/json" in request.META["HTTP_ACCEPT"]:
         return JsonResponse(context)
-    return HttpResponseBadRequest("Invalid accept encoding")
+    return render(request, "output.html", context)
 
 
 def download_output(request: HttpRequest, job_id: UUID, fmt: str) -> HttpResponse:
@@ -96,6 +94,7 @@ def handle_snapms_request(request: HttpRequest) -> HttpResponse:
 
     # data = defaultdict(str)
     data = json.loads(request.POST["metadata"])
+    print(data)
     # Try to get the file
     try:
         upload_file = request.FILES["file"]
@@ -107,7 +106,6 @@ def handle_snapms_request(request: HttpRequest) -> HttpResponse:
         parameters=json.dumps(data),
     )
     job_id = str(job.id)
-    print(job_id)
     # Setup job directory
     job_dir = Path(settings.SNAPMS_DATADIR) / job_id
     job_dir.mkdir()
@@ -133,6 +131,8 @@ def handle_snapms_request(request: HttpRequest) -> HttpResponse:
         min_atlas_size=data["min_atlas_size"],
         min_group_size=data["min_group_size"],
         job_id=job_id,
+        atlas_filter=AtlasFilter(data["reference_db"]),
+        custom_filter=data["custom_value"],
     )
     if parameters.file_type == "csv":
         run_snapms_masslist.delay(parameters, job_id)

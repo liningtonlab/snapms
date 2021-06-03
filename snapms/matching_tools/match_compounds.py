@@ -58,14 +58,7 @@ def compute_adduct_matches(
         for adduct in parameters.adduct_list:
             selected_compounds = atlas_df[
                 atlas_df[adduct].between(mass - mass_error, mass + mass_error)
-            ][
-                [
-                    "npaid",
-                    "exact_mass",
-                    "smiles",
-                    "name",
-                ]
-            ]
+            ][["npaid", "exact_mass", "smiles", "name", "origin_organism_type"]]
             if not selected_compounds.empty:
                 selected_compounds["mass"] = mass
                 selected_compounds["compound_number"] = index + 1

@@ -13,6 +13,7 @@ class CompoundMatch:
     mass: float
     compound_number: int
     adduct: str
+    origin_organism_type: str
 
     @property
     def npatlas_url(self) -> str:

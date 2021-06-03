@@ -59,6 +59,7 @@ def match_compound_network(compound_match_list: List[CompoundMatch]) -> nx.Graph
                     "original_gnps_mass": compound.mass,
                     "compound_group": compound.compound_number,
                     "adduct": compound.adduct,
+                    "origin_organism_type": compound.origin_organism_type,
                 },
             )
         )

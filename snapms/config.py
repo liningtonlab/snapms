@@ -1,6 +1,7 @@
 from os import getenv
 from pathlib import Path
 from typing import List, Optional
+from enum import Enum
 
 CYTOSCAPE_DATADIR = Path(getenv("CYTOSCAPE_DATADIR", "/root/data"))
 
@@ -14,6 +15,13 @@ DEFAULT_ADDUCT_LIST = [
     "2m_plus_h",
     "2m_plus_na",
 ]
+
+
+class AtlasFilter(str, Enum):
+    full = "full"
+    bacteria = "bacteria"
+    fungi = "fungi"
+    custom = "custom"
 
 
 class Parameters:
@@ -33,6 +41,8 @@ class Parameters:
         min_group_size: int = 3,
         job_id: Optional[str] = None,
         compress_output: bool = False,
+        atlas_filter: AtlasFilter = AtlasFilter.full,
+        custom_filter: Optional[str] = None,
     ):
         self.file_path = file_path
         # pathlib.Path gives convenient methods for getting name and extension
@@ -50,6 +60,8 @@ class Parameters:
         self.job_id = job_id
         self.init_output_directory()
         self.compress_output = compress_output
+        self.atlas_filter = atlas_filter
+        self.custom_filter = custom_filter
 
     def init_output_directory(self) -> Path:
         file_path = self.output_path
