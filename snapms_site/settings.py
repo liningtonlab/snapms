@@ -119,7 +119,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
+STATIC_ROOT = "./static_deploy/"
 STATICFILES_DIRS = [BASE_DIR / "snapms_site" / "static"]
 STATIC_URL = "/static/"
 

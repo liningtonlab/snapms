@@ -68,5 +68,14 @@ For cytoscape session file serving to work, the mounted volume should point to t
 In development, I often use the `./data` as my `SNAPMS_DATADIR`.
 
 ```
-docker run --name cy -itd -v $(PWD)/data:/root/data -p 1234:1234 jvansan/cytoscape-desktop-headless:latest
+docker run --name cy -itd -v $(pwd)/data/testing:/root/data -p 1234:1234 jvansan/cytoscape-desktop-headless:latest
 ```
+
+## Docker deployment
+
+In this repo is a `docker-compose.yml` file which shows how to deploy this example app using Traefik as a reverse proxy.
+In a real production environment, you should NOT use the build in Django `runserver`.
+
+__TODO:__
+
+- Change 

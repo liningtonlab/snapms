@@ -1,5 +1,5 @@
 """Conversion and API access tools for the Cytoscape CyREST API"""
-
+import os
 from pathlib import Path
 from typing import Dict, Optional, Tuple
 from urllib.parse import quote
@@ -10,7 +10,7 @@ import requests
 # Response custom datatype
 Response = Tuple[int, Dict]
 
-BASE_URL = "http://localhost:1234/v1"
+BASE_URL = os.getenv("CYTOSCAPE_BASEURL", "http://localhost:1234/v1")
 HEADERS = {"Content-Type": "application/json"}
 
 # Converters derived from (under MIT License)

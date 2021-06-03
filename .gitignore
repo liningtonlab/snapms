@@ -6,6 +6,10 @@ db/
 # Data folders for development
 data/
 
+# Django collected static
+static_deploy/
+docker_volumes/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
