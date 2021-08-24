@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 from snapms.atlas_tools.atlas_import import import_atlas
-from snapms.config import Parameters
+from snapms.config import AtlasFilter, Parameters
 from snapms.core import create_gnps_network_annotations, network_from_mass_list
 
 # current working directory for data file paths
@@ -25,7 +25,13 @@ def main():
     atlas_data = DATADIR / "NPAtlas_download.json"
     output_directory = DATADIR / "output" / "gnps"
     # TODO: Add all optional params explicitly for example script
-    parameters = Parameters(source_ms_data, atlas_data, output_directory)
+    parameters = Parameters(
+        source_ms_data,
+        atlas_data,
+        output_directory,
+        atlas_filter=AtlasFilter.custom,
+        custom_filter="Ascomycota|Cyanobacteria",
+    )
 
     # Load Atlas data as Pandas dataframe
     print("Loading NP Atlas data")

@@ -2,10 +2,11 @@
 
 """Tools to import and reformat NP Atlas data"""
 
-import unicodedata
 from typing import List, Optional
 
+import unicodedata
 import pandas as pd
+import numpy as np
 
 from snapms.config import AtlasFilter, Parameters
 from snapms.exceptions import AdductNotFound
@@ -40,7 +41,20 @@ def apply_db_filter(
         print("Filtering for fungi")
         return df[df.origin_organism_type == "Fungus"].copy()
     elif filter_type == AtlasFilter.custom:
-        print("Filtering for custom")
+        print(f"Filtering for custom {custom_value}")
+        names = custom_value.split("|")
+        masks = []
+        for n in names:
+            masks.append(df["origin_organism_taxon_name"] == n)
+            masks.append(
+                df["origin_organism_taxon_ancestors"].apply(
+                    lambda x: any([a["name"] == n for a in x])
+                )
+            )
+        mask = np.array(masks).any(axis=0)
+        df1 = df[mask].copy()
+        print(f"Custom filtered DF has {len(df1)} compounds")
+        return df1
     return df
 
 
