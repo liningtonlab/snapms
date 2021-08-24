@@ -64,4 +64,4 @@ def test_compound_match():
     assert compound.adduct == "m_plus_h"
     # test computed prop
     assert compound.npatlas_url == "https://www.npatlas.org/explore/compounds/NPA018705"
-    assert compound.friendly_name() == ""
+    assert compound.friendly_name() == "NPA018705"

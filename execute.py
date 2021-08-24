@@ -20,15 +20,15 @@ def main():
     assert DATADIR.exists()
 
     #### CONFIG
-    source_ms_data = DATADIR / "ms_input" / "mass_list.csv"
-    # source_ms_data = DATADIR / "ms_input" / "NIH_Natural_Products_1_And_2.graphml"
-    # atlas_data = DATADIR / "atlas_input" / "npatlas_all_20201210.tsv"
-    atlas_data = DATADIR / "atlas_input" / "npatlas_v202006.json"
-    output_directory = DATADIR / "output"
+    # source_ms_data = DATADIR / "ms_input" / "mass_list.csv"
+    source_ms_data = DATADIR / "ms_input" / "NIHNaturalProducts1.graphml"
+    atlas_data = DATADIR / "NPAtlas_download.json"
+    output_directory = DATADIR / "output" / "gnps"
     # TODO: Add all optional params explicitly for example script
     parameters = Parameters(source_ms_data, atlas_data, output_directory)
 
     # Load Atlas data as Pandas dataframe
+    print("Loading NP Atlas data")
     atlas_df = import_atlas(parameters)
 
     if parameters.file_type == "csv":

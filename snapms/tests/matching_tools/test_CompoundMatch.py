@@ -30,4 +30,4 @@ def test_CompoundMatch_cleans_bad_name():
     test_data["name"] = "Jadomycim\u00b3"
     comp = CompoundMatch(**test_data)
     assert comp.npaid == "1"
-    assert comp.friendly_name() == ""
+    assert comp.friendly_name() == "1"

@@ -1,17 +1,19 @@
 [
   {
-    "npaid": 1,
-    "name": "Curvularide C\u00b3",
+    "id": 1,
+    "npaid": "NPA000001",
+    "original_name": "Curvularide C",
     "mol_formula": "C19H37NO5",
-    "inchikey": "BZLIDAVUQDTJQF-HWTFSWDCSA-N",
-    "smiles": "CC[C@H](C)[C@@H](CO)NC(=O)/C=C/[C@](C)([C@H]([C@@H](C)C[C@@H](CC)O)O)OC",
-    "inchi": "InChI=1S/C19H37NO5/c1-7-13(3)16(12-21)20-17(23)9-10-19(5,25-6)18(24)14(4)11-15(22)8-2/h9-10,13-16,18,21-22,24H,7-8,11-12H2,1-6H3,(H,20,23)/b10-9+/t13-,14-,15+,16+,18-,19+/m0/s1",
     "mol_weight": 359.507,
     "exact_mass": 359.2672,
-    "m_plus_h": 360.2745,
-    "m_plus_na": 382.2564,
+    "inchikey": "BZLIDAVUQDTJQF-HWTFSWDCSA-N",
+    "smiles": "CC[C@H](C)[C@@H](CO)NC(=O)/C=C/[C@](C)([C@H]([C@@H](C)C[C@@H](CC)O)O)OC",
     "cluster_id": 1,
     "node_id": 1,
+    "synonyms": [],
+    "inchi": "InChI=1S/C19H37NO5/c1-7-13(3)16(12-21)20-17(23)9-10-19(5,25-6)18(24)14(4)11-15(22)8-2/h9-10,13-16,18,21-22,24H,7-8,11-12H2,1-6H3,(H,20,23)/b10-9+/t13-,14-,15+,16+,18-,19+/m0/s1",
+    "m_plus_h": 360.2745,
+    "m_plus_na": 382.2564,
     "origin_reference": {
       "doi": "10.1002/chem.201000652",
       "pmid": 20680940,
@@ -34,69 +36,246 @@
         "rank": "genus",
         "taxon_db": "mycobank",
         "external_id": "7847",
+        "ncbi_id": 5502,
         "ancestors": [
           {
             "id": 599,
             "name": "Eukarya",
             "rank": "domain",
             "taxon_db": "mycobank",
-            "external_id": null
+            "external_id": "0",
+            "ncbi_id": 2759
           },
           {
             "id": 600,
             "name": "Fungi",
             "rank": "kingdom",
             "taxon_db": "mycobank",
-            "external_id": "90157"
+            "external_id": "90157",
+            "ncbi_id": 4751
           },
           {
             "id": 617,
             "name": "Ascomycota",
             "rank": "phylum",
             "taxon_db": "mycobank",
-            "external_id": "90031"
+            "external_id": "90031",
+            "ncbi_id": 4890
           },
           {
             "id": 618,
             "name": "Dothideomycetes",
             "rank": "class",
             "taxon_db": "mycobank",
-            "external_id": "501481"
+            "external_id": "501481",
+            "ncbi_id": 147541
           },
           {
             "id": 645,
             "name": "Pleosporales",
             "rank": "order",
             "taxon_db": "mycobank",
-            "external_id": "90563"
+            "external_id": "90563",
+            "ncbi_id": 92860
           },
           {
             "id": 648,
             "name": "Pleosporaceae",
             "rank": "family",
             "taxon_db": "mycobank",
-            "external_id": "81188"
+            "external_id": "81188",
+            "ncbi_id": 28556
           }
         ]
       }
     },
     "syntheses": [],
     "reassignments": [],
-    "external_ids": []
+    "external_ids": [],
+    "classyfire": {
+      "class": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0003909",
+        "name": "Fatty Acyls",
+        "chemont_id": "CHEMONTID:0003909",
+        "description": "Organic molecules synthesized by chain elongation of an acetyl-CoA primer with malonyl-CoA (or methylmalonyl-CoA) groups that might contain a cyclic functionality and/or are substituted with heteroatoms."
+      },
+      "smiles": "CC[C@@H](O)C[C@H](C)[C@H](O)[C@](C)(OC)\\C=C\\C(=O)N[C@H](CO)[C@@H](C)CC",
+      "kingdom": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000000",
+        "name": "Organic compounds",
+        "chemont_id": "CHEMONTID:0000000",
+        "description": "Compounds that contain at least one carbon atom, excluding isocyanide/cyanide and their non-hydrocarbyl derivatives, thiophosgene, carbon diselenide, carbon monosulfide, carbon disulfide, carbon subsulfide, carbon monoxide, carbon dioxide, Carbon suboxide, and dicarbon monoxide."
+      },
+      "inchikey": "InChIKey=BZLIDAVUQDTJQF-HWTFSWDCSA-N",
+      "subclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000331",
+        "name": "Fatty amides",
+        "chemont_id": "CHEMONTID:0000331",
+        "description": "Carboxylic acid amide derivatives of fatty acids, that are formed from a fatty acid and an amine."
+      },
+      "ancestors": [
+        "Alcohols and polyols",
+        "Carbonyl compounds",
+        "Carboxylic acid amides",
+        "Carboxylic acid derivatives",
+        "Carboxylic acids and derivatives",
+        "Chemical entities",
+        "Dialkyl ethers",
+        "Ethers",
+        "Fatty Acyls",
+        "Fatty amides",
+        "Hydrocarbon derivatives",
+        "Lipids and lipid-like molecules",
+        "N-acyl amines",
+        "Organic acids and derivatives",
+        "Organic compounds",
+        "Organic nitrogen compounds",
+        "Organic oxides",
+        "Organic oxygen compounds",
+        "Organonitrogen compounds",
+        "Organooxygen compounds",
+        "Organopnictogen compounds",
+        "Primary alcohols",
+        "Secondary alcohols",
+        "Secondary carboxylic acid amides"
+      ],
+      "superclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000012",
+        "name": "Lipids and lipid-like molecules",
+        "chemont_id": "CHEMONTID:0000012",
+        "description": "Fatty acids and their derivatives, and substances related biosynthetically or functionally to these compounds."
+      },
+      "description": "This compound belongs to the class of organic compounds known as n-acyl amines. These are compounds containing a fatty acid moiety linked to an amine group through an ester linkage.",
+      "substituents": [
+        "N-acyl-amine",
+        "Carboxamide group",
+        "Secondary alcohol",
+        "Secondary carboxylic acid amide",
+        "Carboxylic acid derivative",
+        "Dialkyl ether",
+        "Ether",
+        "Organooxygen compound",
+        "Organonitrogen compound",
+        "Organic oxygen compound",
+        "Carbonyl group",
+        "Alcohol",
+        "Organic nitrogen compound",
+        "Primary alcohol",
+        "Organic oxide",
+        "Hydrocarbon derivative",
+        "Aliphatic acyclic compound"
+      ],
+      "direct_parent": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0001096",
+        "name": "N-acyl amines",
+        "chemont_id": "CHEMONTID:0001096",
+        "description": "Compounds containing a fatty acid moiety linked to an amine group through an ester linkage."
+      },
+      "intermediate_nodes": [],
+      "alternative_parents": [
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001663",
+          "name": "Secondary carboxylic acid amides",
+          "chemont_id": "CHEMONTID:0001663",
+          "description": "Compounds containing a secondary carboxylic acid amide functional group, with the general structure RC(=O)N(R')H (R,R'=alkyl, aryl)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001661",
+          "name": "Secondary alcohols",
+          "chemont_id": "CHEMONTID:0001661",
+          "description": "Compounds containing a secondary alcohol functional group, with the general structure HOC(R)(R') (R,R'=alkyl, aryl)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001167",
+          "name": "Dialkyl ethers",
+          "chemont_id": "CHEMONTID:0001167",
+          "description": "Organic compounds containing the dialkyl ether functional group, with the formula ROR', where R and R' are alkyl groups."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000286",
+          "name": "Primary alcohols",
+          "chemont_id": "CHEMONTID:0000286",
+          "description": "Compounds comprising the primary alcohol functional group, with the general structure RCOH (R=alkyl, aryl)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000278",
+          "name": "Organonitrogen compounds",
+          "chemont_id": "CHEMONTID:0000278",
+          "description": "Organic compounds containing a nitrogen atom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003940",
+          "name": "Organic oxides",
+          "chemont_id": "CHEMONTID:0003940",
+          "description": "Organic compounds containing an oxide group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004150",
+          "name": "Hydrocarbon derivatives",
+          "chemont_id": "CHEMONTID:0004150",
+          "description": "Derivatives of hydrocarbons obtained by substituting one or more carbon atoms by an heteroatom. They contain at least one carbon atom and heteroatom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001831",
+          "name": "Carbonyl compounds",
+          "chemont_id": "CHEMONTID:0001831",
+          "description": "Organic compounds containing a carbonyl group, with the general structure RC(=O)R', where R=organyl, R'=H, N, O, organyl group or halide group."
+        }
+      ],
+      "molecular_framework": "Aliphatic acyclic compounds",
+      "external_descriptors": [],
+      "predicted_chebi_terms": [
+        "carboxamide (CHEBI:37622)",
+        "secondary alcohol (CHEBI:35681)",
+        "ether (CHEBI:25698)",
+        "primary alcohol (CHEBI:15734)",
+        "organonitrogen compound (CHEBI:35352)",
+        "organic oxide (CHEBI:25701)",
+        "organic molecule (CHEBI:72695)",
+        "carbonyl compound (CHEBI:36586)",
+        "fatty amide (CHEBI:29348)",
+        "chemical entity (CHEBI:24431)",
+        "organic acid (CHEBI:64709)",
+        "carboxylic acid (CHEBI:33575)",
+        "organooxygen compound (CHEBI:36963)",
+        "amide (CHEBI:32988)",
+        "oxygen molecular entity (CHEBI:25806)",
+        "organic molecular entity (CHEBI:50860)",
+        "polyol (CHEBI:26191)",
+        "organic hydroxy compound (CHEBI:33822)",
+        "alcohol (CHEBI:30879)",
+        "nitrogen molecular entity (CHEBI:51143)",
+        "lipid (CHEBI:18059)"
+      ],
+      "classification_version": "2.1",
+      "predicted_lipidmaps_terms": [
+        "N-acyl amines (FA0802)",
+        "Fatty Acyls (FA)",
+        "Fatty amides (FA08)"
+      ]
+    },
+    "npclassifier": {
+      "isglycoside": false,
+      "class_results": ["Open-chain polyketides"],
+      "pathway_results": ["Polyketides"],
+      "superclass_results": ["Linear polyketides"]
+    }
   },
   {
-    "npaid": 2,
-    "name": "Homopetasinic acid",
+    "id": 2,
+    "npaid": "NPA000002",
+    "original_name": "Homopetasinic acid",
     "mol_formula": "C24H32O6",
-    "inchikey": "MMWCHIIGAIJQMV-DHCANEKFSA-N",
-    "smiles": "C[C@H]1[C@@H](CCC2=CC(=O)[C@@H](C[C@]12C)C(=C)C)OC(=O)[C@@H](C)[C@H](/C=C/C=C/C(=O)O)O",
-    "inchi": "InChI=1S/C24H32O6/c1-14(2)18-13-24(5)16(4)21(11-10-17(24)12-20(18)26)30-23(29)15(3)19(25)8-6-7-9-22(27)28/h6-9,12,15-16,18-19,21,25H,1,10-11,13H2,2-5H3,(H,27,28)/b8-6+,9-7+/t15-,16-,18-,19-,21+,24+/m0/s1",
     "mol_weight": 416.514,
     "exact_mass": 416.2199,
-    "m_plus_h": 417.2272,
-    "m_plus_na": 439.2091,
+    "inchikey": "MMWCHIIGAIJQMV-DHCANEKFSA-N",
+    "smiles": "C[C@H]1[C@@H](CCC2=CC(=O)[C@@H](C[C@]12C)C(=C)C)OC(=O)[C@@H](C)[C@H](/C=C/C=C/C(=O)O)O",
     "cluster_id": 2,
     "node_id": 2,
+    "synonyms": [],
+    "inchi": "InChI=1S/C24H32O6/c1-14(2)18-13-24(5)16(4)21(11-10-17(24)12-20(18)26)30-23(29)15(3)19(25)8-6-7-9-22(27)28/h6-9,12,15-16,18-19,21,25H,1,10-11,13H2,2-5H3,(H,27,28)/b8-6+,9-7+/t15-,16-,18-,19-,21+,24+/m0/s1",
+    "m_plus_h": 417.2272,
+    "m_plus_na": 439.2091,
     "origin_reference": {
       "doi": "10.1016/j.tetlet.2016.01.095",
       "pmid": null,
@@ -119,69 +298,312 @@
         "rank": "genus",
         "taxon_db": "mycobank",
         "external_id": "1497",
+        "ncbi_id": 36922,
         "ancestors": [
           {
             "id": 599,
             "name": "Eukarya",
             "rank": "domain",
             "taxon_db": "mycobank",
-            "external_id": null
+            "external_id": "0",
+            "ncbi_id": 2759
           },
           {
             "id": 600,
             "name": "Fungi",
             "rank": "kingdom",
             "taxon_db": "mycobank",
-            "external_id": "90157"
+            "external_id": "90157",
+            "ncbi_id": 4751
           },
           {
             "id": 617,
             "name": "Ascomycota",
             "rank": "phylum",
             "taxon_db": "mycobank",
-            "external_id": "90031"
+            "external_id": "90031",
+            "ncbi_id": 4890
           },
           {
             "id": 879,
             "name": "Sordariomycetes",
             "rank": "class",
             "taxon_db": "mycobank",
-            "external_id": "90350"
+            "external_id": "90350",
+            "ncbi_id": 147550
           },
           {
             "id": 1074,
             "name": "Diaporthales",
             "rank": "order",
             "taxon_db": "mycobank",
-            "external_id": "90468"
+            "external_id": "90468",
+            "ncbi_id": 5114
           },
           {
             "id": 1087,
             "name": "Diaporthaceae",
             "rank": "family",
             "taxon_db": "mycobank",
-            "external_id": "80691"
+            "external_id": "80691",
+            "ncbi_id": 767018
           }
         ]
       }
     },
     "syntheses": [],
     "reassignments": [],
-    "external_ids": []
+    "external_ids": [],
+    "classyfire": {
+      "class": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000259",
+        "name": "Prenol lipids",
+        "chemont_id": "CHEMONTID:0000259",
+        "description": "Lipids synthesized from the five-carbon-unit precursors isopentenyl diphosphate and dimethylallyl diphosphate."
+      },
+      "smiles": "[H]\\C(\\C(\\[H])=C(/[H])[C@]([H])(O)[C@]([H])(C)C(=O)O[C@]1([H])CCC2=CC(=O)[C@@]([H])(C[C@]2(C)[C@@]1([H])C)C(C)=C)=C(\\[H])C(O)=O",
+      "kingdom": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000000",
+        "name": "Organic compounds",
+        "chemont_id": "CHEMONTID:0000000",
+        "description": "Compounds that contain at least one carbon atom, excluding isocyanide/cyanide and their non-hydrocarbyl derivatives, thiophosgene, carbon diselenide, carbon monosulfide, carbon disulfide, carbon subsulfide, carbon monoxide, carbon dioxide, Carbon suboxide, and dicarbon monoxide."
+      },
+      "inchikey": "InChIKey=MMWCHIIGAIJQMV-DHCANEKFSA-N",
+      "subclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0001550",
+        "name": "Sesquiterpenoids",
+        "chemont_id": "CHEMONTID:0001550",
+        "description": "Terpenes with three consecutive isoprene units."
+      },
+      "ancestors": [
+        "Alcohols and polyols",
+        "Beta hydroxy acids and derivatives",
+        "Branched fatty acids",
+        "Carbonyl compounds",
+        "Carboxylic acid derivatives",
+        "Carboxylic acid esters",
+        "Carboxylic acids",
+        "Carboxylic acids and derivatives",
+        "Chemical entities",
+        "Cyclic ketones",
+        "Cyclohexenones",
+        "Dicarboxylic acids and derivatives",
+        "Eremophilane, 8,9-secoeremophilane and furoeremophilane sesquiterpenoids",
+        "Fatty Acyls",
+        "Fatty acid esters",
+        "Fatty acids and conjugates",
+        "Hydrocarbon derivatives",
+        "Hydroxy acids and derivatives",
+        "Hydroxy fatty acids",
+        "Ketones",
+        "Lipids and lipid-like molecules",
+        "Medium-chain fatty acids",
+        "Medium-chain hydroxy acids and derivatives",
+        "Organic acids and derivatives",
+        "Organic compounds",
+        "Organic oxides",
+        "Organic oxygen compounds",
+        "Organooxygen compounds",
+        "Prenol lipids",
+        "Secondary alcohols",
+        "Sesquiterpenoids",
+        "Unsaturated fatty acids"
+      ],
+      "superclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000012",
+        "name": "Lipids and lipid-like molecules",
+        "chemont_id": "CHEMONTID:0000012",
+        "description": "Fatty acids and their derivatives, and substances related biosynthetically or functionally to these compounds."
+      },
+      "description": "This compound belongs to the class of organic compounds known as eremophilane, 8,9-secoeremophilane and furoeremophilane sesquiterpenoids. These are sesquiterpenoids with a structure based either on the eremophilane skeleton, its 8,9-seco derivative, or the furoeremophilane skeleton. Eremophilanes have been shown to be derived from eudesmanes by migration of the methyl group at C-10 to C-5.",
+      "substituents": [
+        "Eremophilane sesquiterpenoid",
+        "Medium-chain hydroxy acid",
+        "Medium-chain fatty acid",
+        "Cyclohexenone",
+        "Hydroxy fatty acid",
+        "Fatty acid ester",
+        "Branched fatty acid",
+        "Beta-hydroxy acid",
+        "Fatty acyl",
+        "Unsaturated fatty acid",
+        "Hydroxy acid",
+        "Dicarboxylic acid or derivatives",
+        "Cyclic ketone",
+        "Secondary alcohol",
+        "Ketone",
+        "Carboxylic acid ester",
+        "Carboxylic acid",
+        "Carboxylic acid derivative",
+        "Organic oxygen compound",
+        "Organic oxide",
+        "Hydrocarbon derivative",
+        "Organooxygen compound",
+        "Carbonyl group",
+        "Alcohol",
+        "Aliphatic homopolycyclic compound"
+      ],
+      "direct_parent": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0003655",
+        "name": "Eremophilane, 8,9-secoeremophilane and furoeremophilane sesquiterpenoids",
+        "chemont_id": "CHEMONTID:0003655",
+        "description": "Sesquiterpenoids with a structure based either on the eremophilane skeleton, its 8,9-seco derivative, or the furoeremophilane skeleton. Eremophilanes have been shown to be derived from eudesmanes by migration of the methyl group at C-10 to C-5."
+      },
+      "intermediate_nodes": [],
+      "alternative_parents": [
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000299",
+          "name": "Medium-chain hydroxy acids and derivatives",
+          "chemont_id": "CHEMONTID:0000299",
+          "description": "Hydroxy acids with a 6 to 12 carbon atoms long side chain."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003086",
+          "name": "Medium-chain fatty acids",
+          "chemont_id": "CHEMONTID:0003086",
+          "description": "Fatty acids with an aliphatic tail that contains between 4 and 12 carbon atoms."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000341",
+          "name": "Hydroxy fatty acids",
+          "chemont_id": "CHEMONTID:0000341",
+          "description": "Fatty acids in which the chain bears a hydroxyl group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000324",
+          "name": "Fatty acid esters",
+          "chemont_id": "CHEMONTID:0000324",
+          "description": "Carboxylic ester derivatives of a fatty acid."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004325",
+          "name": "Cyclohexenones",
+          "chemont_id": "CHEMONTID:0004325",
+          "description": "Compounds containing a cylohexenone moiety, which is a six-membered aliphatic ring that carries a ketone and has one endocyclic double bond."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000338",
+          "name": "Branched fatty acids",
+          "chemont_id": "CHEMONTID:0000338",
+          "description": "Fatty acids containing a branched chain."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001713",
+          "name": "Beta hydroxy acids and derivatives",
+          "chemont_id": "CHEMONTID:0001713",
+          "description": "Compounds containing a carboxylic acid substituted with a hydroxyl group on the C3 carbon atom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000339",
+          "name": "Unsaturated fatty acids",
+          "chemont_id": "CHEMONTID:0000339",
+          "description": "Fatty acids with a chain that contains at least one CC double bond."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000346",
+          "name": "Dicarboxylic acids and derivatives",
+          "chemont_id": "CHEMONTID:0000346",
+          "description": "Organic compounds containing exactly two carboxylic acid groups."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001661",
+          "name": "Secondary alcohols",
+          "chemont_id": "CHEMONTID:0001661",
+          "description": "Compounds containing a secondary alcohol functional group, with the general structure HOC(R)(R') (R,R'=alkyl, aryl)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001238",
+          "name": "Carboxylic acid esters",
+          "chemont_id": "CHEMONTID:0001238",
+          "description": "Carboxylic acid derivatives in which the carbon atom from the carbonyl group is attached to an alkyl or an aryl moiety through an oxygen atom (forming an ester group)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001205",
+          "name": "Carboxylic acids",
+          "chemont_id": "CHEMONTID:0001205",
+          "description": "Compounds containing a carboxylic acid group with the formula -C(=O)OH."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003940",
+          "name": "Organic oxides",
+          "chemont_id": "CHEMONTID:0003940",
+          "description": "Organic compounds containing an oxide group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004150",
+          "name": "Hydrocarbon derivatives",
+          "chemont_id": "CHEMONTID:0004150",
+          "description": "Derivatives of hydrocarbons obtained by substituting one or more carbon atoms by an heteroatom. They contain at least one carbon atom and heteroatom."
+        }
+      ],
+      "molecular_framework": "Aliphatic homopolycyclic compounds",
+      "external_descriptors": [],
+      "predicted_chebi_terms": [
+        "carbonyl compound (CHEBI:36586)",
+        "medium-chain fatty acid (CHEBI:59554)",
+        "hydroxy fatty acid (CHEBI:24654)",
+        "fatty acid ester (CHEBI:35748)",
+        "cyclohexenones (CHEBI:48953)",
+        "branched-chain fatty acid (CHEBI:35819)",
+        "3-hydroxy carboxylic acid (CHEBI:61355)",
+        "unsaturated fatty acid (CHEBI:27208)",
+        "dicarboxylic acid (CHEBI:35692)",
+        "secondary alcohol (CHEBI:35681)",
+        "carboxylic ester (CHEBI:33308)",
+        "carboxylic acid (CHEBI:33575)",
+        "carboxylic acid anion (CHEBI:29067)",
+        "organic oxide (CHEBI:25701)",
+        "organic molecule (CHEBI:72695)",
+        "sesquiterpenoid (CHEBI:26658)",
+        "chemical entity (CHEBI:24431)",
+        "organooxygen compound (CHEBI:36963)",
+        "hydroxy carboxylic acid (CHEBI:24669)",
+        "lipid (CHEBI:18059)",
+        "monocarboxylic acid (CHEBI:25384)",
+        "oxygen molecular entity (CHEBI:25806)",
+        "organic molecular entity (CHEBI:50860)",
+        "ketone (CHEBI:17087)",
+        "cyclic ketone (CHEBI:3992)",
+        "polyol (CHEBI:26191)",
+        "organic hydroxy compound (CHEBI:33822)",
+        "alcohol (CHEBI:30879)",
+        "ether lipid (CHEBI:64611)"
+      ],
+      "classification_version": "2.1",
+      "predicted_lipidmaps_terms": [
+        "Fatty Acids and Conjugates (FA01)",
+        "Hydroxy fatty acids (FA0105)",
+        "Fatty esters (FA07)",
+        "Branched fatty acids (FA0102)",
+        "Unsaturated fatty acids (FA0103)",
+        "Dicarboxylic acids (FA0117)",
+        "C15 isoprenoids (sesquiterpenes) (PR0103)",
+        "Fatty Acyls (FA)",
+        "Prenol Lipids (PR)"
+      ]
+    },
+    "npclassifier": {
+      "isglycoside": false,
+      "class_results": ["Eremophilane sesquiterpenoids"],
+      "pathway_results": ["Terpenoids"],
+      "superclass_results": ["Sesquiterpenoids"]
+    }
   },
   {
-    "npaid": 3,
-    "name": "A-503083 F",
+    "id": 3,
+    "npaid": "NPA000003",
+    "original_name": "A-503083 F",
     "mol_formula": "C18H22N4O13",
-    "inchikey": "RNRCUOCMUNIOMZ-UHFFFAOYSA-N",
-    "smiles": "COC1C(C(OC1C(C(=O)N)OC2C(C(C=C(O2)C(=O)O)O)O)N3C=CC(=O)NC3=O)OC(=O)N",
-    "inchi": "InChI=1S/C18H22N4O13/c1-31-9-10(11(13(19)26)34-16-8(25)5(23)4-6(32-16)15(27)28)33-14(12(9)35-17(20)29)22-3-2-7(24)21-18(22)30/h2-5,8-12,14,16,23,25H,1H3,(H2,19,26)(H2,20,29)(H,27,28)(H,21,24,30)",
     "mol_weight": 502.389,
     "exact_mass": 502.1183,
-    "m_plus_h": 503.1256,
-    "m_plus_na": 525.1075,
+    "inchikey": "RNRCUOCMUNIOMZ-UHFFFAOYSA-N",
+    "smiles": "COC1C(C(OC1C(C(=O)N)OC2C(C(C=C(O2)C(=O)O)O)O)N3C=CC(=O)NC3=O)OC(=O)N",
     "cluster_id": 3,
     "node_id": 3,
+    "synonyms": [],
+    "inchi": "InChI=1S/C18H22N4O13/c1-31-9-10(11(13(19)26)34-16-8(25)5(23)4-6(32-16)15(27)28)33-14(12(9)35-17(20)29)22-3-2-7(24)21-18(22)30/h2-5,8-12,14,16,23,25H,1H3,(H2,19,26)(H2,20,29)(H,27,28)(H,21,24,30)",
+    "m_plus_h": 503.1256,
+    "m_plus_na": 525.1075,
     "origin_reference": {
       "doi": "10.7164/antibiotics.57.639",
       "pmid": 15638324,
@@ -204,41 +626,47 @@
         "rank": "genus",
         "taxon_db": "lpsn",
         "external_id": "517119",
+        "ncbi_id": 1883,
         "ancestors": [
           {
             "id": 1,
             "name": "Bacteria",
             "rank": "domain",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 2
           },
           {
             "id": 203,
             "name": "Actinobacteria",
             "rank": "phylum",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 201174
           },
           {
             "id": 204,
             "name": "Actinobacteria",
             "rank": "class",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": null
           },
           {
             "id": 275,
             "name": "Streptomycetales",
             "rank": "order",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 85011
           },
           {
             "id": 276,
             "name": "Streptomycetaceae",
             "rank": "family",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 2062
           }
         ]
       }
@@ -250,21 +678,307 @@
         "external_db_name": "mibig",
         "external_db_code": "BGC0000288"
       }
-    ]
+    ],
+    "classyfire": {
+      "class": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000323",
+        "name": "Organooxygen compounds",
+        "chemont_id": "CHEMONTID:0000323",
+        "description": "Organic compounds containing a bond between a carbon atom and an oxygen atom."
+      },
+      "smiles": "[H]C(OC1([H])OC(=CC([H])(O)C1([H])O)C(O)=O)(C(O)=N)C1([H])OC([H])(N2C=CC(O)=NC2=O)C([H])(OC(O)=N)C1([H])OC",
+      "kingdom": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000000",
+        "name": "Organic compounds",
+        "chemont_id": "CHEMONTID:0000000",
+        "description": "Compounds that contain at least one carbon atom, excluding isocyanide/cyanide and their non-hydrocarbyl derivatives, thiophosgene, carbon diselenide, carbon monosulfide, carbon disulfide, carbon subsulfide, carbon monoxide, carbon dioxide, Carbon suboxide, and dicarbon monoxide."
+      },
+      "inchikey": "InChIKey=RNRCUOCMUNIOMZ-UHFFFAOYSA-N",
+      "subclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000011",
+        "name": "Carbohydrates and carbohydrate conjugates",
+        "chemont_id": "CHEMONTID:0000011",
+        "description": "Monosaccharides, disaccharides, oligosaccharides, polysaccharides, and their derivatives."
+      },
+      "ancestors": [
+        "1,2-diols",
+        "Acetals",
+        "Alcohols and polyols",
+        "Azacyclic compounds",
+        "Carbohydrates and carbohydrate conjugates",
+        "Carbonyl compounds",
+        "Carboximidic acids",
+        "Carboximidic acids and derivatives",
+        "Carboxylic acids",
+        "Carboxylic acids and derivatives",
+        "Chemical entities",
+        "Dialkyl ethers",
+        "Diazines",
+        "Disaccharides",
+        "Ethers",
+        "Glycosyl compounds",
+        "Glycosylamines",
+        "Heteroaromatic compounds",
+        "Hydrocarbon derivatives",
+        "Hydropyrimidines",
+        "Hydroxypyrimidines",
+        "Imines",
+        "Monocarboxylic acids and derivatives",
+        "Organic acids and derivatives",
+        "Organic compounds",
+        "Organic nitrogen compounds",
+        "Organic oxides",
+        "Organic oxygen compounds",
+        "Organoheterocyclic compounds",
+        "Organonitrogen compounds",
+        "Organooxygen compounds",
+        "Organopnictogen compounds",
+        "Oxacyclic compounds",
+        "Oxolanes",
+        "Polyols",
+        "Pyrimidines and pyrimidine derivatives",
+        "Pyrimidones",
+        "Secondary alcohols"
+      ],
+      "superclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0004603",
+        "name": "Organic oxygen compounds",
+        "chemont_id": "CHEMONTID:0004603",
+        "description": "Organic compounds that contain one or more oxygen atoms."
+      },
+      "description": "This compound belongs to the class of organic compounds known as glycosylamines. These are compounds consisting of an amine with a beta-N-glycosidic bond to a carbohydrate, thus forming a cyclic hemiaminal ether bond (alpha-amino ether).",
+      "substituents": [
+        "Disaccharide",
+        "N-glycosyl compound",
+        "Hydroxypyrimidine",
+        "Pyrimidone",
+        "Hydropyrimidine",
+        "Pyrimidine",
+        "Heteroaromatic compound",
+        "Oxolane",
+        "1,2-diol",
+        "Secondary alcohol",
+        "Acetal",
+        "Carboximidic acid",
+        "Carboximidic acid derivative",
+        "Carboxylic acid derivative",
+        "Carboxylic acid",
+        "Dialkyl ether",
+        "Ether",
+        "Monocarboxylic acid or derivatives",
+        "Oxacycle",
+        "Organoheterocyclic compound",
+        "Azacycle",
+        "Alcohol",
+        "Organic oxide",
+        "Hydrocarbon derivative",
+        "Imine",
+        "Organonitrogen compound",
+        "Carbonyl group",
+        "Organic nitrogen compound",
+        "Organopnictogen compound",
+        "Aromatic heteromonocyclic compound"
+      ],
+      "direct_parent": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0002203",
+        "name": "Glycosylamines",
+        "chemont_id": "CHEMONTID:0002203",
+        "description": "Compounds consisting of an amine with a beta-N-glycosidic bond to a carbohydrate, thus forming a cyclic hemiaminal ether bond (alpha-amino ether)."
+      },
+      "intermediate_nodes": [
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002105",
+          "name": "Glycosyl compounds",
+          "chemont_id": "CHEMONTID:0002105",
+          "description": "Carbohydrate derivatives in which a sugar group is bonded through its anomeric carbon to another group via a C-, S-,N-,O-, or Se- glycosidic bond."
+        }
+      ],
+      "alternative_parents": [
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001542",
+          "name": "Disaccharides",
+          "chemont_id": "CHEMONTID:0001542",
+          "description": "Compounds containing two carbohydrate moieties linked to each to each other through a glycosidic bond, no set of three or more glycosidically linked carbohydrate units."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000291",
+          "name": "Pyrimidones",
+          "chemont_id": "CHEMONTID:0000291",
+          "description": "Compounds that contain a pyrimidine ring, which bears a ketone. Pyrimidine is a 6-membered ring consisting of four carbon atoms and two nitrogen centers at the 1- and 3- ring positions."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004161",
+          "name": "Hydroxypyrimidines",
+          "chemont_id": "CHEMONTID:0004161",
+          "description": "Organic compounds containing a hydroxyl group attached to a pyrimidine ring. Pyrimidine is a 6-membered ring consisting of four carbon atoms and two nitrogen centers at the 1- and 3- ring positions."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002202",
+          "name": "Hydropyrimidines",
+          "chemont_id": "CHEMONTID:0002202",
+          "description": "Compounds containing a hydrogenated pyrimidine ring (i.e. containing less than the maximum number of double bonds.)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001967",
+          "name": "Oxolanes",
+          "chemont_id": "CHEMONTID:0001967",
+          "description": "Organic compounds containing an oxolane (tetrahydrofuran) ring, which is a saturated aliphatic five-member ring containing one oxygen and five carbon atoms."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004144",
+          "name": "Heteroaromatic compounds",
+          "chemont_id": "CHEMONTID:0004144",
+          "description": "Compounds containing an aromatic ring where a carbon atom is linked to an hetero atom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001661",
+          "name": "Secondary alcohols",
+          "chemont_id": "CHEMONTID:0001661",
+          "description": "Compounds containing a secondary alcohol functional group, with the general structure HOC(R)(R') (R,R'=alkyl, aryl)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002467",
+          "name": "1,2-diols",
+          "chemont_id": "CHEMONTID:0002467",
+          "description": "Polyols containing an alcohol group at two adjacent positions."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004140",
+          "name": "Oxacyclic compounds",
+          "chemont_id": "CHEMONTID:0004140",
+          "description": "Organic compounds containing an heterocycle with at least one oxygen atom linked to a ring carbon."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001656",
+          "name": "Acetals",
+          "chemont_id": "CHEMONTID:0001656",
+          "description": "Compounds having the structure R2C(OR')2 ( R' not Hydrogen) and thus diethers of geminal diols. Originally, the term was confined to derivatives of aldehydes (one R = H), but it now applies equally to derivatives of ketones (neither R = H ). Mixed acetals have different R' groups."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004139",
+          "name": "Azacyclic compounds",
+          "chemont_id": "CHEMONTID:0004139",
+          "description": "Organic compounds containing an heterocycle with at least one nitrogen atom and one carbon atom linked to each other."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002484",
+          "name": "Carboximidic acids",
+          "chemont_id": "CHEMONTID:0002484",
+          "description": "Organic acids with the general formula RC(=N)-OH (R=H, organic group)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001205",
+          "name": "Carboxylic acids",
+          "chemont_id": "CHEMONTID:0001205",
+          "description": "Compounds containing a carboxylic acid group with the formula -C(=O)OH."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001137",
+          "name": "Monocarboxylic acids and derivatives",
+          "chemont_id": "CHEMONTID:0001137",
+          "description": "Carboxylic acids containing exactly one carboxyl groups."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001167",
+          "name": "Dialkyl ethers",
+          "chemont_id": "CHEMONTID:0001167",
+          "description": "Organic compounds containing the dialkyl ether functional group, with the formula ROR', where R and R' are alkyl groups."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004557",
+          "name": "Organopnictogen compounds",
+          "chemont_id": "CHEMONTID:0004557",
+          "description": "Compounds containing a bond between carbon a pnictogen atom. Pnictogens are p-block element atoms that are in the group 15 of the periodic table."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003940",
+          "name": "Organic oxides",
+          "chemont_id": "CHEMONTID:0003940",
+          "description": "Organic compounds containing an oxide group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004150",
+          "name": "Hydrocarbon derivatives",
+          "chemont_id": "CHEMONTID:0004150",
+          "description": "Derivatives of hydrocarbons obtained by substituting one or more carbon atoms by an heteroatom. They contain at least one carbon atom and heteroatom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001831",
+          "name": "Carbonyl compounds",
+          "chemont_id": "CHEMONTID:0001831",
+          "description": "Organic compounds containing a carbonyl group, with the general structure RC(=O)R', where R=organyl, R'=H, N, O, organyl group or halide group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000117",
+          "name": "Imines",
+          "chemont_id": "CHEMONTID:0000117",
+          "description": "Compounds containing an imine functional group, with the general structure RN=CR2 (R = H, hydrocarbyl)."
+        }
+      ],
+      "molecular_framework": "Aromatic heteromonocyclic compounds",
+      "external_descriptors": [],
+      "predicted_chebi_terms": [
+        "disaccharide (CHEBI:36233)",
+        "pyrimidone (CHEBI:38337)",
+        "hydroxypyrimidine (CHEBI:38340)",
+        "pyrimidines (CHEBI:39447)",
+        "oxolanes (CHEBI:26912)",
+        "organic aromatic compound (CHEBI:33659)",
+        "secondary alcohol (CHEBI:35681)",
+        "polyol (CHEBI:26191)",
+        "oxacycle (CHEBI:38104)",
+        "acetal (CHEBI:59769)",
+        "organonitrogen heterocyclic compound (CHEBI:38101)",
+        "carboximidic acid (CHEBI:48378)",
+        "carboxylic acid (CHEBI:33575)",
+        "monocarboxylic acid (CHEBI:25384)",
+        "ether (CHEBI:25698)",
+        "pnictogen molecular entity (CHEBI:33302)",
+        "organic molecular entity (CHEBI:50860)",
+        "organic oxide (CHEBI:25701)",
+        "organic molecule (CHEBI:72695)",
+        "carbonyl compound (CHEBI:36586)",
+        "imine (CHEBI:24783)",
+        "N-glycosyl compound (CHEBI:21731)",
+        "chemical entity (CHEBI:24431)",
+        "oxygen molecular entity (CHEBI:25806)",
+        "organooxygen compound (CHEBI:36963)",
+        "carbohydrates and carbohydrate derivatives (CHEBI:78616)",
+        "organic heterocyclic compound (CHEBI:24532)",
+        "diazines (CHEBI:38313)",
+        "organic hydroxy compound (CHEBI:33822)",
+        "alcohol (CHEBI:30879)",
+        "organic acid (CHEBI:64709)",
+        "organonitrogen compound (CHEBI:35352)",
+        "nitrogen molecular entity (CHEBI:51143)",
+        "glycoside (CHEBI:24400)",
+        "carboxylic acid anion (CHEBI:29067)"
+      ],
+      "classification_version": "2.1",
+      "predicted_lipidmaps_terms": []
+    },
+    "npclassifier": {
+      "isglycoside": true,
+      "class_results": ["Pyrimidine nucleosides"],
+      "pathway_results": ["Carbohydrates"],
+      "superclass_results": ["Nucleosides"]
+    }
   },
   {
-    "npaid": 4,
-    "name": "Aqabamycin E2",
+    "id": 4,
+    "npaid": "NPA000004",
+    "original_name": "Aqabamycin E2",
     "mol_formula": "C16H11N3O5",
-    "inchikey": "NMMDNCZQLOFGES-UHFFFAOYSA-N",
-    "smiles": "C1=CC=C(C=C1)C2=C(NC(=C2C3=CC(=C(C=C3)O)[N+](=O)[O-])N=O)O",
-    "inchi": "InChI=1S/C16H11N3O5/c20-12-7-6-10(8-11(12)19(23)24)13-14(9-4-2-1-3-5-9)16(21)17-15(13)18-22/h1-8,17,20-21H",
     "mol_weight": 325.28,
     "exact_mass": 325.0699,
-    "m_plus_h": 326.0772,
-    "m_plus_na": 348.0591,
+    "inchikey": "NMMDNCZQLOFGES-UHFFFAOYSA-N",
+    "smiles": "C1=CC=C(C=C1)C2=C(NC(=C2C3=CC(=C(C=C3)O)[N+](=O)[O-])N=O)O",
     "cluster_id": 4,
     "node_id": 4,
+    "synonyms": [],
+    "inchi": "InChI=1S/C16H11N3O5/c20-12-7-6-10(8-11(12)19(23)24)13-14(9-4-2-1-3-5-9)16(21)17-15(13)18-22/h1-8,17,20-21H",
+    "m_plus_h": 326.0772,
+    "m_plus_na": 348.0591,
     "origin_reference": {
       "doi": "10.1038/ja.2010.34",
       "pmid": 20431617,
@@ -287,62 +1001,288 @@
         "rank": "genus",
         "taxon_db": "lpsn",
         "external_id": "517157",
+        "ncbi_id": 662,
         "ancestors": [
           {
             "id": 1,
             "name": "Bacteria",
             "rank": "domain",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 2
           },
           {
             "id": 2,
             "name": "Proteobacteria",
             "rank": "phylum",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 1224
           },
           {
             "id": 79,
             "name": "Gammaproteobacteria",
             "rank": "class",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 1236
           },
           {
             "id": 134,
             "name": "Vibrionales",
             "rank": "order",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 135623
           },
           {
             "id": 135,
             "name": "Vibrionaceae",
             "rank": "family",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 641
           }
         ]
       }
     },
     "syntheses": [],
     "reassignments": [],
-    "external_ids": []
+    "external_ids": [],
+    "classyfire": {
+      "class": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000090",
+        "name": "Pyrroles",
+        "chemont_id": "CHEMONTID:0000090",
+        "description": "Compounds containing a pyrrole ring, which is a five-member aromatic heterocycle with one nitrogen atom and four carbon atoms."
+      },
+      "smiles": "OC1=C(C(=C(N1)N=O)C1=CC(=C(O)C=C1)N(=O)=O)C1=CC=CC=C1",
+      "kingdom": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000000",
+        "name": "Organic compounds",
+        "chemont_id": "CHEMONTID:0000000",
+        "description": "Compounds that contain at least one carbon atom, excluding isocyanide/cyanide and their non-hydrocarbyl derivatives, thiophosgene, carbon diselenide, carbon monosulfide, carbon disulfide, carbon subsulfide, carbon monoxide, carbon dioxide, Carbon suboxide, and dicarbon monoxide."
+      },
+      "inchikey": "InChIKey=NMMDNCZQLOFGES-UHFFFAOYSA-N",
+      "subclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0002257",
+        "name": "Substituted pyrroles",
+        "chemont_id": "CHEMONTID:0002257",
+        "description": "Heterocyclic compounds containing a pyrrole ring substituted at one or more positions."
+      },
+      "ancestors": [
+        "1-hydroxy-2-unsubstituted benzenoids",
+        "Allyl-type 1,3-dipolar organic compounds",
+        "Azacyclic compounds",
+        "Benzene and substituted derivatives",
+        "Benzenoids",
+        "C-nitro compounds",
+        "C-nitroso compounds",
+        "Chemical entities",
+        "Heteroaromatic compounds",
+        "Hydrocarbon derivatives",
+        "Nitroaromatic compounds",
+        "Nitrobenzenes",
+        "Nitrophenols",
+        "Organic 1,3-dipolar compounds",
+        "Organic compounds",
+        "Organic nitro compounds",
+        "Organic nitrogen compounds",
+        "Organic nitroso compounds",
+        "Organic oxides",
+        "Organic oxoazanium compounds",
+        "Organic oxygen compounds",
+        "Organic zwitterions",
+        "Organoheterocyclic compounds",
+        "Organonitrogen compounds",
+        "Organooxygen compounds",
+        "Organopnictogen compounds",
+        "Phenols",
+        "Phenylpyrroles",
+        "Propargyl-type 1,3-dipolar organic compounds",
+        "Pyrroles",
+        "Substituted pyrroles"
+      ],
+      "superclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000002",
+        "name": "Organoheterocyclic compounds",
+        "chemont_id": "CHEMONTID:0000002",
+        "description": "Compounds containing a ring with least one carbon atom and one non-carbon atom."
+      },
+      "description": "This compound belongs to the class of organic compounds known as phenylpyrroles. These are polycyclic aromatic compounds containing a benzene ring linked to a pyrrole ring through a CC or CN bond.",
+      "substituents": [
+        "3-phenylpyrrole",
+        "Nitrophenol",
+        "Nitrobenzene",
+        "Nitroaromatic compound",
+        "1-hydroxy-2-unsubstituted benzenoid",
+        "Phenol",
+        "Benzenoid",
+        "Monocyclic benzene moiety",
+        "Heteroaromatic compound",
+        "Organic nitro compound",
+        "C-nitro compound",
+        "Organic nitroso compound",
+        "Azacycle",
+        "Organic 1,3-dipolar compound",
+        "Propargyl-type 1,3-dipolar organic compound",
+        "Allyl-type 1,3-dipolar organic compound",
+        "Organic oxoazanium",
+        "C-nitroso compound",
+        "Organic nitrogen compound",
+        "Organic oxygen compound",
+        "Organopnictogen compound",
+        "Organic oxide",
+        "Hydrocarbon derivative",
+        "Organic zwitterion",
+        "Organooxygen compound",
+        "Organonitrogen compound",
+        "Aromatic heteromonocyclic compound"
+      ],
+      "direct_parent": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0002334",
+        "name": "Phenylpyrroles",
+        "chemont_id": "CHEMONTID:0002334",
+        "description": "Polycyclic aromatic compounds containing a benzene ring linked to a pyrrole ring through a CC or CN bond."
+      },
+      "intermediate_nodes": [],
+      "alternative_parents": [
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000141",
+          "name": "Nitrophenols",
+          "chemont_id": "CHEMONTID:0000141",
+          "description": "Compounds containing a nitrophenol moiety, which consists of a benzene ring bearing both a hydroxyl group and a nitro group on two different ring carbon atoms."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000036",
+          "name": "Nitrobenzenes",
+          "chemont_id": "CHEMONTID:0000036",
+          "description": "Compounds containing a nitrobenzene moiety, which consists of a benzene ring with a carbon bearing a nitro group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004612",
+          "name": "Nitroaromatic compounds",
+          "chemont_id": "CHEMONTID:0004612",
+          "description": "C-nitro compounds where the nitro group is C-substituted with an aromatic group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004646",
+          "name": "1-hydroxy-2-unsubstituted benzenoids",
+          "chemont_id": "CHEMONTID:0004646",
+          "description": "Phenols that a unsubstituted at the 2-position."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004144",
+          "name": "Heteroaromatic compounds",
+          "chemont_id": "CHEMONTID:0004144",
+          "description": "Compounds containing an aromatic ring where a carbon atom is linked to an hetero atom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003633",
+          "name": "Propargyl-type 1,3-dipolar organic compounds",
+          "chemont_id": "CHEMONTID:0003633",
+          "description": "Organic 1,3-dipolar compounds with the general structure  X#N+-Z- <-> X-=N+=Z <-> X-=N-Z+ <-> X-N=Z (X = C or O, Z = C, N, or O)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001508",
+          "name": "Organic oxoazanium compounds",
+          "chemont_id": "CHEMONTID:0001508",
+          "description": "Organic compounds comprising the oxoazanium cation, with the formula N+=O."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003034",
+          "name": "C-nitroso compounds",
+          "chemont_id": "CHEMONTID:0003034",
+          "description": "Nitroso compounds with he general formula RN=O, where R is an organic group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004139",
+          "name": "Azacyclic compounds",
+          "chemont_id": "CHEMONTID:0004139",
+          "description": "Organic compounds containing an heterocycle with at least one nitrogen atom and one carbon atom linked to each other."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004557",
+          "name": "Organopnictogen compounds",
+          "chemont_id": "CHEMONTID:0004557",
+          "description": "Compounds containing a bond between carbon a pnictogen atom. Pnictogens are p-block element atoms that are in the group 15 of the periodic table."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000323",
+          "name": "Organooxygen compounds",
+          "chemont_id": "CHEMONTID:0000323",
+          "description": "Organic compounds containing a bond between a carbon atom and an oxygen atom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003610",
+          "name": "Organic zwitterions",
+          "chemont_id": "CHEMONTID:0003610",
+          "description": "Organic neutral compounds having formal unit electrical charges of opposite sign."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003940",
+          "name": "Organic oxides",
+          "chemont_id": "CHEMONTID:0003940",
+          "description": "Organic compounds containing an oxide group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004150",
+          "name": "Hydrocarbon derivatives",
+          "chemont_id": "CHEMONTID:0004150",
+          "description": "Derivatives of hydrocarbons obtained by substituting one or more carbon atoms by an heteroatom. They contain at least one carbon atom and heteroatom."
+        }
+      ],
+      "molecular_framework": "Aromatic heteromonocyclic compounds",
+      "external_descriptors": [],
+      "predicted_chebi_terms": [
+        "phenols (CHEBI:33853)",
+        "nitrobenzenes (CHEBI:48109)",
+        "aromatic compound (CHEBI:33655)",
+        "organic aromatic compound (CHEBI:33659)",
+        "dipolar compound (CHEBI:51151)",
+        "nitrogen molecular entity (CHEBI:51143)",
+        "organooxygen compound (CHEBI:36963)",
+        "nitroso compound (CHEBI:35800)",
+        "organonitrogen heterocyclic compound (CHEBI:38101)",
+        "pnictogen molecular entity (CHEBI:33302)",
+        "organic molecular entity (CHEBI:50860)",
+        "zwitterion (CHEBI:27369)",
+        "organic oxide (CHEBI:25701)",
+        "organic molecule (CHEBI:72695)",
+        "pyrroles (CHEBI:26455)",
+        "chemical entity (CHEBI:24431)",
+        "benzenoid aromatic compound (CHEBI:33836)",
+        "benzenes (CHEBI:22712)",
+        "nitro compound (CHEBI:35715)",
+        "organic heterocyclic compound (CHEBI:24532)",
+        "oxygen molecular entity (CHEBI:25806)",
+        "organonitrogen compound (CHEBI:35352)"
+      ],
+      "classification_version": "2.1",
+      "predicted_lipidmaps_terms": []
+    },
+    "npclassifier": {
+      "isglycoside": false,
+      "class_results": [],
+      "pathway_results": ["Alkaloids"],
+      "superclass_results": []
+    }
   },
   {
-    "npaid": 5,
-    "name": "Hymenopsin A",
+    "id": 5,
+    "npaid": "NPA000005",
+    "original_name": "Hymenopsin A",
     "mol_formula": "C22H32O6",
-    "inchikey": "OYLVOLOSQHRPLK-WRXMSMRBSA-N",
-    "smiles": "C[C@]1(CCC[C@]2([C@H]1CC=C3[C@@H]2C[C@]45C(O4)[C@@H]([C@]6(C([C@@]5(C3)O)O6)CO)O)C)CO",
-    "inchi": "InChI=1S/C22H32O6/c1-18(10-23)6-3-7-19(2)13-9-22-16(27-22)15(25)20(11-24)17(28-20)21(22,26)8-12(13)4-5-14(18)19/h4,13-17,23-26H,3,5-11H2,1-2H3/t13-,14-,15-,16?,17?,18-,19+,20-,21+,22+/m0/s1",
     "mol_weight": 392.492,
     "exact_mass": 392.2199,
-    "m_plus_h": 393.2272,
-    "m_plus_na": 415.2091,
+    "inchikey": "OYLVOLOSQHRPLK-WRXMSMRBSA-N",
+    "smiles": "C[C@]1(CCC[C@]2([C@H]1CC=C3[C@@H]2C[C@]45C(O4)[C@@H]([C@]6(C([C@@]5(C3)O)O6)CO)O)C)CO",
     "cluster_id": 5,
     "node_id": 5,
+    "synonyms": [],
+    "inchi": "InChI=1S/C22H32O6/c1-18(10-23)6-3-7-19(2)13-9-22-16(27-22)15(25)20(11-24)17(28-20)21(22,26)8-12(13)4-5-14(18)19/h4,13-17,23-26H,3,5-11H2,1-2H3/t13-,14-,15-,16?,17?,18-,19+,20-,21+,22+/m0/s1",
+    "m_plus_h": 393.2272,
+    "m_plus_na": 415.2091,
     "origin_reference": {
       "doi": "10.1021/np900613d",
       "pmid": 19928955,
@@ -365,69 +1305,242 @@
         "rank": "genus",
         "taxon_db": "mycobank",
         "external_id": "8284",
+        "ncbi_id": 5506,
         "ancestors": [
           {
             "id": 599,
             "name": "Eukarya",
             "rank": "domain",
             "taxon_db": "mycobank",
-            "external_id": null
+            "external_id": "0",
+            "ncbi_id": 2759
           },
           {
             "id": 600,
             "name": "Fungi",
             "rank": "kingdom",
             "taxon_db": "mycobank",
-            "external_id": "90157"
+            "external_id": "90157",
+            "ncbi_id": 4751
           },
           {
             "id": 617,
             "name": "Ascomycota",
             "rank": "phylum",
             "taxon_db": "mycobank",
-            "external_id": "90031"
+            "external_id": "90031",
+            "ncbi_id": 4890
           },
           {
             "id": 879,
             "name": "Sordariomycetes",
             "rank": "class",
             "taxon_db": "mycobank",
-            "external_id": "90350"
+            "external_id": "90350",
+            "ncbi_id": 147550
           },
           {
             "id": 899,
             "name": "Hypocreales",
             "rank": "order",
             "taxon_db": "mycobank",
-            "external_id": "90477"
+            "external_id": "90477",
+            "ncbi_id": 5125
           },
           {
             "id": 921,
             "name": "Nectriaceae",
             "rank": "family",
             "taxon_db": "mycobank",
-            "external_id": "81059"
+            "external_id": "81059",
+            "ncbi_id": 110618
           }
         ]
       }
     },
     "syntheses": [],
     "reassignments": [],
-    "external_ids": []
+    "external_ids": [],
+    "classyfire": {
+      "class": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000259",
+        "name": "Prenol lipids",
+        "chemont_id": "CHEMONTID:0000259",
+        "description": "Lipids synthesized from the five-carbon-unit precursors isopentenyl diphosphate and dimethylallyl diphosphate."
+      },
+      "smiles": "C[C@@]1(CO)CCC[C@]2(C)[C@H]3C[C@@]45OC4[C@H](O)[C@]4(CO)OC4[C@]5(O)CC3=CC[C@@H]12",
+      "kingdom": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000000",
+        "name": "Organic compounds",
+        "chemont_id": "CHEMONTID:0000000",
+        "description": "Compounds that contain at least one carbon atom, excluding isocyanide/cyanide and their non-hydrocarbyl derivatives, thiophosgene, carbon diselenide, carbon monosulfide, carbon disulfide, carbon subsulfide, carbon monoxide, carbon dioxide, Carbon suboxide, and dicarbon monoxide."
+      },
+      "inchikey": "InChIKey=OYLVOLOSQHRPLK-WRXMSMRBSA-N",
+      "subclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0001551",
+        "name": "Diterpenoids",
+        "chemont_id": "CHEMONTID:0001551",
+        "description": "Terpene compounds formed by four isoprene units."
+      },
+      "ancestors": [
+        "Alcohols and polyols",
+        "Chemical entities",
+        "Cyclic alcohols and derivatives",
+        "Dialkyl ethers",
+        "Diterpenoids",
+        "Epoxides",
+        "Ethers",
+        "Hydrocarbon derivatives",
+        "Lipids and lipid-like molecules",
+        "Organic compounds",
+        "Organic oxygen compounds",
+        "Organoheterocyclic compounds",
+        "Organooxygen compounds",
+        "Oxacyclic compounds",
+        "Oxepanes",
+        "Prenol lipids",
+        "Primary alcohols",
+        "Secondary alcohols",
+        "Tertiary alcohols"
+      ],
+      "superclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000012",
+        "name": "Lipids and lipid-like molecules",
+        "chemont_id": "CHEMONTID:0000012",
+        "description": "Fatty acids and their derivatives, and substances related biosynthetically or functionally to these compounds."
+      },
+      "description": "This compound belongs to the class of organic compounds known as diterpenoids. These are terpene compounds formed by four isoprene units.",
+      "substituents": [
+        "Diterpenoid",
+        "Oxepane",
+        "Tertiary alcohol",
+        "Cyclic alcohol",
+        "Secondary alcohol",
+        "Oxacycle",
+        "Organoheterocyclic compound",
+        "Ether",
+        "Oxirane",
+        "Dialkyl ether",
+        "Primary alcohol",
+        "Alcohol",
+        "Organooxygen compound",
+        "Organic oxygen compound",
+        "Hydrocarbon derivative",
+        "Aliphatic heteropolycyclic compound"
+      ],
+      "direct_parent": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0001551",
+        "name": "Diterpenoids",
+        "chemont_id": "CHEMONTID:0001551",
+        "description": "Terpene compounds formed by four isoprene units."
+      },
+      "intermediate_nodes": [],
+      "alternative_parents": [
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001729",
+          "name": "Oxepanes",
+          "chemont_id": "CHEMONTID:0001729",
+          "description": "Compounds containing an oxepane ring, which is a seven-member saturated aliphatic heterocycle with one oxygen and six carbon atoms."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001670",
+          "name": "Tertiary alcohols",
+          "chemont_id": "CHEMONTID:0001670",
+          "description": "Compounds in which a hydroxy group, -OH, is attached to a saturated carbon atom R3COH (R not H )."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001661",
+          "name": "Secondary alcohols",
+          "chemont_id": "CHEMONTID:0001661",
+          "description": "Compounds containing a secondary alcohol functional group, with the general structure HOC(R)(R') (R,R'=alkyl, aryl)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001292",
+          "name": "Cyclic alcohols and derivatives",
+          "chemont_id": "CHEMONTID:0001292",
+          "description": "Organic compounds containing an aliphatic ring substituted with at least one hydroxyl group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004140",
+          "name": "Oxacyclic compounds",
+          "chemont_id": "CHEMONTID:0004140",
+          "description": "Organic compounds containing an heterocycle with at least one oxygen atom linked to a ring carbon."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000159",
+          "name": "Epoxides",
+          "chemont_id": "CHEMONTID:0000159",
+          "description": "Compounds containing a cyclic ether with three ring atoms(one oxygen and two carbon atoms)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001167",
+          "name": "Dialkyl ethers",
+          "chemont_id": "CHEMONTID:0001167",
+          "description": "Organic compounds containing the dialkyl ether functional group, with the formula ROR', where R and R' are alkyl groups."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000286",
+          "name": "Primary alcohols",
+          "chemont_id": "CHEMONTID:0000286",
+          "description": "Compounds comprising the primary alcohol functional group, with the general structure RCOH (R=alkyl, aryl)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004150",
+          "name": "Hydrocarbon derivatives",
+          "chemont_id": "CHEMONTID:0004150",
+          "description": "Derivatives of hydrocarbons obtained by substituting one or more carbon atoms by an heteroatom. They contain at least one carbon atom and heteroatom."
+        }
+      ],
+      "molecular_framework": "Aliphatic heteropolycyclic compounds",
+      "external_descriptors": [],
+      "predicted_chebi_terms": [
+        "oxacycle (CHEBI:38104)",
+        "tertiary alcohol (CHEBI:26878)",
+        "secondary alcohol (CHEBI:35681)",
+        "organic hydroxy compound (CHEBI:33822)",
+        "epoxide (CHEBI:32955)",
+        "ether (CHEBI:25698)",
+        "primary alcohol (CHEBI:15734)",
+        "organic molecule (CHEBI:72695)",
+        "diterpenoid (CHEBI:23849)",
+        "chemical entity (CHEBI:24431)",
+        "organic heterocyclic compound (CHEBI:24532)",
+        "oxygen molecular entity (CHEBI:25806)",
+        "organic molecular entity (CHEBI:50860)",
+        "organooxygen compound (CHEBI:36963)",
+        "polyol (CHEBI:26191)",
+        "alcohol (CHEBI:30879)",
+        "lipid (CHEBI:18059)",
+        "ether lipid (CHEBI:64611)"
+      ],
+      "classification_version": "2.1",
+      "predicted_lipidmaps_terms": [
+        "C20 isoprenoids (diterpenes) (PR0104)",
+        "Prenol Lipids (PR)"
+      ]
+    },
+    "npclassifier": {
+      "isglycoside": false,
+      "class_results": ["Abeoabietane diterpenoids"],
+      "pathway_results": ["Terpenoids"],
+      "superclass_results": ["Diterpenoids"]
+    }
   },
   {
-    "npaid": 6,
-    "name": "Hibarimicin E",
+    "id": 6,
+    "npaid": "NPA000006",
+    "original_name": "Hibarimicin E",
     "mol_formula": "C77H100O34",
-    "inchikey": "QETQXVGQENIMIR-XYHXNMECSA-N",
-    "smiles": "CCCC1(C(C(C(C2C1(C(=O)C3=C(C2)C=C4C(=C3O)C(=C(C(=C4OC)OC)C5=C(C(=O)C6=C(C5=O)C(=C7C(=C6O)C8C9C(C(C(C(C9(C7=O)O)(O8)CCC)O[C@H]1CCC([C@H](O1)C)O)O)O[C@H]1C[C@H]([C@H]([C@@H](O1)C)O)O)O)OC)O)O)O[C@H]1C[C@H]([C@H]([C@@H](O1)C)O)O)O)O[C@H]1CCC([C@H](O1)C)O[C@H]1CC[C@]([C@@H](O1)C)(C(=O)C)O)O",
-    "inchi": "InChI=1S/C77H100O34/c1-12-19-74(95)71(109-40-17-15-38(27(4)102-40)106-41-18-21-73(94,30(7)78)31(8)105-41)61(90)64(107-42-24-36(80)53(82)28(5)103-42)34-23-32-22-33-45(55(84)44(32)69(92)76(34,74)96)56(85)49(67(100-11)63(33)98-9)48-57(86)46-47(60(89)66(48)99-10)58(87)50-51(59(46)88)70(93)77(97)52-65(50)111-75(77,20-13-2)72(110-39-16-14-35(79)26(3)101-39)62(91)68(52)108-43-25-37(81)54(83)29(6)104-43/h22,26-29,31,34-43,52-54,61-62,64-65,68,71-72,79-85,87-88,90-91,94-97H,12-21,23-25H2,1-11H3/t26-,27-,28+,29+,31+,34?,35?,36-,37-,38?,39+,40+,41+,42+,43+,52?,53+,54+,61?,62?,64?,65?,68?,71?,72?,73-,74?,75?,76?,77?/m1/s1",
     "mol_weight": 1569.613,
     "exact_mass": 1568.6096,
-    "m_plus_h": 1569.6169,
-    "m_plus_na": 1591.5988,
+    "inchikey": "QETQXVGQENIMIR-XYHXNMECSA-N",
+    "smiles": "CCCC1(C(C(C(C2C1(C(=O)C3=C(C2)C=C4C(=C3O)C(=C(C(=C4OC)OC)C5=C(C(=O)C6=C(C5=O)C(=C7C(=C6O)C8C9C(C(C(C(C9(C7=O)O)(O8)CCC)O[C@H]1CCC([C@H](O1)C)O)O)O[C@H]1C[C@H]([C@H]([C@@H](O1)C)O)O)O)OC)O)O)O[C@H]1C[C@H]([C@H]([C@@H](O1)C)O)O)O)O[C@H]1CCC([C@H](O1)C)O[C@H]1CC[C@]([C@@H](O1)C)(C(=O)C)O)O",
     "cluster_id": 6,
     "node_id": 6,
+    "synonyms": [],
+    "inchi": "InChI=1S/C77H100O34/c1-12-19-74(95)71(109-40-17-15-38(27(4)102-40)106-41-18-21-73(94,30(7)78)31(8)105-41)61(90)64(107-42-24-36(80)53(82)28(5)103-42)34-23-32-22-33-45(55(84)44(32)69(92)76(34,74)96)56(85)49(67(100-11)63(33)98-9)48-57(86)46-47(60(89)66(48)99-10)58(87)50-51(59(46)88)70(93)77(97)52-65(50)111-75(77,20-13-2)72(110-39-16-14-35(79)26(3)101-39)62(91)68(52)108-43-25-37(81)54(83)29(6)104-43/h22,26-29,31,34-43,52-54,61-62,64-65,68,71-72,79-85,87-88,90-91,94-97H,12-21,23-25H2,1-11H3/t26-,27-,28+,29+,31+,34?,35?,36-,37-,38?,39+,40+,41+,42+,43+,52?,53+,54+,61?,62?,64?,65?,68?,71?,72?,73-,74?,75?,76?,77?/m1/s1",
+    "m_plus_h": 1569.6169,
+    "m_plus_na": 1591.5988,
     "origin_reference": {
       "doi": "10.7164/antibiotics.55.270",
       "pmid": 12014442,
@@ -450,62 +1563,388 @@
         "rank": "genus",
         "taxon_db": "lpsn",
         "external_id": "516081",
+        "ncbi_id": 2005,
         "ancestors": [
           {
             "id": 1,
             "name": "Bacteria",
             "rank": "domain",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 2
           },
           {
             "id": 203,
             "name": "Actinobacteria",
             "rank": "phylum",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 201174
           },
           {
             "id": 204,
             "name": "Actinobacteria",
             "rank": "class",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": null
           },
           {
             "id": 205,
             "name": "Streptosporangiales",
             "rank": "order",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 85012
           },
           {
             "id": 206,
             "name": "Streptosporangiaceae",
             "rank": "family",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 2004
           }
         ]
       }
     },
     "syntheses": [],
     "reassignments": [],
-    "external_ids": []
+    "external_ids": [],
+    "classyfire": {
+      "class": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000018",
+        "name": "Anthracenes",
+        "chemont_id": "CHEMONTID:0000018",
+        "description": "Organic compounds containing a system of three linearly fused benzene rings."
+      },
+      "smiles": "CCCC12OC3C(C(O[C@H]4C[C@@H](O)[C@@H](O)[C@H](C)O4)C(O)C1O[C@H]1CCC(O)[C@@H](C)O1)C2(O)C(=O)c1c(O)c2C(=O)C(=C(OC)C(=O)c2c(O)c31)c1c(O)c2c(O)c3C(=O)C4(O)C(Cc3cc2c(OC)c1OC)C(O[C@H]1C[C@@H](O)[C@@H](O)[C@H](C)O1)C(O)C(O[C@H]1CCC(O[C@H]2CC[C@](O)([C@H](C)O2)C(C)=O)[C@@H](C)O1)C4(O)CCC",
+      "kingdom": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000000",
+        "name": "Organic compounds",
+        "chemont_id": "CHEMONTID:0000000",
+        "description": "Compounds that contain at least one carbon atom, excluding isocyanide/cyanide and their non-hydrocarbyl derivatives, thiophosgene, carbon diselenide, carbon monosulfide, carbon disulfide, carbon subsulfide, carbon monoxide, carbon dioxide, Carbon suboxide, and dicarbon monoxide."
+      },
+      "inchikey": "InChIKey=QETQXVGQENIMIR-XYHXNMECSA-N",
+      "subclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000151",
+        "name": "Anthraquinones",
+        "chemont_id": "CHEMONTID:0000151",
+        "description": "Organic compounds containing either anthracene-9,10-quinone, 1,4-anthraquinone, or 1,2-anthraquinone."
+      },
+      "ancestors": [
+        "1-hydroxy-4-unsubstituted benzenoids",
+        "Acetals",
+        "Alcohols and polyols",
+        "Alkyl aryl ethers",
+        "Alpha-hydroxy ketones",
+        "Anisoles",
+        "Anthracenes",
+        "Anthraquinones",
+        "Aryl alkyl ketones",
+        "Aryl ketones",
+        "Benzenoids",
+        "Carbohydrates and carbohydrate conjugates",
+        "Carbonyl compounds",
+        "Chemical entities",
+        "Cyclic alcohols and derivatives",
+        "Cyclic ketones",
+        "Cyclitols and derivatives",
+        "Dialkyl ethers",
+        "Ethers",
+        "Glycosyl compounds",
+        "Hydrocarbon derivatives",
+        "Ketones",
+        "Monosaccharides",
+        "Naphthalenes",
+        "Naphthols and derivatives",
+        "O-glycosyl compounds",
+        "Organic acids and derivatives",
+        "Organic compounds",
+        "Organic oxides",
+        "Organic oxygen compounds",
+        "Organoheterocyclic compounds",
+        "Organooxygen compounds",
+        "Oxacyclic compounds",
+        "Oxanes",
+        "Oxepanes",
+        "Phenol ethers",
+        "Phenols",
+        "Polyols",
+        "Quinones",
+        "Secondary alcohols",
+        "Tertiary alcohols",
+        "Tetrahydrofurans",
+        "Tetralins",
+        "Vinylogous acids",
+        "Vinylogous esters"
+      ],
+      "superclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0002448",
+        "name": "Benzenoids",
+        "chemont_id": "CHEMONTID:0002448",
+        "description": "Aromatic compounds containing one or more benzene rings."
+      },
+      "description": "This compound belongs to the class of organic compounds known as anthraquinones. These are organic compounds containing either anthracene-9,10-quinone, 1,4-anthraquinone, or 1,2-anthraquinone.",
+      "substituents": [
+        "1,4-anthraquinone",
+        "Anthraquinone",
+        "Glycosyl compound",
+        "O-glycosyl compound",
+        "1-naphthol",
+        "Tetralin",
+        "Naphthalene",
+        "Quinone",
+        "Aryl ketone",
+        "Aryl alkyl ketone",
+        "Anisole",
+        "Alkyl aryl ether",
+        "1-hydroxy-4-unsubstituted benzenoid",
+        "Oxepane",
+        "Cyclitol or derivatives",
+        "Monosaccharide",
+        "Oxane",
+        "Cyclic alcohol",
+        "Tertiary alcohol",
+        "Tetrahydrofuran",
+        "Vinylogous acid",
+        "Vinylogous ester",
+        "Alpha-hydroxy ketone",
+        "Secondary alcohol",
+        "Ketone",
+        "Ether",
+        "Dialkyl ether",
+        "Acetal",
+        "Organoheterocyclic compound",
+        "Polyol",
+        "Oxacycle",
+        "Organic oxygen compound",
+        "Carbonyl group",
+        "Organooxygen compound",
+        "Hydrocarbon derivative",
+        "Organic oxide",
+        "Alcohol",
+        "Aromatic heteropolycyclic compound"
+      ],
+      "direct_parent": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000151",
+        "name": "Anthraquinones",
+        "chemont_id": "CHEMONTID:0000151",
+        "description": "Organic compounds containing either anthracene-9,10-quinone, 1,4-anthraquinone, or 1,2-anthraquinone."
+      },
+      "intermediate_nodes": [],
+      "alternative_parents": [
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002441",
+          "name": "Naphthols and derivatives",
+          "chemont_id": "CHEMONTID:0002441",
+          "description": "Naphthalene derivatives carrying one or more hydroxyl (-OH) groups at any ring position."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002207",
+          "name": "O-glycosyl compounds",
+          "chemont_id": "CHEMONTID:0002207",
+          "description": "Glycoside in which a sugar group is bonded through one carbon to another group via a O-glycosidic bond."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000048",
+          "name": "Tetralins",
+          "chemont_id": "CHEMONTID:0000048",
+          "description": "Polycyclic aromatic compounds containing a tetralin moiety, which consists of a benzene fused to a cyclohexane."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003671",
+          "name": "Aryl alkyl ketones",
+          "chemont_id": "CHEMONTID:0003671",
+          "description": "Ketones have the generic structure RC(=O)R', where R = aryl group and R'=alkyl group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000138",
+          "name": "Anisoles",
+          "chemont_id": "CHEMONTID:0000138",
+          "description": "Organic compounds containing a methoxybenzene or a derivative thereof."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002495",
+          "name": "Quinones",
+          "chemont_id": "CHEMONTID:0002495",
+          "description": "Compounds having a fully conjugated cyclic dione structure, such as that of benzoquinones, derived from aromatic compounds by conversion of an even number of number of -CH= groups into -C(=O)- groups with any necessary rearrangement of double bonds (polycyclic and heterocyclic analogues are included)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001729",
+          "name": "Oxepanes",
+          "chemont_id": "CHEMONTID:0001729",
+          "description": "Compounds containing an oxepane ring, which is a seven-member saturated aliphatic heterocycle with one oxygen and six carbon atoms."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000128",
+          "name": "Alkyl aryl ethers",
+          "chemont_id": "CHEMONTID:0000128",
+          "description": "Organic compounds containing the alkyl aryl ether functional group with the generic formula R-O-R' , where R is an alkyl group and R' is an aryl group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004647",
+          "name": "1-hydroxy-4-unsubstituted benzenoids",
+          "chemont_id": "CHEMONTID:0004647",
+          "description": "Phenols that are unsubstituted at the 4-position."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002012",
+          "name": "Oxanes",
+          "chemont_id": "CHEMONTID:0002012",
+          "description": "Compounds containing an oxane (tetrahydropyran) ring, which is a six-member saturated aliphatic heterocycle with one oxygen atom and five carbon atoms."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002509",
+          "name": "Cyclitols and derivatives",
+          "chemont_id": "CHEMONTID:0002509",
+          "description": "Compounds containing a cycloalkane moiety with one hydroxyl group on each of three or more ring atoms. These of also include derivatives where the hydrogen atom of one or more of the hydroxyl groups is replaced with another atom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001540",
+          "name": "Monosaccharides",
+          "chemont_id": "CHEMONTID:0001540",
+          "description": "Compounds containing one carbohydrate unit not glycosidically linked to another such unit, and no set of two or more glycosidically linked carbohydrate units. Monosaccharides have the general formula CnH2nOn."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002912",
+          "name": "Alpha-hydroxy ketones",
+          "chemont_id": "CHEMONTID:0002912",
+          "description": "Organic compounds containing a carboxylic acid, and an amine group attached to the alpha carbon atom, relative to the C=O group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001670",
+          "name": "Tertiary alcohols",
+          "chemont_id": "CHEMONTID:0001670",
+          "description": "Compounds in which a hydroxy group, -OH, is attached to a saturated carbon atom R3COH (R not H )."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002648",
+          "name": "Tetrahydrofurans",
+          "chemont_id": "CHEMONTID:0002648",
+          "description": "Heterocyclic compounds containing a saturated, aliphatic, five-membered ring where a carbon is replaced by an oxygen."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003889",
+          "name": "Vinylogous acids",
+          "chemont_id": "CHEMONTID:0003889",
+          "description": "Organic compounds containing a hydroxyl group, which is indirectly attached to a carbonyl via an intervening vinyl (>C=C<) moiety."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003891",
+          "name": "Vinylogous esters",
+          "chemont_id": "CHEMONTID:0003891",
+          "description": "Organic compounds containing an ester group, which is indirectly attached to a carbonyl via an intervening vinyl (>C=C<) moiety."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001661",
+          "name": "Secondary alcohols",
+          "chemont_id": "CHEMONTID:0001661",
+          "description": "Compounds containing a secondary alcohol functional group, with the general structure HOC(R)(R') (R,R'=alkyl, aryl)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004140",
+          "name": "Oxacyclic compounds",
+          "chemont_id": "CHEMONTID:0004140",
+          "description": "Organic compounds containing an heterocycle with at least one oxygen atom linked to a ring carbon."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002286",
+          "name": "Polyols",
+          "chemont_id": "CHEMONTID:0002286",
+          "description": "Organic compounds containing more than one hydroxyl groups."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001656",
+          "name": "Acetals",
+          "chemont_id": "CHEMONTID:0001656",
+          "description": "Compounds having the structure R2C(OR')2 ( R' not Hydrogen) and thus diethers of geminal diols. Originally, the term was confined to derivatives of aldehydes (one R = H), but it now applies equally to derivatives of ketones (neither R = H ). Mixed acetals have different R' groups."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001167",
+          "name": "Dialkyl ethers",
+          "chemont_id": "CHEMONTID:0001167",
+          "description": "Organic compounds containing the dialkyl ether functional group, with the formula ROR', where R and R' are alkyl groups."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004150",
+          "name": "Hydrocarbon derivatives",
+          "chemont_id": "CHEMONTID:0004150",
+          "description": "Derivatives of hydrocarbons obtained by substituting one or more carbon atoms by an heteroatom. They contain at least one carbon atom and heteroatom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003940",
+          "name": "Organic oxides",
+          "chemont_id": "CHEMONTID:0003940",
+          "description": "Organic compounds containing an oxide group."
+        }
+      ],
+      "molecular_framework": "Aromatic heteropolycyclic compounds",
+      "external_descriptors": [],
+      "predicted_chebi_terms": [
+        "naphthols (CHEBI:25392)",
+        "glycoside (CHEBI:24400)",
+        "tetralins (CHEBI:36786)",
+        "aromatic ketone (CHEBI:76224)",
+        "methoxybenzene (CHEBI:51683)",
+        "quinone (CHEBI:36141)",
+        "oxacycle (CHEBI:38104)",
+        "aromatic ether (CHEBI:35618)",
+        "phenols (CHEBI:33853)",
+        "oxanes (CHEBI:46942)",
+        "organooxygen compound (CHEBI:36963)",
+        "monosaccharide (CHEBI:35381)",
+        "ketone (CHEBI:17087)",
+        "tertiary alcohol (CHEBI:26878)",
+        "oxolanes (CHEBI:26912)",
+        "enone (CHEBI:51689)",
+        "enol (CHEBI:33823)",
+        "enol ether (CHEBI:47985)",
+        "secondary alcohol (CHEBI:35681)",
+        "polyol (CHEBI:26191)",
+        "acetal (CHEBI:59769)",
+        "ether (CHEBI:25698)",
+        "organic molecule (CHEBI:72695)",
+        "organic oxide (CHEBI:25701)",
+        "anthraquinone (CHEBI:22580)",
+        "chemical entity (CHEBI:24431)",
+        "benzenoid aromatic compound (CHEBI:33836)",
+        "naphthalenes (CHEBI:25477)",
+        "oxygen molecular entity (CHEBI:25806)",
+        "organic molecular entity (CHEBI:50860)",
+        "carbohydrates and carbohydrate derivatives (CHEBI:78616)",
+        "carbonyl compound (CHEBI:36586)",
+        "cyclic ketone (CHEBI:3992)",
+        "organic heterocyclic compound (CHEBI:24532)",
+        "organic hydroxy compound (CHEBI:33822)",
+        "alcohol (CHEBI:30879)",
+        "anthracenes (CHEBI:46955)"
+      ],
+      "classification_version": "2.1",
+      "predicted_lipidmaps_terms": []
+    },
+    "npclassifier": {
+      "isglycoside": true,
+      "class_results": ["Tetracyclines"],
+      "pathway_results": ["Polyketides"],
+      "superclass_results": ["Polycyclic aromatic polyketides"]
+    }
   },
   {
-    "npaid": 7,
-    "name": "Chaetoxanthone A",
+    "id": 7,
+    "npaid": "NPA000007",
+    "original_name": "Chaetoxanthone A",
     "mol_formula": "C20H18O7",
-    "inchikey": "PYEDKAHYOPGAKC-PDXJJUDESA-N",
-    "smiles": "C[C@]12C[C@@H](C[C@H](O1)C3=C(O2)C=C4C(=C3O)C(=O)C5=C(O4)C=CC=C5OC)O",
-    "inchi": "InChI=1S/C20H18O7/c1-20-8-9(21)6-13(26-20)16-14(27-20)7-12-17(19(16)23)18(22)15-10(24-2)4-3-5-11(15)25-12/h3-5,7,9,13,21,23H,6,8H2,1-2H3/t9-,13+,20+/m1/s1",
     "mol_weight": 370.357,
     "exact_mass": 370.1053,
-    "m_plus_h": 371.1126,
-    "m_plus_na": 393.0945,
+    "inchikey": "PYEDKAHYOPGAKC-PDXJJUDESA-N",
+    "smiles": "C[C@]12C[C@@H](C[C@H](O1)C3=C(O2)C=C4C(=C3O)C(=O)C5=C(O4)C=CC=C5OC)O",
     "cluster_id": 7,
     "node_id": 7,
+    "synonyms": [],
+    "inchi": "InChI=1S/C20H18O7/c1-20-8-9(21)6-13(26-20)16-14(27-20)7-12-17(19(16)23)18(22)15-10(24-2)4-3-5-11(15)25-12/h3-5,7,9,13,21,23H,6,8H2,1-2H3/t9-,13+,20+/m1/s1",
+    "m_plus_h": 371.1126,
+    "m_plus_na": 393.0945,
     "origin_reference": {
       "doi": "10.1021/np800294q",
       "pmid": 18683985,
@@ -528,69 +1967,331 @@
         "rank": "genus",
         "taxon_db": "mycobank",
         "external_id": "953",
+        "ncbi_id": 5149,
         "ancestors": [
           {
             "id": 599,
             "name": "Eukarya",
             "rank": "domain",
             "taxon_db": "mycobank",
-            "external_id": null
+            "external_id": "0",
+            "ncbi_id": 2759
           },
           {
             "id": 600,
             "name": "Fungi",
             "rank": "kingdom",
             "taxon_db": "mycobank",
-            "external_id": "90157"
+            "external_id": "90157",
+            "ncbi_id": 4751
           },
           {
             "id": 617,
             "name": "Ascomycota",
             "rank": "phylum",
             "taxon_db": "mycobank",
-            "external_id": "90031"
+            "external_id": "90031",
+            "ncbi_id": 4890
           },
           {
             "id": 879,
             "name": "Sordariomycetes",
             "rank": "class",
             "taxon_db": "mycobank",
-            "external_id": "90350"
+            "external_id": "90350",
+            "ncbi_id": 147550
           },
           {
             "id": 1050,
             "name": "Sordariales",
             "rank": "order",
             "taxon_db": "mycobank",
-            "external_id": "90499"
+            "external_id": "90499",
+            "ncbi_id": 5139
           },
           {
             "id": 1056,
             "name": "Chaetomiaceae",
             "rank": "family",
             "taxon_db": "mycobank",
-            "external_id": "80582"
+            "external_id": "80582",
+            "ncbi_id": 35718
           }
         ]
       }
     },
     "syntheses": [],
     "reassignments": [],
-    "external_ids": []
+    "external_ids": [],
+    "classyfire": {
+      "class": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000123",
+        "name": "Benzopyrans",
+        "chemont_id": "CHEMONTID:0000123",
+        "description": "Organic compounds containing a benzene ring fused to a pyran ring. Pyran a six-membered heterocyclic, non-aromatic ring, made up of five carbon atoms and one oxygen atom and containing two double bonds."
+      },
+      "smiles": "COC1=CC=CC2=C1C(=O)C1=C(O)C3=C(O[C@@]4(C)C[C@H](O)C[C@@H]3O4)C=C1O2",
+      "kingdom": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000000",
+        "name": "Organic compounds",
+        "chemont_id": "CHEMONTID:0000000",
+        "description": "Compounds that contain at least one carbon atom, excluding isocyanide/cyanide and their non-hydrocarbyl derivatives, thiophosgene, carbon diselenide, carbon monosulfide, carbon disulfide, carbon subsulfide, carbon monoxide, carbon dioxide, Carbon suboxide, and dicarbon monoxide."
+      },
+      "inchikey": "InChIKey=PYEDKAHYOPGAKC-PDXJJUDESA-N",
+      "subclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0003410",
+        "name": "1-benzopyrans",
+        "chemont_id": "CHEMONTID:0003410",
+        "description": "Organic aromatic compounds that 1-benzopyran, a bicyclic compound made up of a benzene ring fused to a pyran, so that the oxygen atom is at the 1-position."
+      },
+      "ancestors": [
+        "1-benzopyrans",
+        "1-hydroxy-4-unsubstituted benzenoids",
+        "Acetals",
+        "Alcohols and polyols",
+        "Alkyl aryl ethers",
+        "Anisoles",
+        "Benzenoids",
+        "Benzopyrans",
+        "Chemical entities",
+        "Chromones",
+        "Dibenzopyrans",
+        "Ethers",
+        "Heteroaromatic compounds",
+        "Hydrocarbon derivatives",
+        "Ketals",
+        "Organic acids and derivatives",
+        "Organic compounds",
+        "Organic oxides",
+        "Organic oxygen compounds",
+        "Organoheterocyclic compounds",
+        "Organooxygen compounds",
+        "Oxacyclic compounds",
+        "Oxanes",
+        "Phenol ethers",
+        "Phenols",
+        "Pyranones and derivatives",
+        "Pyrans",
+        "Secondary alcohols",
+        "Vinylogous acids",
+        "Vinylogous esters",
+        "Xanthenes",
+        "Xanthones"
+      ],
+      "superclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000002",
+        "name": "Organoheterocyclic compounds",
+        "chemont_id": "CHEMONTID:0000002",
+        "description": "Compounds containing a ring with least one carbon atom and one non-carbon atom."
+      },
+      "description": "This compound belongs to the class of organic compounds known as xanthones. These are polycyclic aromatic compounds containing a xanthene moiety conjugated to a ketone group at carbon 9. Xanthene is a tricyclic compound made up of two benzene rings linearly fused to each other through a pyran ring.",
+      "substituents": [
+        "Xanthone",
+        "Chromone",
+        "Anisole",
+        "1-hydroxy-4-unsubstituted benzenoid",
+        "Alkyl aryl ether",
+        "Ketal",
+        "Pyranone",
+        "Oxane",
+        "Benzenoid",
+        "Pyran",
+        "Heteroaromatic compound",
+        "Vinylogous ester",
+        "Vinylogous acid",
+        "Secondary alcohol",
+        "Oxacycle",
+        "Ether",
+        "Acetal",
+        "Organooxygen compound",
+        "Hydrocarbon derivative",
+        "Organic oxide",
+        "Organic oxygen compound",
+        "Alcohol",
+        "Aromatic heteropolycyclic compound"
+      ],
+      "direct_parent": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000204",
+        "name": "Xanthones",
+        "chemont_id": "CHEMONTID:0000204",
+        "description": "Polycyclic aromatic compounds containing a xanthene moiety conjugated to a ketone group at carbon 9. Xanthene is a tricyclic compound made up of two benzene rings linearly fused to each other through a pyran ring."
+      },
+      "intermediate_nodes": [
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002817",
+          "name": "Dibenzopyrans",
+          "chemont_id": "CHEMONTID:0002817",
+          "description": "Organic heterocyclic compounds with a structure containing a dibenzopyran moiety, made up of two benzene rings fused to a central pyran ring."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000200",
+          "name": "Xanthenes",
+          "chemont_id": "CHEMONTID:0000200",
+          "description": "Polycyclic aromatic compounds containing a xanthene moiety, which consists of two benzene rings joined to each other by a pyran ring."
+        }
+      ],
+      "alternative_parents": [
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000144",
+          "name": "Chromones",
+          "chemont_id": "CHEMONTID:0000144",
+          "description": "Compounds containing a benzopyran-4-one moiety."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000138",
+          "name": "Anisoles",
+          "chemont_id": "CHEMONTID:0000138",
+          "description": "Organic compounds containing a methoxybenzene or a derivative thereof."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000481",
+          "name": "Pyranones and derivatives",
+          "chemont_id": "CHEMONTID:0000481",
+          "description": "Compounds containing a pyran ring which bears a ketone."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004472",
+          "name": "Ketals",
+          "chemont_id": "CHEMONTID:0004472",
+          "description": "Acetals derived from ketones by replacement of the oxo group by two hydrocarbyloxy groups R2C(OR)2 ( R not Hydrogen ). This term, once abandoned, has been reinstated as a subclass of acetals."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000128",
+          "name": "Alkyl aryl ethers",
+          "chemont_id": "CHEMONTID:0000128",
+          "description": "Organic compounds containing the alkyl aryl ether functional group with the generic formula R-O-R' , where R is an alkyl group and R' is an aryl group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004647",
+          "name": "1-hydroxy-4-unsubstituted benzenoids",
+          "chemont_id": "CHEMONTID:0004647",
+          "description": "Phenols that are unsubstituted at the 4-position."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002012",
+          "name": "Oxanes",
+          "chemont_id": "CHEMONTID:0002012",
+          "description": "Compounds containing an oxane (tetrahydropyran) ring, which is a six-member saturated aliphatic heterocycle with one oxygen atom and five carbon atoms."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003891",
+          "name": "Vinylogous esters",
+          "chemont_id": "CHEMONTID:0003891",
+          "description": "Organic compounds containing an ester group, which is indirectly attached to a carbonyl via an intervening vinyl (>C=C<) moiety."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003889",
+          "name": "Vinylogous acids",
+          "chemont_id": "CHEMONTID:0003889",
+          "description": "Organic compounds containing a hydroxyl group, which is indirectly attached to a carbonyl via an intervening vinyl (>C=C<) moiety."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004144",
+          "name": "Heteroaromatic compounds",
+          "chemont_id": "CHEMONTID:0004144",
+          "description": "Compounds containing an aromatic ring where a carbon atom is linked to an hetero atom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001661",
+          "name": "Secondary alcohols",
+          "chemont_id": "CHEMONTID:0001661",
+          "description": "Compounds containing a secondary alcohol functional group, with the general structure HOC(R)(R') (R,R'=alkyl, aryl)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004140",
+          "name": "Oxacyclic compounds",
+          "chemont_id": "CHEMONTID:0004140",
+          "description": "Organic compounds containing an heterocycle with at least one oxygen atom linked to a ring carbon."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003940",
+          "name": "Organic oxides",
+          "chemont_id": "CHEMONTID:0003940",
+          "description": "Organic compounds containing an oxide group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004150",
+          "name": "Hydrocarbon derivatives",
+          "chemont_id": "CHEMONTID:0004150",
+          "description": "Derivatives of hydrocarbons obtained by substituting one or more carbon atoms by an heteroatom. They contain at least one carbon atom and heteroatom."
+        }
+      ],
+      "molecular_framework": "Aromatic heteropolycyclic compounds",
+      "external_descriptors": [
+        {
+          "source": "CHEBI",
+          "source_id": "CHEBI:65611",
+          "annotations": [
+            "cyclic ketone",
+            "phenols",
+            "organic heteropentacyclic compound",
+            "bridged compound",
+            "cyclic ketal"
+          ]
+        }
+      ],
+      "predicted_chebi_terms": [
+        "chromones (CHEBI:23238)",
+        "methoxybenzene (CHEBI:51683)",
+        "pyranone (CHEBI:37963)",
+        "ketal (CHEBI:59777)",
+        "aromatic ether (CHEBI:35618)",
+        "phenols (CHEBI:33853)",
+        "oxanes (CHEBI:46942)",
+        "enone (CHEBI:51689)",
+        "enol ether (CHEBI:47985)",
+        "enol (CHEBI:33823)",
+        "organic aromatic compound (CHEBI:33659)",
+        "secondary alcohol (CHEBI:35681)",
+        "oxacycle (CHEBI:38104)",
+        "organic oxide (CHEBI:25701)",
+        "organic molecule (CHEBI:72695)",
+        "xanthones (CHEBI:51149)",
+        "chemical entity (CHEBI:24431)",
+        "organic heterocyclic compound (CHEBI:24532)",
+        "benzopyran (CHEBI:22727)",
+        "1-benzopyran (CHEBI:38443)",
+        "benzenoid aromatic compound (CHEBI:33836)",
+        "pyrans (CHEBI:26407)",
+        "oxygen molecular entity (CHEBI:25806)",
+        "organic molecular entity (CHEBI:50860)",
+        "organooxygen compound (CHEBI:36963)",
+        "ether (CHEBI:25698)",
+        "acetal (CHEBI:59769)",
+        "polyol (CHEBI:26191)",
+        "organic hydroxy compound (CHEBI:33822)",
+        "alcohol (CHEBI:30879)",
+        "dibenzopyran (CHEBI:39203)",
+        "xanthenes (CHEBI:38835)"
+      ],
+      "classification_version": "2.1",
+      "predicted_lipidmaps_terms": [
+        "Dibenzofurans, griseofulvins, dibenzopyrans and xanthones (PK1306)",
+        "Benzopyranoids (PK1311)"
+      ]
+    },
+    "npclassifier": {
+      "isglycoside": false,
+      "class_results": ["Methyl xanthones"],
+      "pathway_results": ["Polyketides"],
+      "superclass_results": ["Xanthones"]
+    }
   },
   {
-    "npaid": 8,
-    "name": "Dihydroxydione 13",
+    "id": 8,
+    "npaid": "NPA000008",
+    "original_name": "Dihydroxydione 13",
     "mol_formula": "C23H35NO4S",
-    "inchikey": "MAZMBUSHGWINCC-RHTYRPEXSA-N",
-    "smiles": "CCC(=O)[C@H](C)[C@H]([C@@H](C)C(=O)CC/C(=C\\CC(/C(=C/C1=CSC(=N1)C)/C)O)/C)O",
-    "inchi": "InChI=1S/C23H35NO4S/c1-7-20(25)16(4)23(28)17(5)22(27)11-9-14(2)8-10-21(26)15(3)12-19-13-29-18(6)24-19/h8,12-13,16-17,21,23,26,28H,7,9-11H2,1-6H3/b14-8-,15-12+/t16-,17-,21?,23+/m0/s1",
     "mol_weight": 421.603,
     "exact_mass": 421.2287,
-    "m_plus_h": 422.236,
-    "m_plus_na": 444.2179,
+    "inchikey": "MAZMBUSHGWINCC-RHTYRPEXSA-N",
+    "smiles": "CCC(=O)[C@H](C)[C@H]([C@@H](C)C(=O)CC/C(=C\\CC(/C(=C/C1=CSC(=N1)C)/C)O)/C)O",
     "cluster_id": 8,
     "node_id": 8,
+    "synonyms": [],
+    "inchi": "InChI=1S/C23H35NO4S/c1-7-20(25)16(4)23(28)17(5)22(27)11-9-14(2)8-10-21(26)15(3)12-19-13-29-18(6)24-19/h8,12-13,16-17,21,23,26,28H,7,9-11H2,1-6H3/b14-8-,15-12+/t16-,17-,21?,23+/m0/s1",
+    "m_plus_h": 422.236,
+    "m_plus_na": 444.2179,
     "origin_reference": {
       "doi": "10.1021/np030218+",
       "pmid": 14575429,
@@ -613,62 +2314,249 @@
         "rank": "genus",
         "taxon_db": "lpsn",
         "external_id": "516145",
+        "ncbi_id": 32,
         "ancestors": [
           {
             "id": 1,
             "name": "Bacteria",
             "rank": "domain",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 2
           },
           {
             "id": 2,
             "name": "Proteobacteria",
             "rank": "phylum",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 1224
           },
           {
             "id": 168,
             "name": "Deltaproteobacteria",
             "rank": "class",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 28221
           },
           {
             "id": 169,
             "name": "Myxococcales",
             "rank": "order",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 29
           },
           {
             "id": 183,
             "name": "Myxococcaceae",
             "rank": "family",
             "taxon_db": "lpsn",
-            "external_id": "0"
+            "external_id": "0",
+            "ncbi_id": 31
           }
         ]
       }
     },
     "syntheses": [],
     "reassignments": [],
-    "external_ids": []
+    "external_ids": [],
+    "classyfire": {
+      "class": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000259",
+        "name": "Prenol lipids",
+        "chemont_id": "CHEMONTID:0000259",
+        "description": "Lipids synthesized from the five-carbon-unit precursors isopentenyl diphosphate and dimethylallyl diphosphate."
+      },
+      "smiles": "CCC(=O)[C@H](C)[C@@H](O)[C@@H](C)C(=O)CC\\C(C)=C/CC(O)C(\\C)=C\\c1csc(C)n1",
+      "kingdom": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000000",
+        "name": "Organic compounds",
+        "chemont_id": "CHEMONTID:0000000",
+        "description": "Compounds that contain at least one carbon atom, excluding isocyanide/cyanide and their non-hydrocarbyl derivatives, thiophosgene, carbon diselenide, carbon monosulfide, carbon disulfide, carbon subsulfide, carbon monoxide, carbon dioxide, Carbon suboxide, and dicarbon monoxide."
+      },
+      "inchikey": "InChIKey=MAZMBUSHGWINCC-RHTYRPEXSA-N",
+      "subclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0001550",
+        "name": "Sesquiterpenoids",
+        "chemont_id": "CHEMONTID:0001550",
+        "description": "Terpenes with three consecutive isoprene units."
+      },
+      "ancestors": [
+        "2,4-disubstituted thiazoles",
+        "Alcohols and polyols",
+        "Azacyclic compounds",
+        "Azoles",
+        "Beta-hydroxy ketones",
+        "Carbonyl compounds",
+        "Chemical entities",
+        "Heteroaromatic compounds",
+        "Hydrocarbon derivatives",
+        "Ketones",
+        "Lipids and lipid-like molecules",
+        "Organic compounds",
+        "Organic nitrogen compounds",
+        "Organic oxides",
+        "Organic oxygen compounds",
+        "Organoheterocyclic compounds",
+        "Organonitrogen compounds",
+        "Organooxygen compounds",
+        "Organopnictogen compounds",
+        "Prenol lipids",
+        "Secondary alcohols",
+        "Sesquiterpenoids",
+        "Thiazoles"
+      ],
+      "superclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000012",
+        "name": "Lipids and lipid-like molecules",
+        "chemont_id": "CHEMONTID:0000012",
+        "description": "Fatty acids and their derivatives, and substances related biosynthetically or functionally to these compounds."
+      },
+      "description": "This compound belongs to the class of organic compounds known as sesquiterpenoids. These are terpenes with three consecutive isoprene units.",
+      "substituents": [
+        "Sesquiterpenoid",
+        "Farsesane sesquiterpenoid",
+        "2,4-disubstituted 1,3-thiazole",
+        "Beta-hydroxy ketone",
+        "Azole",
+        "Thiazole",
+        "Heteroaromatic compound",
+        "Secondary alcohol",
+        "Ketone",
+        "Organoheterocyclic compound",
+        "Azacycle",
+        "Alcohol",
+        "Organic oxide",
+        "Organopnictogen compound",
+        "Organooxygen compound",
+        "Organonitrogen compound",
+        "Carbonyl group",
+        "Organic oxygen compound",
+        "Organic nitrogen compound",
+        "Hydrocarbon derivative",
+        "Aromatic heteromonocyclic compound"
+      ],
+      "direct_parent": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0001550",
+        "name": "Sesquiterpenoids",
+        "chemont_id": "CHEMONTID:0001550",
+        "description": "Terpenes with three consecutive isoprene units."
+      },
+      "intermediate_nodes": [],
+      "alternative_parents": [
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002634",
+          "name": "2,4-disubstituted thiazoles",
+          "chemont_id": "CHEMONTID:0002634",
+          "description": "Compounds containing a thiazole ring substituted at the positions 2 and 3."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002913",
+          "name": "Beta-hydroxy ketones",
+          "chemont_id": "CHEMONTID:0002913",
+          "description": "Ketones containing a hydroxyl group attached to the beta-carbon atom, relative to the C=O group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004144",
+          "name": "Heteroaromatic compounds",
+          "chemont_id": "CHEMONTID:0004144",
+          "description": "Compounds containing an aromatic ring where a carbon atom is linked to an hetero atom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001661",
+          "name": "Secondary alcohols",
+          "chemont_id": "CHEMONTID:0001661",
+          "description": "Compounds containing a secondary alcohol functional group, with the general structure HOC(R)(R') (R,R'=alkyl, aryl)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004139",
+          "name": "Azacyclic compounds",
+          "chemont_id": "CHEMONTID:0004139",
+          "description": "Organic compounds containing an heterocycle with at least one nitrogen atom and one carbon atom linked to each other."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004557",
+          "name": "Organopnictogen compounds",
+          "chemont_id": "CHEMONTID:0004557",
+          "description": "Compounds containing a bond between carbon a pnictogen atom. Pnictogens are p-block element atoms that are in the group 15 of the periodic table."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000278",
+          "name": "Organonitrogen compounds",
+          "chemont_id": "CHEMONTID:0000278",
+          "description": "Organic compounds containing a nitrogen atom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003940",
+          "name": "Organic oxides",
+          "chemont_id": "CHEMONTID:0003940",
+          "description": "Organic compounds containing an oxide group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004150",
+          "name": "Hydrocarbon derivatives",
+          "chemont_id": "CHEMONTID:0004150",
+          "description": "Derivatives of hydrocarbons obtained by substituting one or more carbon atoms by an heteroatom. They contain at least one carbon atom and heteroatom."
+        }
+      ],
+      "molecular_framework": "Aromatic heteromonocyclic compounds",
+      "external_descriptors": [],
+      "predicted_chebi_terms": [
+        "thiazoles (CHEBI:48901)",
+        "beta-hydroxy ketone (CHEBI:55380)",
+        "organic aromatic compound (CHEBI:33659)",
+        "secondary alcohol (CHEBI:35681)",
+        "organonitrogen heterocyclic compound (CHEBI:38101)",
+        "pnictogen molecular entity (CHEBI:33302)",
+        "organic molecular entity (CHEBI:50860)",
+        "organonitrogen compound (CHEBI:35352)",
+        "organic oxide (CHEBI:25701)",
+        "organic molecule (CHEBI:72695)",
+        "sesquiterpenoid (CHEBI:26658)",
+        "chemical entity (CHEBI:24431)",
+        "organic heterocyclic compound (CHEBI:24532)",
+        "azole (CHEBI:68452)",
+        "oxygen molecular entity (CHEBI:25806)",
+        "organooxygen compound (CHEBI:36963)",
+        "carbonyl compound (CHEBI:36586)",
+        "ketone (CHEBI:17087)",
+        "polyol (CHEBI:26191)",
+        "organic hydroxy compound (CHEBI:33822)",
+        "alcohol (CHEBI:30879)",
+        "nitrogen molecular entity (CHEBI:51143)",
+        "lipid (CHEBI:18059)",
+        "ether lipid (CHEBI:64611)"
+      ],
+      "classification_version": "2.1",
+      "predicted_lipidmaps_terms": [
+        "C15 isoprenoids (sesquiterpenes) (PR0103)",
+        "Prenol Lipids (PR)"
+      ]
+    },
+    "npclassifier": {
+      "isglycoside": false,
+      "class_results": ["Open-chain polyketides"],
+      "pathway_results": ["Polyketides"],
+      "superclass_results": ["Linear polyketides"]
+    }
   },
   {
-    "npaid": 9,
-    "name": "Viticolin B",
+    "id": 9,
+    "npaid": "NPA000009",
+    "original_name": "Viticolin B",
     "mol_formula": "C10H10O6",
-    "inchikey": "WVBPTDMOPNMMDP-UHFFFAOYSA-N",
-    "smiles": "COC1=CC(=CC(=O)C(=C1O)OC)C(=O)O",
-    "inchi": "InChI=1S/C10H10O6/c1-15-7-4-5(10(13)14)3-6(11)9(16-2)8(7)12/h3-4,12H,1-2H3,(H,13,14)",
     "mol_weight": 226.184,
     "exact_mass": 226.0477,
-    "m_plus_h": 227.055,
-    "m_plus_na": 249.0369,
+    "inchikey": "WVBPTDMOPNMMDP-UHFFFAOYSA-N",
+    "smiles": "COC1=CC(=CC(=O)C(=C1O)OC)C(=O)O",
     "cluster_id": 9,
     "node_id": 9,
+    "synonyms": [],
+    "inchi": "InChI=1S/C10H10O6/c1-15-7-4-5(10(13)14)3-6(11)9(16-2)8(7)12/h3-4,12H,1-2H3,(H,13,14)",
+    "m_plus_h": 227.055,
+    "m_plus_na": 249.0369,
     "origin_reference": {
       "doi": "10.1038/ja.2010.124",
       "pmid": 21063422,
@@ -691,69 +2579,201 @@
         "rank": "genus",
         "taxon_db": "mycobank",
         "external_id": "9257",
+        "ncbi_id": 5073,
         "ancestors": [
           {
             "id": 599,
             "name": "Eukarya",
             "rank": "domain",
             "taxon_db": "mycobank",
-            "external_id": null
+            "external_id": "0",
+            "ncbi_id": 2759
           },
           {
             "id": 600,
             "name": "Fungi",
             "rank": "kingdom",
             "taxon_db": "mycobank",
-            "external_id": "90157"
+            "external_id": "90157",
+            "ncbi_id": 4751
           },
           {
             "id": 617,
             "name": "Ascomycota",
             "rank": "phylum",
             "taxon_db": "mycobank",
-            "external_id": "90031"
+            "external_id": "90031",
+            "ncbi_id": 4890
           },
           {
             "id": 1212,
             "name": "Eurotiomycetes",
             "rank": "class",
             "taxon_db": "mycobank",
-            "external_id": "501483"
+            "external_id": "501483",
+            "ncbi_id": 147545
           },
           {
             "id": 1235,
             "name": "Eurotiales",
             "rank": "order",
             "taxon_db": "mycobank",
-            "external_id": "90472"
+            "external_id": "90472",
+            "ncbi_id": 5042
           },
           {
             "id": 1236,
             "name": "Aspergillaceae",
             "rank": "family",
             "taxon_db": "mycobank",
-            "external_id": "80489"
+            "external_id": "80489",
+            "ncbi_id": 1131492
           }
         ]
       }
     },
     "syntheses": [],
     "reassignments": [],
-    "external_ids": []
+    "external_ids": [],
+    "classyfire": {
+      "class": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0001650",
+        "name": "Tropones",
+        "chemont_id": "CHEMONTID:0001650",
+        "description": "Compounds containing a tropone ring, which is a cycloheptatrienone ring bearing a ketone group."
+      },
+      "smiles": "COC1=CC(=CC(=O)C(OC)=C1O)C(O)=O",
+      "kingdom": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000000",
+        "name": "Organic compounds",
+        "chemont_id": "CHEMONTID:0000000",
+        "description": "Compounds that contain at least one carbon atom, excluding isocyanide/cyanide and their non-hydrocarbyl derivatives, thiophosgene, carbon diselenide, carbon monosulfide, carbon disulfide, carbon subsulfide, carbon monoxide, carbon dioxide, Carbon suboxide, and dicarbon monoxide."
+      },
+      "inchikey": "InChIKey=WVBPTDMOPNMMDP-UHFFFAOYSA-N",
+      "subclass": null,
+      "ancestors": [
+        "Alkyl aryl ethers",
+        "Carbonyl compounds",
+        "Carboxylic acids",
+        "Carboxylic acids and derivatives",
+        "Chemical entities",
+        "Cyclic ketones",
+        "Ethers",
+        "Hydrocarbon derivatives",
+        "Ketones",
+        "Monocarboxylic acids and derivatives",
+        "Organic acids and derivatives",
+        "Organic compounds",
+        "Organic oxides",
+        "Organic oxygen compounds",
+        "Organooxygen compounds",
+        "Tropones",
+        "Vinylogous acids"
+      ],
+      "superclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0004150",
+        "name": "Hydrocarbon derivatives",
+        "chemont_id": "CHEMONTID:0004150",
+        "description": "Derivatives of hydrocarbons obtained by substituting one or more carbon atoms by an heteroatom. They contain at least one carbon atom and heteroatom."
+      },
+      "description": "This compound belongs to the class of organic compounds known as tropones. These are compounds containing a tropone ring, which is a cycloheptatrienone ring bearing a ketone group.",
+      "substituents": [
+        "Tropone",
+        "Alkyl aryl ether",
+        "Vinylogous acid",
+        "Cyclic ketone",
+        "Ether",
+        "Carboxylic acid",
+        "Carboxylic acid derivative",
+        "Organic oxygen compound",
+        "Organic oxide",
+        "Organooxygen compound",
+        "Aromatic homomonocyclic compound"
+      ],
+      "direct_parent": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0001650",
+        "name": "Tropones",
+        "chemont_id": "CHEMONTID:0001650",
+        "description": "Compounds containing a tropone ring, which is a cycloheptatrienone ring bearing a ketone group."
+      },
+      "intermediate_nodes": [],
+      "alternative_parents": [
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000128",
+          "name": "Alkyl aryl ethers",
+          "chemont_id": "CHEMONTID:0000128",
+          "description": "Organic compounds containing the alkyl aryl ether functional group with the generic formula R-O-R' , where R is an alkyl group and R' is an aryl group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003889",
+          "name": "Vinylogous acids",
+          "chemont_id": "CHEMONTID:0003889",
+          "description": "Organic compounds containing a hydroxyl group, which is indirectly attached to a carbonyl via an intervening vinyl (>C=C<) moiety."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003487",
+          "name": "Cyclic ketones",
+          "chemont_id": "CHEMONTID:0003487",
+          "description": "Organic compounds containing a ketone that is conjugated to a cyclic moiety."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001205",
+          "name": "Carboxylic acids",
+          "chemont_id": "CHEMONTID:0001205",
+          "description": "Compounds containing a carboxylic acid group with the formula -C(=O)OH."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003940",
+          "name": "Organic oxides",
+          "chemont_id": "CHEMONTID:0003940",
+          "description": "Organic compounds containing an oxide group."
+        }
+      ],
+      "molecular_framework": "Aromatic homomonocyclic compounds",
+      "external_descriptors": [],
+      "predicted_chebi_terms": [
+        "aromatic ether (CHEBI:35618)",
+        "enone (CHEBI:51689)",
+        "enol (CHEBI:33823)",
+        "cyclic ketone (CHEBI:3992)",
+        "carboxylic acid (CHEBI:33575)",
+        "organic oxide (CHEBI:25701)",
+        "chemical entity (CHEBI:24431)",
+        "organic molecule (CHEBI:72695)",
+        "oxygen molecular entity (CHEBI:25806)",
+        "organic molecular entity (CHEBI:50860)",
+        "organooxygen compound (CHEBI:36963)",
+        "ether (CHEBI:25698)",
+        "organic acid (CHEBI:64709)",
+        "carbonyl compound (CHEBI:36586)",
+        "ketone (CHEBI:17087)",
+        "carboxylic acid anion (CHEBI:29067)"
+      ],
+      "classification_version": "2.1",
+      "predicted_lipidmaps_terms": []
+    },
+    "npclassifier": {
+      "isglycoside": false,
+      "class_results": ["Tropolones and derivatives (PKS)"],
+      "pathway_results": ["Polyketides"],
+      "superclass_results": ["Tropolones"]
+    }
   },
   {
-    "npaid": 10,
-    "name": "Botryorhodine G",
+    "id": 10,
+    "npaid": "NPA000010",
+    "original_name": "Botryorhodine G",
     "mol_formula": "C17H16O7",
-    "inchikey": "SSOWCJPLHWZECI-UHFFFAOYSA-N",
-    "smiles": "CC1=CC(=C(C2=C1C(=O)OC3=C(C(=C(C(=C3O2)C)O)O)C)CO)O",
-    "inchi": "InChI=1S/C17H16O7/c1-6-4-10(19)9(5-18)16-11(6)17(22)24-15-8(3)13(21)12(20)7(2)14(15)23-16/h4,18-21H,5H2,1-3H3",
     "mol_weight": 332.308,
     "exact_mass": 332.0896,
-    "m_plus_h": 333.0969,
-    "m_plus_na": 355.0788,
+    "inchikey": "SSOWCJPLHWZECI-UHFFFAOYSA-N",
+    "smiles": "CC1=CC(=C(C2=C1C(=O)OC3=C(C(=C(C(=C3O2)C)O)O)C)CO)O",
     "cluster_id": 10,
     "node_id": 10,
+    "synonyms": [],
+    "inchi": "InChI=1S/C17H16O7/c1-6-4-10(19)9(5-18)16-11(6)17(22)24-15-8(3)13(21)12(20)7(2)14(15)23-16/h4,18-21H,5H2,1-3H3",
+    "m_plus_h": 333.0969,
+    "m_plus_na": 355.0788,
     "origin_reference": {
       "doi": "10.1021/np400192q",
       "pmid": 23964677,
@@ -776,54 +2796,251 @@
         "rank": "genus",
         "taxon_db": "mycobank",
         "external_id": "4403",
+        "ncbi_id": 5596,
         "ancestors": [
           {
             "id": 599,
             "name": "Eukarya",
             "rank": "domain",
             "taxon_db": "mycobank",
-            "external_id": null
+            "external_id": "0",
+            "ncbi_id": 2759
           },
           {
             "id": 600,
             "name": "Fungi",
             "rank": "kingdom",
             "taxon_db": "mycobank",
-            "external_id": "90157"
+            "external_id": "90157",
+            "ncbi_id": 4751
           },
           {
             "id": 617,
             "name": "Ascomycota",
             "rank": "phylum",
             "taxon_db": "mycobank",
-            "external_id": "90031"
+            "external_id": "90031",
+            "ncbi_id": 4890
           },
           {
             "id": 879,
             "name": "Sordariomycetes",
             "rank": "class",
             "taxon_db": "mycobank",
-            "external_id": "90350"
+            "external_id": "90350",
+            "ncbi_id": 147550
           },
           {
             "id": 880,
             "name": "Microascales",
             "rank": "order",
             "taxon_db": "mycobank",
-            "external_id": "90484"
+            "external_id": "90484",
+            "ncbi_id": 5592
           },
           {
             "id": 881,
             "name": "Microascaceae",
             "rank": "family",
             "taxon_db": "mycobank",
-            "external_id": "81001"
+            "external_id": "81001",
+            "ncbi_id": 5593
           }
         ]
       }
     },
     "syntheses": [],
     "reassignments": [],
-    "external_ids": []
+    "external_ids": [],
+    "classyfire": {
+      "class": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0001645",
+        "name": "Depsides and depsidones",
+        "chemont_id": "CHEMONTID:0001645",
+        "description": "Polycyclic compounds that is either a polyphenolic compound composed of two or more monocyclic aromatic units linked by an ester bond (depside), or a compound containing the depsidone structure (depsidone)."
+      },
+      "smiles": "CC1=CC(O)=C(CO)C2=C1C(=O)OC1=C(O2)C(C)=C(O)C(O)=C1C",
+      "kingdom": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000000",
+        "name": "Organic compounds",
+        "chemont_id": "CHEMONTID:0000000",
+        "description": "Compounds that contain at least one carbon atom, excluding isocyanide/cyanide and their non-hydrocarbyl derivatives, thiophosgene, carbon diselenide, carbon monosulfide, carbon disulfide, carbon subsulfide, carbon monoxide, carbon dioxide, Carbon suboxide, and dicarbon monoxide."
+      },
+      "inchikey": "InChIKey=SSOWCJPLHWZECI-UHFFFAOYSA-N",
+      "subclass": null,
+      "ancestors": [
+        "1,4-dioxepines",
+        "1-hydroxy-2-unsubstituted benzenoids",
+        "Alcohols and polyols",
+        "Aromatic alcohols",
+        "Benzenoids",
+        "Carboxylic acid derivatives",
+        "Carboxylic acid esters",
+        "Carboxylic acids and derivatives",
+        "Chemical entities",
+        "Depsides and depsidones",
+        "Diarylethers",
+        "Dioxepines",
+        "Ethers",
+        "Hydrocarbon derivatives",
+        "Lactones",
+        "Monocarboxylic acids and derivatives",
+        "Organic acids and derivatives",
+        "Organic compounds",
+        "Organic oxides",
+        "Organic oxygen compounds",
+        "Organoheterocyclic compounds",
+        "Organooxygen compounds",
+        "Oxacyclic compounds",
+        "Phenols",
+        "Phenylpropanoids and polyketides",
+        "Polyols",
+        "Primary alcohols"
+      ],
+      "superclass": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0000261",
+        "name": "Phenylpropanoids and polyketides",
+        "chemont_id": "CHEMONTID:0000261",
+        "description": "Organic compounds that are synthesized either from the amino acid phenylalanine (phenylpropanoids) or the decarboxylative condensation of malonyl-CoA (polyketides). Phenylpropanoids are aromatic compounds based on the phenylpropane skeleton. Polyketides usually consist of alternating carbonyl and methylene groups (beta-polyketones), biogenetically derived from repeated condensation of acetyl coenzyme A (via malonyl coenzyme A), and usually the compounds derived from them by further condensations."
+      },
+      "description": "This compound belongs to the class of organic compounds known as depsides and depsidones. These are polycyclic compounds that is either a polyphenolic compound composed of two or more monocyclic aromatic units linked by an ester bond (depside), or a compound containing the depsidone structure (depsidone).",
+      "substituents": [
+        "Depsidone",
+        "Diaryl ether",
+        "1-hydroxy-2-unsubstituted benzenoid",
+        "1,4-dioxepine",
+        "Dioxepine",
+        "Benzenoid",
+        "Carboxylic acid ester",
+        "Lactone",
+        "Carboxylic acid derivative",
+        "Oxacycle",
+        "Organoheterocyclic compound",
+        "Ether",
+        "Monocarboxylic acid or derivatives",
+        "Polyol",
+        "Alcohol",
+        "Organic oxygen compound",
+        "Aromatic alcohol",
+        "Organic oxide",
+        "Organooxygen compound",
+        "Hydrocarbon derivative",
+        "Primary alcohol",
+        "Aromatic heteropolycyclic compound"
+      ],
+      "direct_parent": {
+        "url": "http://classyfire.wishartlab.com/tax_nodes/C0001645",
+        "name": "Depsides and depsidones",
+        "chemont_id": "CHEMONTID:0001645",
+        "description": "Polycyclic compounds that is either a polyphenolic compound composed of two or more monocyclic aromatic units linked by an ester bond (depside), or a compound containing the depsidone structure (depsidone)."
+      },
+      "intermediate_nodes": [],
+      "alternative_parents": [
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002463",
+          "name": "Diarylethers",
+          "chemont_id": "CHEMONTID:0002463",
+          "description": "Organic compounds containing the dialkyl ether functional group, with the formula ROR', where R and R' are aryl groups."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004646",
+          "name": "1-hydroxy-2-unsubstituted benzenoids",
+          "chemont_id": "CHEMONTID:0004646",
+          "description": "Phenols that a unsubstituted at the 2-position."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002942",
+          "name": "1,4-dioxepines",
+          "chemont_id": "CHEMONTID:0002942",
+          "description": "Dioxepines with the two ring oxygen atoms at position 1 and 4, respectively."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000050",
+          "name": "Lactones",
+          "chemont_id": "CHEMONTID:0000050",
+          "description": "Cyclic esters of hydroxy carboxylic acids, containing a 1-oxacycloalkan-2-one structure, or analogues having unsaturation or heteroatoms replacing one or more carbon atoms of the ring."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001238",
+          "name": "Carboxylic acid esters",
+          "chemont_id": "CHEMONTID:0001238",
+          "description": "Carboxylic acid derivatives in which the carbon atom from the carbonyl group is attached to an alkyl or an aryl moiety through an oxygen atom (forming an ester group)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0002286",
+          "name": "Polyols",
+          "chemont_id": "CHEMONTID:0002286",
+          "description": "Organic compounds containing more than one hydroxyl groups."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004140",
+          "name": "Oxacyclic compounds",
+          "chemont_id": "CHEMONTID:0004140",
+          "description": "Organic compounds containing an heterocycle with at least one oxygen atom linked to a ring carbon."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0001137",
+          "name": "Monocarboxylic acids and derivatives",
+          "chemont_id": "CHEMONTID:0001137",
+          "description": "Carboxylic acids containing exactly one carboxyl groups."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0000286",
+          "name": "Primary alcohols",
+          "chemont_id": "CHEMONTID:0000286",
+          "description": "Compounds comprising the primary alcohol functional group, with the general structure RCOH (R=alkyl, aryl)."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003940",
+          "name": "Organic oxides",
+          "chemont_id": "CHEMONTID:0003940",
+          "description": "Organic compounds containing an oxide group."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0004150",
+          "name": "Hydrocarbon derivatives",
+          "chemont_id": "CHEMONTID:0004150",
+          "description": "Derivatives of hydrocarbons obtained by substituting one or more carbon atoms by an heteroatom. They contain at least one carbon atom and heteroatom."
+        },
+        {
+          "url": "http://classyfire.wishartlab.com/tax_nodes/C0003073",
+          "name": "Aromatic alcohols",
+          "chemont_id": "CHEMONTID:0003073",
+          "description": "Compounds containing an alcohol group attached to an aromatic carbon."
+        }
+      ],
+      "molecular_framework": "Aromatic heteropolycyclic compounds",
+      "external_descriptors": [],
+      "predicted_chebi_terms": [
+        "aromatic ether (CHEBI:35618)",
+        "phenols (CHEBI:33853)",
+        "oxacycle (CHEBI:38104)",
+        "lactone (CHEBI:25000)",
+        "carboxylic ester (CHEBI:33308)",
+        "polyol (CHEBI:26191)",
+        "carbonyl compound (CHEBI:36586)",
+        "primary alcohol (CHEBI:15734)",
+        "organic oxide (CHEBI:25701)",
+        "organic molecule (CHEBI:72695)",
+        "aromatic alcohol (CHEBI:33854)",
+        "chemical entity (CHEBI:24431)",
+        "oxygen molecular entity (CHEBI:25806)",
+        "organic molecular entity (CHEBI:50860)",
+        "organooxygen compound (CHEBI:36963)",
+        "ether (CHEBI:25698)",
+        "benzenoid aromatic compound (CHEBI:33836)",
+        "organic heterocyclic compound (CHEBI:24532)",
+        "organic hydroxy compound (CHEBI:33822)",
+        "alcohol (CHEBI:30879)"
+      ],
+      "classification_version": "2.1",
+      "predicted_lipidmaps_terms": ["Depsides and depsidones (PK1308)"]
+    },
+    "npclassifier": {
+      "isglycoside": false,
+      "class_results": ["Depsides and depsidones"],
+      "pathway_results": ["Polyketides"],
+      "superclass_results": ["Aromatic polyketides"]
+    }
   }
 ]

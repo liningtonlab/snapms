@@ -29,8 +29,12 @@ def network_from_mass_list(atlas_df: pd.DataFrame, parameters: Parameters):
     )
     print(f"Found {len(compound_list)} candidate adduct masses")
     compound_network = create_networks.match_compound_network(compound_list)
+    create_networks.remove_small_subgraphs(compound_network, parameters)
     create_networks.annotate_top_candidates(compound_network)
-    create_networks.export_masslist_graphml(compound_network, parameters)
+    output_fpath = (
+        parameters.output_path / f"{parameters.file_name}_snapms_output.graphml"
+    )
+    create_networks.export_graphml(compound_network, parameters, output_fpath)
     if cy.cyrest_is_available():
         print("Inserting mass list data into Cytoscape")
         # If there is a job_id in the params, use this to save the output file
@@ -55,14 +59,36 @@ def create_gnps_network_annotations(atlas_df: pd.DataFrame, parameters: Paramete
 
     # Analyze each gnps subgraph to create predictions about possible compound families from atlas data.
     # This is the core function of this suite of tools.
-    match_compounds.annotate_gnps_network(atlas_df, parameters)
+    compound_networks = match_compounds.annotate_gnps_network(atlas_df, parameters)
 
-    # Append all Atlas annotation networks to GNPS original network file
-    # NOTE: GNPS network file must be open in Cytoscape for this to work
-    # cytoscape_status = input("Is the Cytoscape file open? [y/n]")
+    # write outputs
+    parameters.output_path.mkdir(exist_ok=True)
+    filtered_networks = {}
+    for cluster_id, network in compound_networks.items():
+        if create_networks.graph_size_check(
+            network,
+            parameters.min_compound_group_count,
+            parameters.min_atlas_annotation_cluster_size,
+        ):
+            create_networks.remove_small_subgraphs(network, parameters)
+            create_networks.annotate_top_candidates(network)
+            output_fpath = (
+                parameters.output_path / f"GNPS_componentindex_{cluster_id}.graphml"
+            )
+            create_networks.export_graphml(network, parameters, output_fpath)
+            filtered_networks[cluster_id] = network
+        else:
+            print(
+                f"ERROR: Atlas annotation graph {cluster_id} either too small or too large. "
+                "Skipping insert."
+            )
+
+    # TODO: Append all Atlas annotation networks to GNPS original network file
     if cy.cyrest_is_available():
         print("Cytoscape detected - performing network annotation")
-        create_networks.insert_atlas_clusters_to_cytoscape(parameters)
+        create_networks.insert_atlas_clusters_to_cytoscape(
+            filtered_networks, parameters
+        )
     else:
         print("WARNING - Cytoscape Unavailable!")
     if parameters.compress_output:

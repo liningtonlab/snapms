@@ -14,7 +14,7 @@ test_atlas = pd.read_json(Path(__file__).parent / "test_atlas.json")
 def test_clean_names_default():
     df = test_atlas.copy()
     expected = [
-        "Curvularide C3",
+        "Curvularide C",
         "Homopetasinic acid",
         "A-503083 F",
         "Aqabamycin E2",
@@ -31,7 +31,7 @@ def test_clean_names_default():
 def test_clean_names_explicit():
     df = test_atlas.copy()
     expected = [
-        "Curvularide C3",
+        "Curvularide C",
         "Homopetasinic acid",
         "A-503083 F",
         "Aqabamycin E2",

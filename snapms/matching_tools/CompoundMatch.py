@@ -28,6 +28,10 @@ class CompoundMatch:
         if re.match(
             "^[A-Za-z0-9 α-ωΑ-Ω\-‐~,\"'$&*()±\[\]′’+./–″<>−{}|_:;]+$", self.name
         ):
-            return self.name
+            return xml_safe_name(self.name)
         else:
-            return ""
+            return self.npaid
+
+
+def xml_safe_name(n):
+    return n.replace("\f", "").encode("ascii", "replace").decode()

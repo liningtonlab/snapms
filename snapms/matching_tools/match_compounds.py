@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """Tools to match masses from mass list to compounds from Atlas"""
-from typing import List
+from typing import List, Dict
 
 import networkx as nx
 import pandas as pd
@@ -73,7 +73,9 @@ def compute_adduct_matches(
     return output_list
 
 
-def annotate_gnps_network(atlas_df: pd.DataFrame, parameters: Parameters):
+def annotate_gnps_network(
+    atlas_df: pd.DataFrame, parameters: Parameters
+) -> Dict[int, nx.Graph]:
     """Tool to create structure class predictions from GNPS clusters by identifying the compound classes with the
     highest prevalence in the GNPS network.
 
@@ -82,13 +84,15 @@ def annotate_gnps_network(atlas_df: pd.DataFrame, parameters: Parameters):
     of compound groups, and prevents 'annotation bloat' where many nodes become interconnected because they are
     repeated compounds, but in different compound groups (and so get edges added in annotation network).
     Leads to cleaned results files. Recommended default is True
+
+    Returns Dict of compound graphs for each GNPS cluster indexed by cluster_id
     """
 
     gnps_network = data_import.import_gnps_network(parameters)
-
+    networks = {}
     for cluster in nx.connected_components(gnps_network):
         if len(cluster) >= parameters.min_gnps_cluster_size:
-            cluster_id = gnps_network.nodes[list(cluster)[0]]["componentindex"]
+            cluster_id = int(gnps_network.nodes[list(cluster)[0]]["componentindex"])
             # Create gnps mass list
             target_mass_list = [
                 gnps_network.nodes[node]["parent mass"] for node in cluster
@@ -112,8 +116,6 @@ def annotate_gnps_network(atlas_df: pd.DataFrame, parameters: Parameters):
                 nx.set_node_attributes(
                     compound_network, cluster_id, name="componentindex"
                 )
-                if len(list(compound_network.nodes)) > 0:
-                    create_networks.export_gnps_graphml(
-                        compound_network, cluster_id, parameters
-                    )
+                networks[cluster_id] = compound_network
             print("Finished Atlas annotation for GNPS cluster " + str(cluster_id))
+    return networks

@@ -59,9 +59,12 @@ def normalize_dataframe(
     return df
 
 
-def clean_names(df: pd.DataFrame, name_col: str = "name") -> pd.DataFrame:
-    """Perform unicode normalization on compound names"""
-    df[name_col] = [unicodedata.normalize("NFKC", n) for n in df[name_col]]
+def clean_names(
+    df: pd.DataFrame, name_col: str = "name", input_name_col: str = "original_name"
+) -> pd.DataFrame:
+    """Perform unicode normalization on compound names as well as move names from `original_name` to `name` col"""
+    df[name_col] = [unicodedata.normalize("NFKC", n) for n in df[input_name_col]]
+    del df[input_name_col]
     return df
 
 

@@ -3,7 +3,7 @@
 """Tools to create networks of various types for SNAP-MS platform"""
 import zipfile
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 import networkx as nx
 from rdkit import Chem, DataStructs
@@ -27,7 +27,6 @@ def tanimoto_matrix(smiles_list: List[str]) -> List[List[float]]:
 def match_compound_network(compound_match_list: List[CompoundMatch]) -> nx.Graph:
     """Tool to create a network illustrating relatedness of candidate structures for masses in a GNPS cluster
     Requires the output list from matching_tools.match_compounds.return_compounds
-
     """
 
     # Similarity score required to create an edge in the network graph
@@ -83,7 +82,7 @@ def match_compound_network(compound_match_list: List[CompoundMatch]) -> nx.Graph
     return compound_graph
 
 
-def export_masslist_graphml(graph: nx.Graph, parameters: Parameters):
+def export_graphml(graph: nx.Graph, parameters: Parameters, output_path: Path):
     """Exports networkx graph from match_compound_network as graphML for use in external visualization tools"""
 
     if graph_size_check(
@@ -91,20 +90,8 @@ def export_masslist_graphml(graph: nx.Graph, parameters: Parameters):
         parameters.min_compound_group_count,
         parameters.min_atlas_annotation_cluster_size,
     ):
-        output_filename = f"{parameters.file_name}_snapms_output.graphml"
-        nx.write_graphml(graph, parameters.output_path / output_filename)
-
-
-def export_gnps_graphml(graph: nx.Graph, cluster_id: int, parameters: Parameters):
-    """Exports networkx graph from match_compound_network for each gnps cluster, with cluster id in filename as graphML"""
-
-    # Pathlib
-    parameters.output_path.mkdir(exist_ok=True)
-
-    nx.write_graphml(
-        graph,
-        parameters.output_path / f"GNPS_componentindex_{cluster_id}.graphml",
-    )
+        nx.write_graphml(graph, output_path)
+    print(f"WARNING - {output_path} is empty and is not being written")
 
 
 def compress_gnps_graphml_outputs(parameters: Parameters):
@@ -121,48 +108,29 @@ def compress_gnps_graphml_outputs(parameters: Parameters):
             f.unlink()
 
 
-def insert_atlas_clusters_to_cytoscape(parameters: Parameters):
+def insert_atlas_clusters_to_cytoscape(
+    filtered_networks: Dict[int, nx.Graph], parameters: Parameters
+):
     """Tool to create a new collection in an existing Cytoscape file, and to append all Atlas GNPS annotation networks
     as separate network views.
 
-    Currently the GNPS file to which networks will be added must be open in the Cytoscape desktop program in a single
-    session.
-    Tested with Cytoscape 3.8
+    Networks should be pre-filtered for size and annotated with top candidates already.
     """
     # Import original gnps network (currently not implemented)
 
     # Open each Atlas annotation network in turn. Glob function includes [0-9] in order to exclude the modified original
     # gnps network (if present)
-    for network in sorted(
-        parameters.output_path.glob("GNPS*[0-9].graphml"),
-        key=extract_cluster_id,
-    ):
-        with open(network, encoding="utf-8") as f:
-            atlas_graph = nx.read_graphml(f)
+    for cluster_id, atlas_graph in sorted(filtered_networks.items()):
+        network_title = f"GNPS_componentindex_{cluster_id}"
 
-        network_title = Path(network).stem
-        print("Starting insertion of " + network_title + " to GNPS network file")
-
-        remove_small_subgraphs(atlas_graph, parameters)
-        # Insert atlas annotation graphs in to cytoscape file, provided they are still an appropriate size
-        # TODO: differentiate between too small and too large
-        if graph_size_check(
+        print(f"Starting insertion of {network_title} to GNPS network file")
+        # Annotate subgraphs to find those subgraphs which are top candidates for the correct compound
+        # family
+        add_cluster_to_cytoscape(
             atlas_graph,
-            parameters.min_compound_group_count,
-            parameters.min_atlas_annotation_cluster_size,
-        ):
-            # Annotate subgraphs to find those subgraphs which are top candidates for the correct compound
-            # family
-            annotate_top_candidates(atlas_graph)
-            add_cluster_to_cytoscape(
-                atlas_graph,
-                network_title,
-            )
-        else:
-            print(
-                f"ERROR: Atlas annotation graph {network_title} either too small or too large. "
-                "Skipping insert."
-            )
+            network_title,
+        )
+
     # If there is a job_id in the params, use this to save the output file
     # For this to work, the snapms datadir should be mounted to the CYTOSCAPE_DATADIR
     # Else use a default
@@ -170,6 +138,7 @@ def insert_atlas_clusters_to_cytoscape(parameters: Parameters):
         output_path = CYTOSCAPE_DATADIR / parameters.job_id / "snapms.cys"
     else:
         output_path = CYTOSCAPE_DATADIR / "snapms.cys"
+    print(f"Saving {output_path}")
     cy.cyrest_save_session(output_path)
     cy.cyrest_delete_session()
 
@@ -235,8 +204,7 @@ def graph_size_check(
         and len(nx.edges(G)) < max_edge_count
     ):
         return True
-    else:
-        return False
+    return False
 
 
 def compound_group_counter(G: nx.Graph) -> int:
