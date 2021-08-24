@@ -56,6 +56,7 @@ def test_compound_match():
         "mass": 420.1421,
         "compound_number": 1,
         "adduct": "m_plus_h",
+        "origin_organism_type": "Bacterium",
     }
     compound = CompoundMatch(**data)
     # test provided props

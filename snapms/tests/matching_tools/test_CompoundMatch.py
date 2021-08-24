@@ -8,6 +8,7 @@ TEST_DAT = dict(
     mass="123",
     compound_number=1,
     adduct="m_plus_h",
+    origin_organism_type="Bacterium",
 )
 
 
