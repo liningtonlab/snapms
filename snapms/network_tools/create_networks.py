@@ -241,8 +241,10 @@ def annotate_top_candidates(G: nx.Graph) -> None:
 
     # globally set top_candidate attribute to False
     nx.set_node_attributes(G, values=False, name="top_candidate")
-
-    max_group_count = max(group_counts.values())
+    try:
+        max_group_count = max(group_counts.values())
+    except ValueError:
+        max_group_count = -1
     for idx, subgraph in enumerate(nx.connected_components(G)):
         if group_counts[idx] == max_group_count:
             print(f"Subgraph {idx} is a top candidate")
