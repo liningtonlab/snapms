@@ -42,7 +42,7 @@ def apply_db_filter(
         return df[df.origin_organism_type == "Fungus"].copy()
     elif filter_type == AtlasFilter.custom:
         print(f"Filtering for custom {custom_value}")
-        names = custom_value.split("|")
+        names = map(lambda x: x.strip(), custom_value.split("|"))
         masks = []
         for n in names:
             masks.append(df["origin_organism_taxon_name"] == n)
