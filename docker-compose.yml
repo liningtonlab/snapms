@@ -1,0 +1,58 @@
+version: "3"
+
+services: 
+  traefik:
+    image: traefik:2.2
+    restart: always
+    command:
+      --api.insecure=true
+      --providers.docker
+      --entryPoints.web.address=:80
+      --log.level=DEBUG
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The HTTPS port
+      - "443:443"
+       # The Web UI enabled by --api.insecure=true
+      - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  # Dont expose ports - no auth
+  # Enable persistent data
+  redis:
+    image: redis
+    volumes:
+      - "./docker_volumes/redis:/data"
+    command: ["redis-server", "--appendonly", "yes"]
+
+  cy:
+    image: jvansan/cytoscape-desktop-headless:latest
+    restart: always
+    volumes:
+      - "./data:/root/data"
+
+  app:
+    image: registry.jvansan.duckdns.org/snapms:latest
+    restart: always
+    environment:
+      - REDIS_URI=redis://redis:6379/0
+      - CYTOSCAPE_BASEURL=http://cy:1234/v1
+    volumes:
+      - "./db:/usr/src/app/db"
+      - "./data:/usr/src/app/data"
+    labels:
+      - traefik.http.routers.snapms.rule=PathPrefix(`/`)
+
+  worker:
+    image: registry.jvansan.duckdns.org/snapms:latest
+    restart: always
+    environment:
+      - REDIS_URI=redis://redis:6379/0
+      - CYTOSCAPE_BASEURL=http://cy:1234/v1
+    volumes:
+      - "./db:/usr/src/app/db"
+      - "./data:/usr/src/app/data"
+    command: ["mamba", "run", "-n", "snapms", "--no-capture-output", "python", "manage.py", "rqworker", "high", "default"]

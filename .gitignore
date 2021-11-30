@@ -1,3 +1,15 @@
+# IDE configs
+.vscode/
+.idea/
+db/
+
+# Data folders for development
+data/
+
+# Django collected static
+static_deploy/
+docker_volumes/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -128,6 +140,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Data folders for development
-
-/data/*
+.DS_Store

@@ -1,0 +1,674 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d7" for="node" attr.name="adduct" attr.type="string" />
+  <key id="d6" for="node" attr.name="compound_group" attr.type="int" />
+  <key id="d5" for="node" attr.name="original_gnps_mass" attr.type="double" />
+  <key id="d4" for="node" attr.name="npatlas_url" attr.type="string" />
+  <key id="d3" for="node" attr.name="compound_name" attr.type="string" />
+  <key id="d2" for="node" attr.name="smiles" attr.type="string" />
+  <key id="d1" for="node" attr.name="exact_mass" attr.type="double" />
+  <key id="d0" for="node" attr.name="npaid" attr.type="int" />
+  <graph edgedefault="undirected">
+    <node id="0">
+      <data key="d0">18705</data>
+      <data key="d1">419.1369</data>
+      <data key="d2">CCC(C)[C@H]1C(=O)O[C@@H]2N1C3=C(C4=C(C=C(C=C24)C)O)C(=O)C5=C(C3=O)C(=CC=C5)O</data>
+      <data key="d3">Jadomycin</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/18705</data>
+      <data key="d5">420.1421</data>
+      <data key="d6">1</data>
+      <data key="d7">m_plus_h</data>
+    </node>
+    <node id="1">
+      <data key="d0">3790</data>
+      <data key="d1">397.1525</data>
+      <data key="d2">CC1=C(OC(=C(C1=O)C)OC)C2CC(=CC(=CC3=CC=C(C=C3)[N+](=O)[O-])C)CO2</data>
+      <data key="d3">Alloaureothin</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/3790</data>
+      <data key="d5">420.1421</data>
+      <data key="d6">1</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="2">
+      <data key="d0">7540</data>
+      <data key="d1">397.1525</data>
+      <data key="d2">CC1=C(OC(=C(C1=O)C)OC)[C@H]2CC/C(=C/C(=C/C3=CC=C(C=C3)[N+](=O)[O-])/C)/O2</data>
+      <data key="d3">Aureothin</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/7540</data>
+      <data key="d5">420.1421</data>
+      <data key="d6">1</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="3">
+      <data key="d0">13050</data>
+      <data key="d1">397.1525</data>
+      <data key="d2">CC1C2=C(C3=C4C(=C5CCC(N5C4=C2CC(O1)CC(=O)O)C(C)O)C=CC3=O)O</data>
+      <data key="d3">BE-54238A</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/13050</data>
+      <data key="d5">420.1421</data>
+      <data key="d6">1</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="4">
+      <data key="d0">8502</data>
+      <data key="d1">402.1072</data>
+      <data key="d2">CS[C@@]12CC3=CC=C[C@@H]([C@H]3N1C(=O)[C@@](NC2=O)(CC4=CC=CC=C4)SC)O</data>
+      <data key="d3">Phomazine B</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/8502</data>
+      <data key="d5">420.1421</data>
+      <data key="d6">1</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="5">
+      <data key="d0">17394</data>
+      <data key="d1">402.1103</data>
+      <data key="d2">CC=CC1C(O1)(C)C2=CC(=O)C3=C(C=C4C(=C3O2)C(=O)C5=C(C4=O)C=CC=C5O)C</data>
+      <data key="d3">Not named</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/17394</data>
+      <data key="d5">420.1421</data>
+      <data key="d6">1</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="6">
+      <data key="d0">8415</data>
+      <data key="d1">381.1761</data>
+      <data key="d2">C1=NC2=C(C(=N1)N)N=CN2[C@H]3[C@@H]([C@@H]([C@H](O3)C[C@H](CC[C@@H](C(=O)O)N)N)O)O</data>
+      <data key="d3">Sinefungin</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/8415</data>
+      <data key="d5">420.1421</data>
+      <data key="d6">1</data>
+      <data key="d7">m_plus_k</data>
+    </node>
+    <node id="7">
+      <data key="d0">9998</data>
+      <data key="d1">381.1761</data>
+      <data key="d2">C1=CC(=C(C=C1C[C@@H](C(=O)O)NC(=O)C[C@H](CN=C(N)N)N=C(N)N)O)O</data>
+      <data key="d3">Hanasanagin</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/9998</data>
+      <data key="d5">420.1421</data>
+      <data key="d6">1</data>
+      <data key="d7">m_plus_k</data>
+    </node>
+    <node id="8">
+      <data key="d0">6196</data>
+      <data key="d1">399.1682</data>
+      <data key="d2">CC/C=C/CCC1=C(C(=O)[C@@]2(O1)[C@H]([C@](NC2=O)(C(=O)C3=CC=CC=C3)OC)O)C</data>
+      <data key="d3">Cephalimysin A</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/6196</data>
+      <data key="d5">422.1585</data>
+      <data key="d6">2</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="9">
+      <data key="d0">20150</data>
+      <data key="d1">399.1682</data>
+      <data key="d2">CC(=O)NC(CC1=CC=CC=C1)C(=O)OC(/C=C/C=C/C=C/C(=O)O)C2(CO2)C</data>
+      <data key="d3">AK-toxin II</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/20150</data>
+      <data key="d5">422.1585</data>
+      <data key="d6">2</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="10">
+      <data key="d0">26820</data>
+      <data key="d1">399.1682</data>
+      <data key="d2">COC1=CC(=O)C(CCC[C@@]2(C)O[C@@H]2/C(C)=C/C2=CC=C([N+](=O)[O-])C=C2)=C(C)O1</data>
+      <data key="d3">Tenebrathin</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/26820</data>
+      <data key="d5">422.1585</data>
+      <data key="d6">2</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="11">
+      <data key="d0">9591</data>
+      <data key="d1">404.126</data>
+      <data key="d2">C/C=C\CC(C)(C1=CC(=O)C2=C(C=C3C(=C2O1)C(=O)C4=C(C3=O)C=CC=C4O)C)O</data>
+      <data key="d3">Beta-Indomycinone</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/9591</data>
+      <data key="d5">422.1585</data>
+      <data key="d6">2</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="12">
+      <data key="d0">11589</data>
+      <data key="d1">404.126</data>
+      <data key="d2">C/C=C/C[C@@]1(C(=O)C=C(O1)C2=C(C=C3C(=C2O)C(=O)C4=C(C3=O)C=CC=C4O)C)C</data>
+      <data key="d3">Rubimycinone A</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/11589</data>
+      <data key="d5">422.1585</data>
+      <data key="d6">2</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="13">
+      <data key="d0">19960</data>
+      <data key="d1">404.126</data>
+      <data key="d2">C/C=C\C(C(C)C1=CC(=O)C2=C(C=C3C(=C2O1)C(=O)C4=C(C3=O)C=CC=C4O)C)O</data>
+      <data key="d3">Saptomycin A</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/19960</data>
+      <data key="d5">422.1585</data>
+      <data key="d6">2</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="14">
+      <data key="d0">20680</data>
+      <data key="d1">404.122</data>
+      <data key="d2">C1=CC(=C(C=C1C(CNC=O)O)C2=C(C=CC(=C2)C(C(C(=O)O)NC=O)O)O)O</data>
+      <data key="d3">WF-2421</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/20680</data>
+      <data key="d5">422.1585</data>
+      <data key="d6">2</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="15">
+      <data key="d0">19393</data>
+      <data key="d1">439.1644</data>
+      <data key="d2">C1C[C@H]2C(=O)N3[C@@H](N2C1)[C@@]4(C[C@H]5C(=O)N[C@@H]4C6=NC7=CC=CC=C7C(=O)N56)C8=CC=CC=C83</data>
+      <data key="d3">Quinadoline B</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/19393</data>
+      <data key="d5">422.1585</data>
+      <data key="d6">2</data>
+      <data key="d7">m_plus_h_minus_h2o</data>
+    </node>
+    <node id="16">
+      <data key="d0">8608</data>
+      <data key="d1">415.1896</data>
+      <data key="d2">CC(=O)N1[C@H]2[C@](C[C@@H]3N2C(=O)C4=CC=CC=C4NC3=O)(C5=CC=CC=C51)C(C)(C)C=C</data>
+      <data key="d3">Epi-aszonalenin A</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/8608</data>
+      <data key="d5">438.1752</data>
+      <data key="d6">3</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="17">
+      <data key="d0">2633</data>
+      <data key="d1">420.142</data>
+      <data key="d2">C[C@@]1(CC2=C(C(=O)C1)C(=C3C(=C2)C=C(C=C3OC)O[C@@H]4[C@@H]([C@@H]([C@H](O4)CO)O)O)O)O</data>
+      <data key="d3">Asperflavin ribofuranoside</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/2633</data>
+      <data key="d5">438.1752</data>
+      <data key="d6">3</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="18">
+      <data key="d0">2759</data>
+      <data key="d1">420.142</data>
+      <data key="d2">C[C@]12C[C@H](C3=C([C@@H]1CCC2=O)C(=O)[C@@]45[C@@]3([C@H](OC(=O)[C@@H]4[C@@H](OC5=O)O)COC)C)O</data>
+      <data key="d3">Wortmannine C</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/2759</data>
+      <data key="d5">438.1752</data>
+      <data key="d6">3</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="19">
+      <data key="d0">9876</data>
+      <data key="d1">420.142</data>
+      <data key="d2">C[C@@H]1[C@H]2C(=O)C3=C(C=C(OC3=O)C)O[C@@]2([C@@H]([C@]4([C@]1(CC(=O)C(C4=O)(C)C)O)O)O)C</data>
+      <data key="d3">Aspertetranone B</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/9876</data>
+      <data key="d5">438.1752</data>
+      <data key="d6">3</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="20">
+      <data key="d0">18960</data>
+      <data key="d1">420.1431</data>
+      <data key="d2">CC12CCC(O1)C(C2CCC(C)(C=C)O)(C)CC[C@@H](C(C)(C)Cl)Br</data>
+      <data key="d3">Dactylomelol</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/18960</data>
+      <data key="d5">438.1752</data>
+      <data key="d6">3</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="21">
+      <data key="d0">22398</data>
+      <data key="d1">420.142</data>
+      <data key="d2">CC1=CC(=CC(=C1C(=O)O[C@H]2[C@@H]3COC(=CC3=CC(=O)[C@@]2(C)O)C(OC)OC)O)O</data>
+      <data key="d3">Talaraculone E</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/22398</data>
+      <data key="d5">438.1752</data>
+      <data key="d6">3</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="22">
+      <data key="d0">27967</data>
+      <data key="d1">420.1434</data>
+      <data key="d2">C[C@@H]1N[C@H]2N(C1=O)C1=CC=CC=C1[C@@]2(O)C[C@H](C(=O)O)N1C=NC2=CC=CC=C2C1=O</data>
+      <data key="d3">Fumigatoside F</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/27967</data>
+      <data key="d5">438.1752</data>
+      <data key="d6">3</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="23">
+      <data key="d0">16853</data>
+      <data key="d1">455.1791</data>
+      <data key="d2">C1[C@@]([C@H]([C@@H](O1)OC[C@@H]2[C@H]([C@@H]([C@H]([C@@H](O2)OCCC3=CNC4=CC=CC=C43)O)O)O)O)(CO)O</data>
+      <data key="d3">Makomotine B</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/16853</data>
+      <data key="d5">438.1752</data>
+      <data key="d6">3</data>
+      <data key="d7">m_plus_h_minus_h2o</data>
+    </node>
+    <node id="24">
+      <data key="d0">7733</data>
+      <data key="d1">417.1424</data>
+      <data key="d2">C/C=C\[C@@H]([C@@H](C1=C(C(=O)[C@@]2(O1)[C@H]([C@@](NC2=O)(C(=O)C3=CC=CC=C3)OC)O)C)O)O</data>
+      <data key="d3">14-norpseurotin A</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/7733</data>
+      <data key="d5">440.133</data>
+      <data key="d6">4</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="25">
+      <data key="d0">611</data>
+      <data key="d1">422.097</data>
+      <data key="d2">CC(C(/C=C/C1=CSC(=N1)C2=CSC(=N2)C(=O)C)OC)/C(=C\C(=O)OC)/OC</data>
+      <data key="d3">Melithiazol C</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/611</data>
+      <data key="d5">440.133</data>
+      <data key="d6">4</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="26">
+      <data key="d0">3251</data>
+      <data key="d1">422.1002</data>
+      <data key="d2">CC(=O)CC1C2=CC(=C(C=C2C3=C(O1)C=C(OC3=O)/C=C/C4=CC(=C(C=C4)O)O)O)O</data>
+      <data key="d3">Inonotusin B</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/3251</data>
+      <data key="d5">440.133</data>
+      <data key="d6">4</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="27">
+      <data key="d0">5040</data>
+      <data key="d1">422.097</data>
+      <data key="d2">C[C@H]([C@H](/C=C/C1=CSC(=N1)C2=CSC(=N2)C(=O)C)OC)/C(=C\C(=O)OC)/OC</data>
+      <data key="d3">Melithiazole M</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/5040</data>
+      <data key="d5">440.133</data>
+      <data key="d6">4</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="28">
+      <data key="d0">8727</data>
+      <data key="d1">422.1002</data>
+      <data key="d2">C1C[C@@H]2[C@@](C1)(C(=O)C3=C4[C@@]25OC6=C7C(=C(C=C6)O)[C@H]([C@@H]8[C@H]([C@]7(O5)OC4=CC=C3)O8)O)O</data>
+      <data key="d3">Ymf 1029E</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/8727</data>
+      <data key="d5">440.133</data>
+      <data key="d6">4</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="29">
+      <data key="d0">15340</data>
+      <data key="d1">422.1002</data>
+      <data key="d2">CC(=O)/C(=C\C1=CC(=C(C=C1)O)O)/C2=C(C=C(OC2=O)/C=C/C3=CC(=C(C=C3)O)O)O</data>
+      <data key="d3">Interfungin B</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/15340</data>
+      <data key="d5">440.133</data>
+      <data key="d6">4</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="30">
+      <data key="d0">27254</data>
+      <data key="d1">422.1033</data>
+      <data key="d2">O[C@H]1[C@H](O)CO[C@@H](N2C3=CC=C(Cl)C=C3C3=C2C2=C(C=C3)C3=CC=CC=C3[NH]2)[C@@H]1O</data>
+      <data key="d3">Tjipanazole F1</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/27254</data>
+      <data key="d5">440.133</data>
+      <data key="d6">4</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="31">
+      <data key="d0">27255</data>
+      <data key="d1">422.1033</data>
+      <data key="d2">O[C@H]1[C@H](O)CO[C@@H](N2C3=CC=CC=C3C3=C2C2=C(C=C3)C3=C(C=CC(Cl)=C3)[NH]2)[C@@H]1O</data>
+      <data key="d3">Tjipanazole F2</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/27255</data>
+      <data key="d5">440.133</data>
+      <data key="d6">4</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="32">
+      <data key="d0">4658</data>
+      <data key="d1">401.1739</data>
+      <data key="d2">CC(C)(C=C)[C@]12C[C@H]3C(=O)NC4=CC=CC=C4C(=O)N3[C@H]1N(C5=CC=CC=C25)C=O</data>
+      <data key="d3">Epi-aszonalenin B</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/4658</data>
+      <data key="d5">440.133</data>
+      <data key="d6">4</data>
+      <data key="d7">m_plus_k</data>
+    </node>
+    <node id="33">
+      <data key="d0">22084</data>
+      <data key="d1">453.1437</data>
+      <data key="d2">C1CC12C(=O)N3[C@H]4N2CN5[C@@H]6C7=NC8=CC=CC=C8C(=O)N7[C@H](C5=O)C[C@]4(O6)C9=CC=CC=C93</data>
+      <data key="d3">Versiquinazoline B</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/22084</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_h</data>
+    </node>
+    <node id="34">
+      <data key="d0">3544</data>
+      <data key="d1">431.158</data>
+      <data key="d2">CC/C=C\[C@@H]([C@@H](C1=C(C(=O)[C@@]2(O1)C([C@@](NC2=O)(C(=O)C3=CC=CC=C3)OC)O)C)O)O</data>
+      <data key="d3">Pseurotin</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/3544</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="35">
+      <data key="d0">4156</data>
+      <data key="d1">431.158</data>
+      <data key="d2">C[C@@]1(CCC[C@]2([C@H]1[C@@H](C=C3[C@@]2(COC3=O)O)OC(=O)C4=CC=C(C=C4)[N+](=O)[O-])C)CO</data>
+      <data key="d3">Insulicolide A</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/4156</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="36">
+      <data key="d0">6244</data>
+      <data key="d1">431.1594</data>
+      <data key="d2">C[C@H]1C(=O)N2[C@H](N1)[C@](C3=CC=CC=C32)(C[C@H]4C(=O)NCC5=NC6=CC=CC=C6C(=O)N45)O</data>
+      <data key="d3">Fumiquinazoline Q</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/6244</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="37">
+      <data key="d0">10369</data>
+      <data key="d1">431.158</data>
+      <data key="d2">CC/C=C\[C@H]([C@@H](C1=C(C(=O)[C@@]2(O1)[C@H]([C@@](NC2=O)(C(=O)C3=CC=CC=C3)OC)O)C)O)O</data>
+      <data key="d3">Pseurotin A3</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/10369</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="38">
+      <data key="d0">11203</data>
+      <data key="d1">431.158</data>
+      <data key="d2">C[C@@]1(CCC[C@]2([C@H]1[C@@H]([C@H](C3=C2COC3=O)O)OC(=O)C4=CC=C(C=C4)[N+](=O)[O-])C)CO</data>
+      <data key="d3">7alpha,14-Dihydroxy-6beta-p-nitrobenzoylconfertifolin</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/11203</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="39">
+      <data key="d0">12944</data>
+      <data key="d1">431.158</data>
+      <data key="d2">C[C@@]1(CCC[C@]2([C@H]1[C@@H]([C@H](C3=C2COC3=O)O)O)C)COC(=O)C4=CC=C(C=C4)[N+](=O)[O-]</data>
+      <data key="d3">6beta,7alpha-dihydroxy-14-p-nitrobenzoylconfertifolin</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/12944</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="40">
+      <data key="d0">15498</data>
+      <data key="d1">431.158</data>
+      <data key="d2">CCC=C[C@@H]([C@@H](C1=C(C(=O)[C@@]2(O1)[C@@H]([C@@](NC2=O)(C(=O)C3=CC=CC=C3)OC)O)C)O)O</data>
+      <data key="d3">Pseurotin A1</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/15498</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="41">
+      <data key="d0">17168</data>
+      <data key="d1">431.158</data>
+      <data key="d2">CCC=C[C@@H]([C@@H](C1=C(C(=O)[C@@]2(O1)[C@H]([C@@](NC2=O)(C(=O)C3=CC=CC=C3)OC)O)C)O)O</data>
+      <data key="d3">Pseurotin A</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/17168</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="42">
+      <data key="d0">18914</data>
+      <data key="d1">431.158</data>
+      <data key="d2">CC/C=C\[C@@H]([C@@H](C1=C(C(=O)[C@@]2(O1)[C@@H]([C@](NC2=O)(C(=O)C3=CC=CC=C3)OC)O)C)O)O</data>
+      <data key="d3">Pseurotin A2</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/18914</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="43">
+      <data key="d0">22086</data>
+      <data key="d1">431.1594</data>
+      <data key="d2">C[C@H]1C(=O)N2[C@@H](N1)[C@@](C3=CC=CC=C32)(C[C@H]4C(=O)NCC5=NC6=CC=CC=C6C(=O)N45)O</data>
+      <data key="d3">Versiquinazoline D</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/22086</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="44">
+      <data key="d0">27703</data>
+      <data key="d1">431.158</data>
+      <data key="d2">CC/C=C\[C@H](O)[C@@H](O)C1=C(C)C(=O)[C@]2(O1)C(=O)N[C@@](OC)(C(=O)C1=CC=CC=C1)[C@H]2O</data>
+      <data key="d3">Pseurotin A4</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/27703</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="45">
+      <data key="d0">27704</data>
+      <data key="d1">431.158</data>
+      <data key="d2">CC/C=C\[C@H](O)[C@@H](O)C1=C(C)C(=O)[C@]2(O1)C(=O)N[C@@](OC)(C(=O)C1=CC=CC=C1)[C@@H]2O</data>
+      <data key="d3">Pseurotin A5</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/27704</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="46">
+      <data key="d0">1227</data>
+      <data key="d1">436.1127</data>
+      <data key="d2">CC(C(/C=C/C1=CSC(=N1)C2=CSC(=N2)C3(CO3)C)OC)/C(=C\C(=O)OC)/OC</data>
+      <data key="d3">Melithiazol N</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/1227</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="47">
+      <data key="d0">4619</data>
+      <data key="d1">436.1158</data>
+      <data key="d2">C1=CC=C(C=C1)C2=CC(=C(C(=C2O[C@H]3[C@@H]([C@H](C=C(O3)C(=O)O)O)O)O)C4=CC=CC=C4)O</data>
+      <data key="d3">Terfestatin C</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/4619</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="48">
+      <data key="d0">16765</data>
+      <data key="d1">436.1158</data>
+      <data key="d2">CC1(/C(=C\C2=CC(=C(C=C2)O)O)/C3=C(O1)C=C(OC3=O)/C=C/C4=CC(=C(C=C4)O)O)OC</data>
+      <data key="d3">Inoscavin B</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/16765</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="49">
+      <data key="d0">18048</data>
+      <data key="d1">436.1158</data>
+      <data key="d2">CC1=C(C=C2C(=C1O)C(=O)C3=C(C2=O)C=C4C=C(C=C(C4=C3O)CC(=O)CC(C)O)O)O</data>
+      <data key="d3">UCE-6</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/18048</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="50">
+      <data key="d0">25247</data>
+      <data key="d1">436.1172</data>
+      <data key="d2">C1[C@@H]2[C@H]([C@@H](C3=C2C4=NC5=CC=CC(=C5N=C4C=C3)C(=O)O)C6=NC7=C(C=CC=C7O)N=C61)O</data>
+      <data key="d3">Baraphenazine D</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/25247</data>
+      <data key="d5">454.1481</data>
+      <data key="d6">5</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="51">
+      <data key="d0">18322</data>
+      <data key="d1">456.1685</data>
+      <data key="d2">COC1=CC(=O)OC(=C1)[C@H](CC2=CC=CC=C2)N3C=C(C(=O)C=C3CC4=CC=CC=C4)C(=O)N</data>
+      <data key="d3">Aspernigrin B</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/18322</data>
+      <data key="d5">474.2021</data>
+      <data key="d6">6</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="52">
+      <data key="d0">7020</data>
+      <data key="d1">435.241</data>
+      <data key="d2">C[C@]12CC[C@]3(C(=CC(=O)[C@H](O3)C(C)(C)O)[C@@H]1CC[C@@H]4[C@@]2(C5=C(C4)C6=CC=CC=C6N5)C)O</data>
+      <data key="d3">7a-Hydroxy-13-desoxypaxilline</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/7020</data>
+      <data key="d5">474.2021</data>
+      <data key="d6">6</data>
+      <data key="d7">m_plus_k</data>
+    </node>
+    <node id="53">
+      <data key="d0">22032</data>
+      <data key="d1">435.241</data>
+      <data key="d2">CC(=CCC/C(=C/CC1=C(C=C2C(=C1O)CN(C2=O)CCC3=CC=C(C=C3)O)OC)/C)C</data>
+      <data key="d3">Corallocin B</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/22032</data>
+      <data key="d5">474.2021</data>
+      <data key="d6">6</data>
+      <data key="d7">m_plus_k</data>
+    </node>
+    <node id="54">
+      <data key="d0">28977</data>
+      <data key="d1">435.241</data>
+      <data key="d2">CC(C)(O)[C@H]1O[C@H]2CC[C@@]3(C)[C@@](O)(CC[C@H]4CC5=C([NH]C6=CC=CC=C56)[C@@]43C)C2=CC1=O</data>
+      <data key="d3">Paxilline</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/28977</data>
+      <data key="d5">474.2021</data>
+      <data key="d6">6</data>
+      <data key="d7">m_plus_k</data>
+    </node>
+    <node id="55">
+      <data key="d0">12034</data>
+      <data key="d1">452.1107</data>
+      <data key="d2">CCOC(=O)/C(=C\C1=CC(=C(C=C1)O)O)/C2=C(C=C(OC2=O)/C=C/C3=CC(=C(C=C3)O)O)O</data>
+      <data key="d3">Phellibaumin E</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/12034</data>
+      <data key="d5">491.0763</data>
+      <data key="d6">7</data>
+      <data key="d7">m_plus_k</data>
+    </node>
+    <node id="56">
+      <data key="d0">13094</data>
+      <data key="d1">234.0448</data>
+      <data key="d2">CC(=O)C1=CC2=C(C=C1)OC/C(=C/Cl)/C=C2</data>
+      <data key="d3">Pterulone</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/13094</data>
+      <data key="d5">491.0763</data>
+      <data key="d6">7</data>
+      <data key="d7">2m_plus_na</data>
+    </node>
+    <node id="57">
+      <data key="d0">5362</data>
+      <data key="d1">469.2213</data>
+      <data key="d2">C1=CC=C(C=C1)C[C@@H](C(=O)O)NC(=O)CCCC(CC(=O)N[C@@H](CC2=CC=CC=C2)C(=O)O)N</data>
+      <data key="d3">Not named</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/5362</data>
+      <data key="d5">492.213</data>
+      <data key="d6">8</data>
+      <data key="d7">m_plus_na</data>
+    </node>
+    <node id="58">
+      <data key="d0">4469</data>
+      <data key="d1">474.1791</data>
+      <data key="d2">COC1=CC2=C(C=C1)C(=CN2)C3=C(C(=C(C(=C3OC)OC)C4=CNC5=C4C=CC(=C5)O)OC)OC</data>
+      <data key="d3">Petromurin D</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/4469</data>
+      <data key="d5">492.213</data>
+      <data key="d6">8</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="59">
+      <data key="d0">20568</data>
+      <data key="d1">474.1809</data>
+      <data key="d2">CCC(C)/C=C(\C)/C=C/C1=CC2=C(C(=O)[C@@]3([C@H](C2=CO1)[C@H]4C(=O)O[C@H](C[C@@]4(O3)OC)C)C)Cl</data>
+      <data key="d3">RP-1551-M1</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/20568</data>
+      <data key="d5">492.213</data>
+      <data key="d6">8</data>
+      <data key="d7">m_plus_nh4</data>
+    </node>
+    <node id="60">
+      <data key="d0">8523</data>
+      <data key="d1">509.2162</data>
+      <data key="d2">CC(=C[C@@H]1N2C3=C(C=CC(=C3)OC)C4=C2[C@H](CC(OO1)(C)C)N5C(=O)[C@@H]6CCCN6C(=O)[C@@]5(C4=O)O)C</data>
+      <data key="d3">13-oxoverruculogen</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/8523</data>
+      <data key="d5">492.213</data>
+      <data key="d6">8</data>
+      <data key="d7">m_plus_h_minus_h2o</data>
+    </node>
+    <node id="61">
+      <data key="d0">12280</data>
+      <data key="d1">453.2515</data>
+      <data key="d2">C[C@]12CC[C@H]3[C@@]4([C@@]1(CC[C@@H]5[C@@]2(C6=C(C5)C7=CC=CC=C7N6)C)O)[C@H](O4)[C@@H]([C@H](O3)C(C)(C)O)O</data>
+      <data key="d3">Terpendole I</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/12280</data>
+      <data key="d5">492.213</data>
+      <data key="d6">8</data>
+      <data key="d7">m_plus_k</data>
+    </node>
+    <node id="62">
+      <data key="d0">29004</data>
+      <data key="d1">453.2475</data>
+      <data key="d2">CCC[C@@H](C)[C@@H](OC(=O)[C@H](NC(=O)[C@H](C)NC(=O)/C=C/C(N)=O)C(C)C)[C@H]1CCOC1=O</data>
+      <data key="d3">Microtermolide B</data>
+      <data key="d4">https://www.npatlas.org/explore/compounds/29004</data>
+      <data key="d5">492.213</data>
+      <data key="d6">8</data>
+      <data key="d7">m_plus_k</data>
+    </node>
+    <edge source="5" target="11" />
+    <edge source="5" target="12" />
+    <edge source="5" target="13" />
+    <edge source="8" target="24" />
+    <edge source="8" target="34" />
+    <edge source="8" target="37" />
+    <edge source="8" target="40" />
+    <edge source="8" target="41" />
+    <edge source="8" target="42" />
+    <edge source="8" target="44" />
+    <edge source="8" target="45" />
+    <edge source="15" target="33" />
+    <edge source="16" target="32" />
+    <edge source="22" target="36" />
+    <edge source="22" target="43" />
+    <edge source="24" target="34" />
+    <edge source="24" target="37" />
+    <edge source="24" target="40" />
+    <edge source="24" target="41" />
+    <edge source="24" target="42" />
+    <edge source="24" target="44" />
+    <edge source="24" target="45" />
+    <edge source="25" target="46" />
+    <edge source="26" target="48" />
+    <edge source="26" target="55" />
+    <edge source="27" target="46" />
+    <edge source="29" target="48" />
+    <edge source="29" target="55" />
+    <edge source="48" target="55" />
+    <edge source="52" target="61" />
+    <edge source="54" target="61" />
+  </graph>
+</graphml>

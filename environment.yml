@@ -1,0 +1,16 @@
+name : snapms
+channels :
+  - conda-forge
+dependencies :
+  - python>=3.8
+  - pip
+  - rdkit
+  - numpy
+  - pandas
+  - networkx
+  - scipy
+  - requests
+  - pip:
+    - python-dotenv
+    - django
+    - django-rq
