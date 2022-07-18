@@ -28,7 +28,7 @@ def network_from_mass_list(atlas_df: pd.DataFrame, parameters: Parameters):
         target_mass_list, parameters, atlas_df
     )
     print(f"Found {len(compound_list)} candidate adduct masses")
-    compound_network = create_networks.match_compound_network(compound_list)
+    compound_network = create_networks.match_compound_network(compound_list, parameters)
     create_networks.remove_small_subgraphs(compound_network, parameters)
     create_networks.annotate_top_candidates(compound_network)
     output_fpath = (

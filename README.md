@@ -33,6 +33,8 @@ NPATLAS_FILE=/home/jvansan/git/snapms/data/atlas_input/npatlas_v202006.json
 
 The `SNAPMS_DATADIR` MUST exist already and the `NPATLAS_FILE` MUST also be available.
 
+To run locally you must also create a DB directory 'db' as 'snapms/db'
+
 Running the development server requires two instances.
 
 1. Django App

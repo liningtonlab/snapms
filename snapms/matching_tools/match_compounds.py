@@ -55,20 +55,38 @@ def compute_adduct_matches(
     for index, mass in enumerate(mass_list):
         mass_error = calculate_error(mass, parameters.ppm_error)
 
-        for adduct in parameters.adduct_list:
-            selected_compounds = atlas_df[
-                atlas_df[adduct].between(mass - mass_error, mass + mass_error)
-            ][["npaid", "exact_mass", "smiles", "name", "origin_organism_type"]]
-            if not selected_compounds.empty:
-                selected_compounds["mass"] = mass
-                selected_compounds["compound_number"] = index + 1
-                selected_compounds["adduct"] = adduct
-                # Use a dataclass for verbosity in other code
-                # avoids needing to know list indices
-                output_list += [
-                    CompoundMatch(**c)
-                    for c in selected_compounds.to_dict(orient="records")
-                ]
+        if parameters.atlas_filter == "coconut":
+            for adduct in parameters.adduct_list:
+                selected_compounds = atlas_df[
+                    atlas_df[adduct].between(mass - mass_error, mass + mass_error)
+                ][["coconut_id", "exact_mass", "smiles", "name", "origin_organism_type"]]
+                if not selected_compounds.empty:
+                    selected_compounds["mass"] = mass
+                    selected_compounds["compound_number"] = index + 1
+                    selected_compounds["adduct"] = adduct
+                    selected_compounds["npaid"] = None
+                    # Use a dataclass for verbosity in other code
+                    # avoids needing to know list indices
+                    output_list += [
+                        CompoundMatch(**c)
+                        for c in selected_compounds.to_dict(orient="records")
+                    ]
+        else:
+            for adduct in parameters.adduct_list:
+                selected_compounds = atlas_df[
+                    atlas_df[adduct].between(mass - mass_error, mass + mass_error)
+                ][["npaid", "exact_mass", "smiles", "name", "origin_organism_type"]]
+                if not selected_compounds.empty:
+                    selected_compounds["mass"] = mass
+                    selected_compounds["compound_number"] = index + 1
+                    selected_compounds["adduct"] = adduct
+                    selected_compounds["coconut_id"] = None
+                    # Use a dataclass for verbosity in other code
+                    # avoids needing to know list indices
+                    output_list += [
+                        CompoundMatch(**c)
+                        for c in selected_compounds.to_dict(orient="records")
+                    ]
 
     return output_list
 
@@ -111,7 +129,7 @@ def annotate_gnps_network(
                     target_mass_list, parameters, atlas_df
                 )
                 compound_network = create_networks.match_compound_network(
-                    atlas_compound_list
+                    atlas_compound_list, parameters
                 )
                 nx.set_node_attributes(
                     compound_network, cluster_id, name="componentindex"

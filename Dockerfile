@@ -15,6 +15,7 @@ COPY manage.py .
 ENV CYTOSCAPE_DATADIR=/root/data
 ENV CYTOSCAPE_BASEURL=http://localhost:1234/v1
 ENV NPATLAS_FILE=/usr/src/app/data/NPAtlas_download.json
+ENV COCONUT_FILE=/usr/src/app/data/COCONUT_download.json
 ENV REDIS_URI=redis://localhost:6379/0
 ENV SNAPMS_DATADIR=/usr/src/app/data
 
