@@ -7,18 +7,6 @@ Minimally, `conda env create -f environment.yml` will create a new conda environ
 
 Requires Python 3.8 or greater.
 
-~~One key installation detail is that you must modify py2cytoscape to make it compatible with modern versions of networkx. Open util_networkx.py and on line 108 change ‘g.node‘ to ‘g.nodes’.~~ (Fixed by writing own cytoscape module)
-
-
-~~Another detail is that there is currently (05012020) a bug in the latest version of networkx (2.5) that stops graph files from opening properly. Works if you install 2.4 instead.~~ (Patched)
-
-## Changelog
-
-- Changed os.path -> pathlib
-- Changed Atlas TSV -> JSON
-- Stripped "compound_" from Atlas download columns
-- Changed "accurate_mass" to "exact_mass" (Exact = theoretical calculated)
-
 ## Django App
 
 This repo includes an example Django App for Snap MS. Some configuration is required.
@@ -27,15 +15,16 @@ Environment file (`.env`)
 ```
 REDIS_URI=redis://localhost:6379/0
 CYTOSCAPE_DATADIR=/root/data
-SNAPMS_DATADIR=/home/jvansan/git/snapms/data
-NPATLAS_FILE=/home/jvansan/git/snapms/data/atlas_input/npatlas_v202006.json
+SNAPMS_DATADIR=/home/username/git/snapms/data
+NPATLAS_FILE=/home/username/git/snapms/data/atlas_input/NPAtlas_download.json
+COCONUT_FILE=/home/username/git/snapms/data/atlas_input/COCONUT_download.json
 ```
 
-The `SNAPMS_DATADIR` MUST exist already and the `NPATLAS_FILE` MUST also be available.
+The `SNAPMS_DATADIR` MUST exist already and the `NPATLAS_FILE` and `COCONUT_FILE` MUST also be available.
 
 To run locally you must also create a DB directory 'db' as 'snapms/db'
 
-Running the development server requires two instances.
+Running the development server requires two instances. For each instance, open a terminal window, navigate to the root 'snapms' directory and type:
 
 1. Django App
 
@@ -48,6 +37,8 @@ dotenv run ./manage.py runserver
 ```
 dotenv run ./manage.py rqworker high default low
 ```
+
+You must also have the following two Docker containers running locally:
 
 ## Requirements
 
@@ -67,7 +58,7 @@ it will be easier to run it in a docker container. The CyREST runs on port 1234.
 For cytoscape session file serving to work, the mounted volume should point to the same place as the 
 `SNAPMS_DATADIR`.
 
-In development, I often use the `./data` as my `SNAPMS_DATADIR`.
+In development, using `./data` as the `SNAPMS_DATADIR` is sensible.
 
 ```
 docker run --name cy -itd -v $(pwd)/data/testing:/root/data -p 1234:1234 jvansan/cytoscape-desktop-headless:latest
@@ -77,7 +68,3 @@ docker run --name cy -itd -v $(pwd)/data/testing:/root/data -p 1234:1234 jvansan
 
 In this repo is a `docker-compose.yml` file which shows how to deploy this example app using Traefik as a reverse proxy.
 In a real production environment, you should NOT use the build in Django `runserver`.
-
-__TODO:__
-
-- Change 
