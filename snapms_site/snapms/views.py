@@ -119,21 +119,39 @@ def handle_snapms_request(request: HttpRequest) -> HttpResponse:
     else:
         input_file = save_convert_masslist(data["masslist"], job_dir)
 
-    parameters = Parameters(
-        file_path=input_file,
-        atlas_db_path=settings.NPATLAS_FILE,
-        output_path=job_dir,
-        ppm_error=data["ppm_error"],
-        adduct_list=data["adduct_list"],
-        remove_duplicates=data["remove_duplicates"],
-        min_gnps_size=data["min_gnps_size"],
-        max_gnps_size=data["max_gnps_size"],
-        min_atlas_size=data["min_atlas_size"],
-        min_group_size=data["min_group_size"],
-        job_id=job_id,
-        atlas_filter=AtlasFilter(data["reference_db"]),
-        custom_filter=data["custom_value"],
-    )
+    if data["reference_db"] == "coconut":
+        parameters = Parameters(
+            file_path=input_file,
+            atlas_db_path=settings.COCONUT_FILE,
+            output_path=job_dir,
+            ppm_error=data["ppm_error"],
+            adduct_list=data["adduct_list"],
+            remove_duplicates=data["remove_duplicates"],
+            min_gnps_size=data["min_gnps_size"],
+            max_gnps_size=data["max_gnps_size"],
+            min_atlas_size=data["min_atlas_size"],
+            min_group_size=data["min_group_size"],
+            job_id=job_id,
+            atlas_filter=AtlasFilter(data["reference_db"]),
+            custom_filter=data["custom_value"],
+        )
+    else:
+        parameters = Parameters(
+            file_path=input_file,
+            atlas_db_path=settings.NPATLAS_FILE,
+            output_path=job_dir,
+            ppm_error=data["ppm_error"],
+            adduct_list=data["adduct_list"],
+            remove_duplicates=data["remove_duplicates"],
+            min_gnps_size=data["min_gnps_size"],
+            max_gnps_size=data["max_gnps_size"],
+            min_atlas_size=data["min_atlas_size"],
+            min_group_size=data["min_group_size"],
+            job_id=job_id,
+            atlas_filter=AtlasFilter(data["reference_db"]),
+            custom_filter=data["custom_value"],
+        )
+
     if parameters.file_type == "csv":
         run_snapms_masslist.delay(parameters, job_id)
     elif parameters.file_type == "graphml":

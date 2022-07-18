@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 import warnings
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -147,6 +148,7 @@ RQ_QUEUES = {
 }
 
 # Data config for SnapMS and some pre-app checks
+load_dotenv()
 try:
     SNAPMS_DATADIR = Path(os.getenv("SNAPMS_DATADIR"))
     assert SNAPMS_DATADIR.exists() and SNAPMS_DATADIR.is_dir()
@@ -159,3 +161,9 @@ try:
 except (TypeError, AssertionError):
     warnings.warn("NPATLAS_FILE not available")
     NPATLAS_FILE = None
+try:
+    COCONUT_FILE = Path(os.getenv("COCONUT_FILE"))
+    assert COCONUT_FILE.exists()
+except (TypeError, AssertionError):
+    warnings.warn("COCONUT_FILE not available")
+    COCONUT_FILE = None

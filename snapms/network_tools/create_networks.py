@@ -24,7 +24,7 @@ def tanimoto_matrix(smiles_list: List[str]) -> List[List[float]]:
     return matrix
 
 
-def match_compound_network(compound_match_list: List[CompoundMatch]) -> nx.Graph:
+def match_compound_network(compound_match_list: List[CompoundMatch], parameters: Parameters) -> nx.Graph:
     """Tool to create a network illustrating relatedness of candidate structures for masses in a GNPS cluster
     Requires the output list from matching_tools.match_compounds.return_compounds
     """
@@ -44,24 +44,51 @@ def match_compound_network(compound_match_list: List[CompoundMatch]) -> nx.Graph
     # Used to prevent inclusion of edges between compounds from the same group
     # (i.e. candidates for the same original mass)
     node_list = []
+    adduct_dict = {"m_plus_h": "[M+H]+",
+                   "m_plus_na": "[M+Na]+",
+                   "m_plus_nh4": "[M+NH4]+",
+                   "m_plus_h_minus_h2o": "[M-H2O+H]+",
+                   "m_plus_k": "[M+K]+",
+                   "2m_plus_h": "[2M+H]+",
+                   "2m_plus_na": "[2M+Na]+"}
     index_group_dict = {}
     for index, compound in enumerate(compound_match_list):
-        node_list.append(
-            (
-                index,
-                {
-                    "npaid": compound.npaid,
-                    "exact_mass": compound.exact_mass,
-                    "smiles": compound.smiles,
-                    "compound_name": compound.friendly_name(),
-                    "npatlas_url": compound.npatlas_url,
-                    "original_gnps_mass": compound.mass,
-                    "compound_group": compound.compound_number,
-                    "adduct": compound.adduct,
-                    "origin_organism_type": compound.origin_organism_type,
-                },
+        if parameters.atlas_filter == "coconut":
+            node_list.append(
+                (
+                    index,
+                    {
+                        "coconut_id": compound.coconut_id,
+                        "exact_mass": compound.exact_mass,
+                        "smiles": compound.smiles,
+                        "compound_name": compound.friendly_name(),
+                        "coconut_url": compound.coconut_url,
+                        "original_gnps_mass": compound.mass,
+                        "compound_group": compound.compound_number,
+                        "adduct": adduct_dict[compound.adduct],
+                        "origin_organism_type": "Unknown",
+                    },
+                )
             )
-        )
+        elif parameters.atlas_filter in ["full", "bacteria", "fungus"]:
+            node_list.append(
+                (
+                    index,
+                    {
+                        "npaid": compound.npaid,
+                        "exact_mass": compound.exact_mass,
+                        "smiles": compound.smiles,
+                        "compound_name": compound.friendly_name(),
+                        "npatlas_url": compound.npatlas_url,
+                        "original_gnps_mass": compound.mass,
+                        "compound_group": compound.compound_number,
+                        "adduct": adduct_dict[compound.adduct],
+                        "origin_organism_type": compound.origin_organism_type,
+                    },
+                )
+            )
+        else:
+            print("ERROR: atlas_filter not found")
         index_group_dict[index] = compound.compound_number
     compound_graph.add_nodes_from(node_list)
 
@@ -84,14 +111,14 @@ def match_compound_network(compound_match_list: List[CompoundMatch]) -> nx.Graph
 
 def export_graphml(graph: nx.Graph, parameters: Parameters, output_path: Path):
     """Exports networkx graph from match_compound_network as graphML for use in external visualization tools"""
-
     if graph_size_check(
         graph,
         parameters.min_compound_group_count,
         parameters.min_atlas_annotation_cluster_size,
     ):
         nx.write_graphml(graph, output_path)
-    print(f"WARNING - {output_path} is empty and is not being written")
+    else:
+        print(f"WARNING - {output_path} is outside size parameters and is not being written")
 
 
 def compress_gnps_graphml_outputs(parameters: Parameters):

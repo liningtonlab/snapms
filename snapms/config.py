@@ -22,6 +22,7 @@ class AtlasFilter(str, Enum):
     bacteria = "bacteria"
     fungi = "fungi"
     custom = "custom"
+    coconut = "coconut"
 
 
 class Parameters:

@@ -26,7 +26,7 @@ def import_atlas(parameters: Parameters):
     # clean_headers(input_df) # shouldn't be needed with JSON input
     input_df = clean_names(input_df)
     input_df = extend_adducts(input_df, parameters.adduct_list)
-    print("Finished NP Atlas data import")
+    print("Finished reference database import")
     return input_df
 
 
@@ -78,6 +78,8 @@ def clean_names(
 ) -> pd.DataFrame:
     """Perform unicode normalization on compound names as well as move names from `original_name` to `name` col"""
     df[name_col] = [unicodedata.normalize("NFKC", n) for n in df[input_name_col]]
+    # If resulting name is None replace with "Unknown" because networkX does not accept None as node attribute value
+    df["name"] = df["name"].fillna("Unknown")
     del df[input_name_col]
     return df
 

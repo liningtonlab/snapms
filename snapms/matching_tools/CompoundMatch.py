@@ -7,6 +7,7 @@ class CompoundMatch:
     """Class for handling compound matches between query adduct mass and NP Atlas"""
 
     npaid: str
+    coconut_id: str
     exact_mass: float
     smiles: str
     name: str
@@ -19,6 +20,10 @@ class CompoundMatch:
     def npatlas_url(self) -> str:
         return f"https://www.npatlas.org/explore/compounds/{self.npaid}"
 
+    @property
+    def coconut_url(self) -> str:
+        return f"https://coconut.naturalproducts.net/compound/coconut_id/{self.coconut_id}"
+
     def friendly_name(self) -> str:
         """JvS - This should no longer be required with unicode normalization on atlas import
         but there are still some issues
@@ -30,7 +35,7 @@ class CompoundMatch:
         ):
             return xml_safe_name(self.name)
         else:
-            return self.npaid
+            return "Unknown"
 
 
 def xml_safe_name(n):
