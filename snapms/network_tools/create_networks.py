@@ -136,7 +136,7 @@ def compress_gnps_graphml_outputs(parameters: Parameters):
 
 
 def insert_atlas_clusters_to_cytoscape(
-    filtered_networks: Dict[int, nx.Graph], parameters: Parameters
+    original_gnps_graph, filtered_networks: Dict[int, nx.Graph], parameters: Parameters
 ):
     """Tool to create a new collection in an existing Cytoscape file, and to append all Atlas GNPS annotation networks
     as separate network views.
@@ -144,9 +144,14 @@ def insert_atlas_clusters_to_cytoscape(
     Networks should be pre-filtered for size and annotated with top candidates already.
     """
     # Import original gnps network (currently not implemented)
-
+    print("Adding original GNPS network to Cytoscape file")
+    add_original_gnps_graph_to_cytoscape(
+        original_gnps_graph,
+        "Original_GNPS_graph"
+    )
     # Open each Atlas annotation network in turn. Glob function includes [0-9] in order to exclude the modified original
     # gnps network (if present)
+
     for cluster_id, atlas_graph in sorted(filtered_networks.items()):
         network_title = f"GNPS_componentindex_{cluster_id}"
 
@@ -155,7 +160,7 @@ def insert_atlas_clusters_to_cytoscape(
         # family
         add_cluster_to_cytoscape(
             atlas_graph,
-            network_title,
+            network_title
         )
 
     # If there is a job_id in the params, use this to save the output file
@@ -193,6 +198,17 @@ def add_cluster_to_cytoscape(G: nx.Graph, title: str) -> None:
     cy.cyrest_apply_layout(network_id, name="force-directed")
     cy.cyrest_create_style(cy.SNAP_MS_STYLE, force=False)
     cy.cyrest_apply_style(network_id, cy.SNAP_MS_STYLE["title"])
+
+
+def add_original_gnps_graph_to_cytoscape(G: nx.Graph, title: str) -> None:
+    """Add original GNPS graph to cytoscape session and applying GNPS styling.
+
+    IMPORTANT: Assumes CyREST is available.
+    """
+    network_id = cy.networkx_to_cyrest(G, name=title)
+    cy.cyrest_apply_layout(network_id, name="force-directed")
+    cy.cyrest_create_style(cy.GNPS_STYLE, force=False)
+    cy.cyrest_apply_style(network_id, cy.GNPS_STYLE["title"])
 
 
 def extract_cluster_id(filepath: Path) -> int:
