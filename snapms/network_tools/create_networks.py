@@ -160,7 +160,7 @@ def insert_atlas_clusters_to_cytoscape(
         # family
         add_cluster_to_cytoscape(
             atlas_graph,
-            network_title
+            network_title,
         )
 
     # If there is a job_id in the params, use this to save the output file

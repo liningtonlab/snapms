@@ -5,7 +5,7 @@ core code for the SNAP MS platform for predicting identities of natural products
 
 Minimally, `conda env create -f environment.yml` will create a new conda environment named snapms.
 
-Requires Python 3.8 or greater.
+Requires Python 3.8+.
 
 ## Django App
 
