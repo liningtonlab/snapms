@@ -3,7 +3,7 @@ import csv
 import pandas as pd
 
 from snapms.config import Parameters, CYTOSCAPE_DATADIR
-from snapms.matching_tools import match_compounds
+from snapms.matching_tools import data_import, match_compounds
 from snapms.network_tools import create_networks
 from snapms.network_tools import cytoscape as cy
 
@@ -86,8 +86,9 @@ def create_gnps_network_annotations(atlas_df: pd.DataFrame, parameters: Paramete
     # TODO: Append all Atlas annotation networks to GNPS original network file
     if cy.cyrest_is_available():
         print("Cytoscape detected - performing network annotation")
+        original_gnps_network = data_import.import_gnps_network(parameters)
         create_networks.insert_atlas_clusters_to_cytoscape(
-            filtered_networks, parameters
+            original_gnps_network, filtered_networks, parameters
         )
     else:
         print("WARNING - Cytoscape Unavailable!")
