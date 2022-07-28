@@ -1,7 +1,6 @@
 NAME := snapms
-# VERSION := $(shell git describe --tags)
-VERSION := 0.1.0
-REGISTRY := registry.jvansan.duckdns.org
+VERSION := $(shell poetry version --short)
+REGISTRY := ghcr.io/liningtonlab
 
 all: build-docker push
 
