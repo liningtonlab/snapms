@@ -3,9 +3,17 @@ core code for the SNAP MS platform for predicting identities of natural products
 
 ## Installation
 
-Minimally, `conda env create -f environment.yml` will create a new conda environment named snapms.
+NEW - uses [Poetry Python](https://python-poetry.org/). 
+To setup local dev simply run `poetry install`
 
 Requires Python 3.8+.
+
+The `docker-compose` solution has been updated such that it should work with the following:
+
+```bash
+docker-compose build
+docker-compose up -d
+```
 
 ## Django App
 
