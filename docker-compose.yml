@@ -35,7 +35,10 @@ services:
       - "./data:/root/data"
 
   app:
-    image: registry.jvansan.duckdns.org/snapms:latest
+    image: ghcr.io/liningtonlab/snapms:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
     environment:
       - REDIS_URI=redis://redis:6379/0
@@ -47,7 +50,7 @@ services:
       - traefik.http.routers.snapms.rule=PathPrefix(`/`)
 
   worker:
-    image: registry.jvansan.duckdns.org/snapms:latest
+    image: ghcr.io/liningtonlab/snapms:latest
     restart: always
     environment:
       - REDIS_URI=redis://redis:6379/0
@@ -55,4 +58,4 @@ services:
     volumes:
       - "./db:/usr/src/app/db"
       - "./data:/usr/src/app/data"
-    command: ["mamba", "run", "-n", "snapms", "--no-capture-output", "python", "manage.py", "rqworker", "high", "default"]
+    command: ["python", "manage.py", "rqworker", "high", "default"]
