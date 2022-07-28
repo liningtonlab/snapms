@@ -3,8 +3,11 @@
 .idea/
 db/
 
-# Data folders for development
-data/
+# Data folders for development except
+data/*
+!data/atlas_input/
+data/atlas_input/*
+!data/atlas_input/.empty
 
 # Django collected static
 static_deploy/
