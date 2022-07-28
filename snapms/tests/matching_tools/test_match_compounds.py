@@ -50,6 +50,7 @@ def test_remove_duplicates_overlap_large_ppm_error():
 def test_compound_match():
     data = {
         "npaid": "NPA018705",
+        "coconut_id": "",
         "exact_mass": 419.1369,
         "smiles": "CCC(C)[C@H]1C(=O)O[C@@H]2N1C3=C(C4=C(C=C(C=C24)C)O)C(=O)C5=C(C3=O)C(=CC=C5)O",
         "name": "Jadomycim\u00b3",
@@ -64,4 +65,4 @@ def test_compound_match():
     assert compound.adduct == "m_plus_h"
     # test computed prop
     assert compound.npatlas_url == "https://www.npatlas.org/explore/compounds/NPA018705"
-    assert compound.friendly_name() == "NPA018705"
+    assert compound.friendly_name() == "Unknown"

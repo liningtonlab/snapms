@@ -52,7 +52,7 @@ def test_networkx_to_cyrest():
         f"{cy.BASE_URL}/networks",
         json={"networkSUID": 1},
         status=200,
-        match_querystring=False,  # ignore collection name
+        match=[],  # ignore collection name in query params
     )
     G = nx.karate_club_graph()  # simple network
     assert isinstance(G, nx.Graph)
@@ -306,7 +306,7 @@ def test_cyrest_load_session():
         f"{cy.BASE_URL}/session",
         json={"file": str(file_path.absolute)},
         status=200,
-        match_querystring=False,  # ignore collection name
+        match=[],  # ignore collection name in query params
     )
     status, _ = cy.cyrest_load_session(file_path)
     assert status == 200
@@ -334,7 +334,7 @@ def test_cyrest_save_session():
         f"{cy.BASE_URL}/session",
         json={"file": str(file_path.absolute)},
         status=200,
-        match_querystring=False,  # ignore collection name
+        match=[],  # ignore collection name in query params
     )
     status, _ = cy.cyrest_save_session(file_path)
     assert status == 200
