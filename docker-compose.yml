@@ -24,6 +24,7 @@ services:
   # Enable persistent data
   redis:
     image: redis
+    restart: always
     volumes:
       - "./docker_volumes/redis:/data"
     command: ["redis-server", "--appendonly", "yes"]
@@ -52,6 +53,8 @@ services:
   worker:
     image: ghcr.io/liningtonlab/snapms:latest
     restart: always
+    depends_on:
+      - redis
     environment:
       - REDIS_URI=redis://redis:6379/0
       - CYTOSCAPE_BASEURL=http://cy:1234/v1
@@ -59,3 +62,4 @@ services:
       - "./db:/usr/src/app/db"
       - "./data:/usr/src/app/data"
     command: ["python", "manage.py", "rqworker", "high", "default"]
+

@@ -13,8 +13,8 @@ ENV PYTHONFAULTHANDLER=1 \
     POETRY_VIRTUALENVS_CREATE=false \
     CYTOSCAPE_DATADIR=/root/data \
     CYTOSCAPE_BASEURL=http://cy:1234/v1 \
-    NPATLAS_FILE=/usr/src/app/data/NPAtlas_download.json \
-    COCONUT_FILE=/usr/src/app/data/COCONUT_download.json \
+    NPATLAS_FILE=/usr/src/app/data/atlas_input/NPAtlas_download.json \
+    COCONUT_FILE=/usr/src/app/data/atlas_input/COCONUT_download.json \
     REDIS_URI=redis://redis:6379/0 \
     SNAPMS_DATADIR=/usr/src/app/data
 
