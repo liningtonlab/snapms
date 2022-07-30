@@ -1,1 +1,4 @@
-__version__ = "0.1.0"
+# Removed to consolidate versions
+# To get the version do the following
+# from importlib.metadata import version
+# version = version("snapms")
