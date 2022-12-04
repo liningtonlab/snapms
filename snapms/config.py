@@ -40,27 +40,35 @@ class Parameters:
         max_gnps_size: int = 5000,
         min_atlas_size: int = 3,
         min_group_size: int = 3,
+        max_node_count: int = 2000,
+        max_edge_count: int = 10000,
         job_id: Optional[str] = None,
         compress_output: bool = False,
         atlas_filter: AtlasFilter = AtlasFilter.full,
         custom_filter: Optional[str] = None,
     ):
-        self.file_path = file_path
+        # I/O options
         # pathlib.Path gives convenient methods for getting name and extension
+        self.file_path = file_path
         self.file_name = file_path.stem
         self.file_type = file_path.suffix.lstrip(".").lower()
         self.reference_db = atlas_db_path
         self.output_path = output_path
+        # comparison parameters
         self.ppm_error = ppm_error
         self.adduct_list = adduct_list
         self.remove_duplicates = remove_duplicates
         self.min_gnps_cluster_size = min_gnps_size
         self.max_gnps_cluster_size = max_gnps_size
+        # used in graph_size_check for outputs
         self.min_atlas_annotation_cluster_size = min_atlas_size
         self.min_compound_group_count = min_group_size
+        self.max_node_count = max_node_count
+        self.max_edge_count = max_edge_count
         self.job_id = job_id
         self.init_output_directory()
         self.compress_output = compress_output
+        # filter options
         self.atlas_filter = atlas_filter
         self.custom_filter = custom_filter
 
