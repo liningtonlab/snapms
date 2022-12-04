@@ -120,38 +120,27 @@ def handle_snapms_request(request: HttpRequest) -> HttpResponse:
         input_file = save_convert_masslist(data["masslist"], job_dir)
 
     if data["reference_db"] == "coconut":
-        parameters = Parameters(
-            file_path=input_file,
-            atlas_db_path=settings.COCONUT_FILE,
-            output_path=job_dir,
-            ppm_error=data["ppm_error"],
-            adduct_list=data["adduct_list"],
-            remove_duplicates=data["remove_duplicates"],
-            min_gnps_size=data["min_gnps_size"],
-            max_gnps_size=data["max_gnps_size"],
-            min_atlas_size=data["min_atlas_size"],
-            min_group_size=data["min_group_size"],
-            job_id=job_id,
-            atlas_filter=AtlasFilter(data["reference_db"]),
-            custom_filter=data["custom_value"],
-        )
+        db_path = settings.COCONUT_FILE
     else:
-        parameters = Parameters(
-            file_path=input_file,
-            atlas_db_path=settings.NPATLAS_FILE,
-            output_path=job_dir,
-            ppm_error=data["ppm_error"],
-            adduct_list=data["adduct_list"],
-            remove_duplicates=data["remove_duplicates"],
-            min_gnps_size=data["min_gnps_size"],
-            max_gnps_size=data["max_gnps_size"],
-            min_atlas_size=data["min_atlas_size"],
-            min_group_size=data["min_group_size"],
-            job_id=job_id,
-            atlas_filter=AtlasFilter(data["reference_db"]),
-            custom_filter=data["custom_value"],
-        )
+        db_path = settings.NPATLAS_FILE
 
+    parameters = Parameters(
+        file_path=input_file,
+        atlas_db_path=db_path,
+        output_path=job_dir,
+        ppm_error=int(data["ppm_error"]),
+        adduct_list=data["adduct_list"],
+        remove_duplicates=data["remove_duplicates"],
+        min_gnps_size=int(data["min_gnps_size"]),
+        max_gnps_size=int(data["max_gnps_size"]),
+        min_atlas_size=int(data["min_atlas_size"]),
+        min_group_size=int(data["min_group_size"]),
+        max_edge_count=int(data["max_edge_count"]),
+        max_node_count=int(data["max_node_count"]),
+        job_id=job_id,
+        atlas_filter=AtlasFilter(data["reference_db"]),
+        custom_filter=data["custom_value"],
+    )
     if parameters.file_type == "csv":
         run_snapms_masslist.delay(parameters, job_id)
     elif parameters.file_type == "graphml":

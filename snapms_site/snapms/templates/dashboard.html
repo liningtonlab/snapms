@@ -189,7 +189,7 @@
                         <div class="form-group row align-items-center">
                             <div class="col-sm-4">
                                 <input class="form-control text-center" type="number" step="1" min="1" id="ppm_error"
-                                    v-model="ppm_error">
+                                    v-model.number="ppm_error">
                             </div>
                             <div class="col-sm-4">
                                 <label class="form-label" for="ppm_error">
@@ -201,7 +201,7 @@
                         <div class="form-group row align-items-center">
                             <div class="col-sm-4">
                                 <input class="form-control text-center" type="number" step="1" min="0"
-                                    id="min_gnps_size" v-model="min_gnps">
+                                    id="min_gnps_size" v-model.number="min_gnps">
                             </div>
                             <div class="col-sm-8">
                                 <label class="form-label" for="min_gnps_size">
@@ -214,7 +214,7 @@
                         <div class="form-group row align-items-center">
                             <div class="col-sm-4">
                                 <input class="form-control text-center" type="number" step="1" min="0"
-                                    id="max_gnps_size" v-model="max_gnps">
+                                    id="max_gnps_size" v-model.number="max_gnps">
                             </div>
                             <div class="col-sm-8">
                                 <label class="form-label" for="max_gnps_size">
@@ -227,7 +227,7 @@
                         <div class="form-group row align-items-center">
                             <div class="col-sm-4">
                                 <input class="form-control text-center" type="number" step="1" min="0"
-                                    id="min_atlas_size" v-model="min_atlas">
+                                    id="min_atlas_size" v-model.number="min_atlas">
                             </div>
                             <div class="col-sm-8">
                                 <label class="form-label" for="min_atlas_size">
@@ -240,13 +240,39 @@
                         <div class="form-group row align-items-center">
                             <div class="col-sm-4">
                                 <input class="form-control text-center" type="number" step="1" min="0" id="min_group"
-                                    v-model="min_group">
+                                    v-model.number="min_group">
                             </div>
                             <div class="col-sm-8">
                                 <label class="form-label" for="min_group">
                                     minimum compound group size <i class="fa fa-question-circle" data-toggle="tooltip"
                                         data-placement="right"
                                         title="Minimum number of compounds groups to be added as true annotations"></i>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <div class="col-sm-4">
+                                <input class="form-control text-center" type="number" step="1" min="0" id="max_nodes"
+                                    v-model.number="max_nodes">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="form-label" for="max_nodes">
+                                    maximum results nodes <i class="fa fa-question-circle" data-toggle="tooltip"
+                                        data-placement="right"
+                                        title="Maximum number of nodes permitted in a single results graph. Used to exclude very large and uninformative graphs and prevent large increases in the size of the results file."></i>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <div class="col-sm-4">
+                                <input class="form-control text-center" type="number" step="1" min="0" id="max_edges"
+                                    v-model.number="max_edges">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="form-label" for="max_edges">
+                                    maximum results edges <i class="fa fa-question-circle" data-toggle="tooltip"
+                                        data-placement="right"
+                                        title="Maximum number of edges permitted in a single results graph. Used to exclude very large and uninformative graphs and prevent large increases in the size of the results file."></i>
                                 </label>
                             </div>
                         </div>
@@ -300,6 +326,8 @@
             max_gnps: 5000,
             min_atlas: 3,
             min_group: 3,
+            max_nodes: 2000,
+            max_edges: 10000,
             deduplicate: true,
         },
         methods: {
@@ -348,6 +376,8 @@
                     max_gnps_size: this.max_gnps,
                     min_atlas_size: this.min_atlas,
                     min_group_size: this.min_group,
+                    max_node_count: this.max_nodes,
+                    max_edge_count: this.max_edges,
                     remove_duplicates: this.deduplicate,
                 }
                 post_data.append("metadata", JSON.stringify(jsonData));
