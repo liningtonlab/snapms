@@ -69,6 +69,8 @@ def create_gnps_network_annotations(atlas_df: pd.DataFrame, parameters: Paramete
             network,
             parameters.min_compound_group_count,
             parameters.min_atlas_annotation_cluster_size,
+            parameters.max_node_count,
+            parameters.max_edge_count,
         ):
             create_networks.remove_small_subgraphs(network, parameters)
             create_networks.annotate_top_candidates(network)

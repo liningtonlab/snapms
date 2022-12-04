@@ -115,6 +115,8 @@ def export_graphml(graph: nx.Graph, parameters: Parameters, output_path: Path):
         graph,
         parameters.min_compound_group_count,
         parameters.min_atlas_annotation_cluster_size,
+        parameters.max_node_count,
+        parameters.max_edge_count,
     ):
         nx.write_graphml(graph, output_path)
     else:
