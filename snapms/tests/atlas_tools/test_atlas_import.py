@@ -3,12 +3,15 @@ from pathlib import Path
 import pandas as pd
 import pytest
 from pandas.testing import assert_series_equal
+from deepdiff import DeepDiff
 
+from snapms.config import Parameters
 from snapms.atlas_tools import atlas_import
 from snapms.exceptions import AdductNotFound
 
 # Test data has an intentional non-unicode name corruption in first compound
-test_atlas = pd.read_json(Path(__file__).parent / "test_atlas.json")
+TEST_FILE_PATH = Path(__file__).parent / "test_atlas.json"
+test_atlas = pd.read_json(TEST_FILE_PATH)
 
 
 def test_clean_names_default():
@@ -149,3 +152,28 @@ def test_extend_adducts_subset():
         assert adduct in out_cols
     for adduct in not_added:
         assert adduct not in out_cols
+
+
+def test_import_atlas_columns():
+    params = Parameters(
+        file_path=Path("."), atlas_db_path=TEST_FILE_PATH, output_path=Path(".")
+    )
+    # fmt: off
+    expected = ["id", "npaid", "mol_formula", "mol_weight", "exact_mass", "inchikey", "smiles",
+        "cluster_id", "node_id", "synonyms", "inchi", "m_plus_h", "m_plus_na",
+        "syntheses", "reassignments", "external_ids", "classyfire", "npclassifier",
+        "origin_reference_doi", "origin_reference_pmid", "origin_reference_authors",
+        "origin_reference_title", "origin_reference_journal",
+        "origin_reference_year", "origin_reference_volume",
+        "origin_reference_issue", "origin_reference_pages", "origin_organism_id",
+        "origin_organism_type", "origin_organism_genus", "origin_organism_species",
+        "origin_organism_taxon_id", "origin_organism_taxon_name",
+        "origin_organism_taxon_rank", "origin_organism_taxon_taxon_db",
+        "origin_organism_taxon_external_id", "origin_organism_taxon_ncbi_id",
+        "origin_organism_taxon_ancestors", "name", "m_plus_nh4",
+        "m_plus_h_minus_h2o", "m_plus_k", "2m_plus_h", "2m_plus_na",
+    ]
+    # fmt: on
+    actual = atlas_import.import_atlas(params)
+    print(actual.columns.values)
+    assert not DeepDiff(expected, actual.columns.to_list(), ignore_order=True)
