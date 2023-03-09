@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """Tools to match masses from mass list to compounds from Atlas"""
-from typing import List, Dict
+from typing import Dict, List
 
 import networkx as nx
 import pandas as pd
@@ -59,7 +59,15 @@ def compute_adduct_matches(
             for adduct in parameters.adduct_list:
                 selected_compounds = atlas_df[
                     atlas_df[adduct].between(mass - mass_error, mass + mass_error)
-                ][["coconut_id", "exact_mass", "smiles", "name", "origin_organism_type"]]
+                ][
+                    [
+                        "coconut_id",
+                        "exact_mass",
+                        "smiles",
+                        "name",
+                        "origin_organism_type",
+                    ]
+                ]
                 if not selected_compounds.empty:
                     selected_compounds["mass"] = mass
                     selected_compounds["compound_number"] = index + 1

@@ -22,7 +22,9 @@ class CompoundMatch:
 
     @property
     def coconut_url(self) -> str:
-        return f"https://coconut.naturalproducts.net/compound/coconut_id/{self.coconut_id}"
+        return (
+            f"https://coconut.naturalproducts.net/compound/coconut_id/{self.coconut_id}"
+        )
 
     def friendly_name(self) -> str:
         """JvS - This should no longer be required with unicode normalization on atlas import
@@ -31,7 +33,7 @@ class CompoundMatch:
         occasionally not clean UTF-8. This if/ else statement cleans up names to eliminate crashes due to string
         parsing failure from the graphML file."""
         if re.match(
-            "^[A-Za-z0-9 α-ωΑ-Ω\-‐~,\"'$&*()±\[\]′’+./–″<>−{}|_:;]+$", self.name
+            r"^[A-Za-z0-9 α-ωΑ-Ω\-‐~,\"'$&*()±\[\]′’+./–″<>−{}|_:;]+$", self.name
         ):
             return xml_safe_name(self.name)
         else:

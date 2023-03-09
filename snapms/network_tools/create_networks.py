@@ -8,6 +8,7 @@ from typing import Dict, List
 import networkx as nx
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
+
 from snapms.config import CYTOSCAPE_DATADIR, Parameters
 from snapms.matching_tools.CompoundMatch import CompoundMatch
 from snapms.network_tools import cytoscape as cy
@@ -24,7 +25,9 @@ def tanimoto_matrix(smiles_list: List[str]) -> List[List[float]]:
     return matrix
 
 
-def match_compound_network(compound_match_list: List[CompoundMatch], parameters: Parameters) -> nx.Graph:
+def match_compound_network(
+    compound_match_list: List[CompoundMatch], parameters: Parameters
+) -> nx.Graph:
     """Tool to create a network illustrating relatedness of candidate structures for masses in a GNPS cluster
     Requires the output list from matching_tools.match_compounds.return_compounds
     """
@@ -44,13 +47,15 @@ def match_compound_network(compound_match_list: List[CompoundMatch], parameters:
     # Used to prevent inclusion of edges between compounds from the same group
     # (i.e. candidates for the same original mass)
     node_list = []
-    adduct_dict = {"m_plus_h": "[M+H]+",
-                   "m_plus_na": "[M+Na]+",
-                   "m_plus_nh4": "[M+NH4]+",
-                   "m_plus_h_minus_h2o": "[M-H2O+H]+",
-                   "m_plus_k": "[M+K]+",
-                   "2m_plus_h": "[2M+H]+",
-                   "2m_plus_na": "[2M+Na]+"}
+    adduct_dict = {
+        "m_plus_h": "[M+H]+",
+        "m_plus_na": "[M+Na]+",
+        "m_plus_nh4": "[M+NH4]+",
+        "m_plus_h_minus_h2o": "[M-H2O+H]+",
+        "m_plus_k": "[M+K]+",
+        "2m_plus_h": "[2M+H]+",
+        "2m_plus_na": "[2M+Na]+",
+    }
     index_group_dict = {}
     for index, compound in enumerate(compound_match_list):
         if parameters.atlas_filter == "coconut":
@@ -120,7 +125,9 @@ def export_graphml(graph: nx.Graph, parameters: Parameters, output_path: Path):
     ):
         nx.write_graphml(graph, output_path)
     else:
-        print(f"WARNING - {output_path} is outside size parameters and is not being written")
+        print(
+            f"WARNING - {output_path} is outside size parameters and is not being written"
+        )
 
 
 def compress_gnps_graphml_outputs(parameters: Parameters):
@@ -147,10 +154,7 @@ def insert_atlas_clusters_to_cytoscape(
     """
     # Import original gnps network (currently not implemented)
     print("Adding original GNPS network to Cytoscape file")
-    add_original_gnps_graph_to_cytoscape(
-        original_gnps_graph,
-        "Original_GNPS_graph"
-    )
+    add_original_gnps_graph_to_cytoscape(original_gnps_graph, "Original_GNPS_graph")
     # Open each Atlas annotation network in turn. Glob function includes [0-9] in order to exclude the modified original
     # gnps network (if present)
 

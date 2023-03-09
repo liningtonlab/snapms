@@ -2,7 +2,7 @@ import csv
 
 import pandas as pd
 
-from snapms.config import Parameters, CYTOSCAPE_DATADIR
+from snapms.config import CYTOSCAPE_DATADIR, Parameters
 from snapms.matching_tools import data_import, match_compounds
 from snapms.network_tools import create_networks
 from snapms.network_tools import cytoscape as cy

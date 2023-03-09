@@ -1,7 +1,7 @@
+from enum import Enum
 from os import getenv
 from pathlib import Path
 from typing import List, Optional
-from enum import Enum
 
 CYTOSCAPE_DATADIR = Path(getenv("CYTOSCAPE_DATADIR", "/root/data"))
 
