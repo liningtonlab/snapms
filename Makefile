@@ -13,3 +13,10 @@ push:
 
 echo-name:
 	echo $(REGISTRY)/$(NAME):$(VERSION)
+
+test:
+	pytest
+
+format:
+	isort snapms
+	black snapms
