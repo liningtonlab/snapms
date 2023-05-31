@@ -9,7 +9,7 @@ import networkx as nx
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
 
-from snapms.config import CYTOSCAPE_DATADIR, Parameters
+from snapms.config import CYTOSCAPE_DATADIR, AtlasFilter, Parameters
 from snapms.matching_tools.CompoundMatch import CompoundMatch
 from snapms.network_tools import cytoscape as cy
 
@@ -58,7 +58,7 @@ def match_compound_network(
     }
     index_group_dict = {}
     for index, compound in enumerate(compound_match_list):
-        if parameters.atlas_filter == "coconut":
+        if parameters.atlas_filter == AtlasFilter.coconut:
             node_list.append(
                 (
                     index,
@@ -75,7 +75,12 @@ def match_compound_network(
                     },
                 )
             )
-        elif parameters.atlas_filter in ["full", "bacteria", "fungus"]:
+        elif parameters.atlas_filter in [
+            AtlasFilter.full,
+            AtlasFilter.bacteria,
+            AtlasFilter.fungi,
+            AtlasFilter.custom,
+        ]:
             node_list.append(
                 (
                     index,
