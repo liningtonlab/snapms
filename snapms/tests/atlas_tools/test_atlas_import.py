@@ -2,11 +2,11 @@ from pathlib import Path
 
 import pandas as pd
 import pytest
-from pandas.testing import assert_series_equal
 from deepdiff import DeepDiff
+from pandas.testing import assert_series_equal
 
-from snapms.config import Parameters
 from snapms.atlas_tools import atlas_import
+from snapms.config import Parameters
 from snapms.exceptions import AdductNotFound
 
 # Test data has an intentional non-unicode name corruption in first compound
